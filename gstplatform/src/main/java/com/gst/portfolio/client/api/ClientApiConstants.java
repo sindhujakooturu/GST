@@ -92,6 +92,22 @@ public class ClientApiConstants {
     public static final String closureDateParamName = "closureDate";
     public static final String closureReasonIdParamName = "closureReasonId";
     public static final String reopenedDateParamName = "reopenedDate";
+    public static final String companyNameParamName = "companyName";
+    public static final String contactNameParamName = "contactName";
+    public static final String officePhoneParamName = "officePhone";
+    public static final String homePhoneParamName = "homePhone";
+    public static final String mobileParamName = "mobile";
+    public static final String faxParamName = "fax";
+    public static final String emailParamName = "email";
+    public static final String gstnRegNoParamName = "gstnRegNo";
+    public static final String panNoParamName = "panNo";
+    public static final String addressLine1ParamName = "addressLine1";
+    public static final String addressLine2ParamName = "addressLine2";
+    public static final String cityParamName = "city";
+    public static final String stateParamName = "state";
+    public static final String countryParamName = "country";
+    public static final String pinParamName = "pin";
+   
 
 
     public static final String rejectionDateParamName = "rejectionDate";
@@ -184,7 +200,9 @@ public class ClientApiConstants {
                     mobileNoParamName, firstnameParamName, middlenameParamName, lastnameParamName, fullnameParamName, officeIdParamName,
                     activeParamName, activationDateParamName, staffIdParamName, submittedOnDateParamName, savingsProductIdParamName,
                     dateOfBirthParamName, genderIdParamName, clientTypeIdParamName, clientClassificationIdParamName, 
-                    clientNonPersonDetailsParamName, displaynameParamName, legalFormIdParamName, datatables));
+                    clientNonPersonDetailsParamName, displaynameParamName, legalFormIdParamName, datatables,companyNameParamName,contactNameParamName,officePhoneParamName,
+                    homePhoneParamName, mobileParamName,faxParamName,emailParamName,gstnRegNoParamName,panNoParamName,addressLine1ParamName,addressLine2ParamName,cityParamName,
+                    stateParamName,countryParamName,pinParamName));
     
     public static final Set<String> CLIENT_NON_PERSON_CREATE_REQUEST_DATA_PARAMETERS = new HashSet<>(
             Arrays.asList(address,localeParamName, dateFormatParamName, incorpNumberParamName, remarksParamName, incorpValidityTillParamName, 
