@@ -2883,4 +2883,28 @@ public class CommandWrapperBuilder {
         this.href = "/b2binvoice/"+id;
         return this;
     }
+    
+    public CommandWrapperBuilder createCompanyMaster() {
+        this.actionName = "CREATE";
+        this.entityName = "COMPANYMASTER";
+        this.entityId = null;
+        this.href = "/company/template";
+        return this;
+    }
+    
+    public CommandWrapperBuilder updateCompanyMaster(final Long companyId) {
+        this.actionName = "UPDATE";
+        this.entityName = "COMPANYMASTER";
+        this.entityId = companyId;
+        this.href = "/company/"+companyId;
+        return this;
+    }
+    
+    public CommandWrapperBuilder deleteCompanyMaster(final Long companyId) {
+        this.actionName = "DELETE";
+        this.entityName = "COMPANYMASTER";
+        this.entityId = companyId;
+        this.href = "/company/"+companyId;
+        return this;
+    }
 }
