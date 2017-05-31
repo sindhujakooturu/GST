@@ -126,54 +126,6 @@ public final class Client extends AbstractPersistableCustom<Long> {
     @JoinColumn(name = "gender_cv_id", nullable = true)
     private CodeValue gender;
 
-    @Column(name = "company_name", length = 50, nullable = false)
-    private String companyName;
-    
-    @Column(name = "contact_name", length = 50, nullable = false)
-    private String contactName;
-    
-    @Column(name = "office_phone", length = 15, nullable = false)
-    private Long officePhone;
-    
-    @Column(name = "home_phone", length = 15, nullable = false)
-    private Long homePhone;
-    
-    @Column(name = "mobile", length = 10, nullable = false)
-    private Long mobile;
-    
-    @Column(name = "fax", length = 30, nullable = false)
-    private String fax;
-    
-    @Column(name = "email", length = 50, nullable = false)
-    private String email;
-    
-    @Column(name = "gstn_reg_no", length = 20, nullable = false)
-    private String gstnRegNo;
-    
-    @Column(name = "pan_no", length = 20, nullable = false)
-    private String panNo;
-    
-    @Column(name = "etin", length = 10, nullable = false)
-    private String etin;
-    
-    @Column(name = "address_line1", length = 50, nullable = false)
-    private String addressLine1;
-    
-    @Column(name = "address_line2", length = 50, nullable = false)
-    private String addressLine2;
-    
-    @Column(name = "city", length = 20, nullable = false)
-    private String city;
-    
-    @Column(name = "state", length = 20, nullable = false)
-    private String state;
-    
-    @Column(name = "country", length = 20, nullable = false)
-    private String country;
-    
-    @Column(name = "pin", length = 20, nullable = false)
-    private Long pin;
-    
     @ManyToOne
     @JoinColumn(name = "staff_id")
     private Staff staff;
@@ -274,9 +226,6 @@ public final class Client extends AbstractPersistableCustom<Long> {
     @JoinColumn(name = "reopened_by_userid", nullable = true)
     private AppUser reopenedBy;
 
-    /*{companyName,contactName,officePhone,
-        homePhone, mobile,fax,email,gstnRegNo,panNo,etin,addressLine1,addressLine2,city,state,country,pin}*/
-    
     public static Client createNew(final AppUser currentUser, final Office clientOffice, final Group clientParentGroup, final Staff staff,
             final Long savingsProductId, final CodeValue gender, final CodeValue clientType, final CodeValue clientClassification,
             final Integer legalForm, final JsonCommand command) {
@@ -289,23 +238,7 @@ public final class Client extends AbstractPersistableCustom<Long> {
         final String middlename = command.stringValueOfParameterNamed(ClientApiConstants.middlenameParamName);
         final String lastname = command.stringValueOfParameterNamed(ClientApiConstants.lastnameParamName);
         final String fullname = command.stringValueOfParameterNamed(ClientApiConstants.fullnameParamName);
-        		
-        final String companyName = command.stringValueOfParameterNamed(ClientApiConstants.companyNameParamName);
-        final String contactName = command.stringValueOfParameterNamed(ClientApiConstants.contactNameParamName);
-        final Long officePhone = command.longValueOfParameterNamed(ClientApiConstants.officePhoneParamName);
-        final Long homePhone = command.longValueOfParameterNamed(ClientApiConstants.homePhoneParamName);
-        final Long mobile = command.longValueOfParameterNamed(ClientApiConstants.mobileParamName);
-        final String fax = command.stringValueOfParameterNamed(ClientApiConstants.faxParamName);
-        final String email = command.stringValueOfParameterNamed(ClientApiConstants.emailParamName);
-        final String gstnRegNo = command.stringValueOfParameterNamed(ClientApiConstants.gstnRegNoParamName);
-        final String panNo = command.stringValueOfParameterNamed(ClientApiConstants.panNoParamName);
-        final String etin = command.stringValueOfParameterNamed(ClientApiConstants.etinParamName);
-        final String addressLine1 = command.stringValueOfParameterNamed(ClientApiConstants.addressLine1ParamName);
-        final String addressLine2 = command.stringValueOfParameterNamed(ClientApiConstants.addressLine2ParamName);
-        final String city = command.stringValueOfParameterNamed(ClientApiConstants.cityParamName);
-        final String state = command.stringValueOfParameterNamed(ClientApiConstants.stateParamName);
-        final String country = command.stringValueOfParameterNamed(ClientApiConstants.countryParamName);
-        final Long pin = command.longValueOfParameterNamed(ClientApiConstants.pinParamName);
+
 
         final LocalDate dataOfBirth = command.localDateValueOfParameterNamed(ClientApiConstants.dateOfBirthParamName);
 
@@ -333,8 +266,7 @@ public final class Client extends AbstractPersistableCustom<Long> {
         final Long savingsAccountId = null;
         return new Client(currentUser, status, clientOffice, clientParentGroup, accountNo, firstname, middlename, lastname, fullname,
                 activationDate, officeJoiningDate, externalId, mobileNo, staff, submittedOnDate, savingsProductId, savingsAccountId, dataOfBirth,
-                gender, clientType, clientClassification, legalForm,companyName,contactName,officePhone,
-                homePhone, mobile,fax,email,gstnRegNo,panNo,etin,addressLine1,addressLine2,city,state,country,pin);
+                gender, clientType, clientClassification, legalForm);
     }
 
     protected Client() {
@@ -345,9 +277,7 @@ public final class Client extends AbstractPersistableCustom<Long> {
             final String accountNo, final String firstname, final String middlename, final String lastname, final String fullname,
             final LocalDate activationDate, final LocalDate officeJoiningDate, final String externalId, final String mobileNo,
             final Staff staff, final LocalDate submittedOnDate, final Long savingsProductId, final Long savingsAccountId,
-            final LocalDate dateOfBirth, final CodeValue gender, final CodeValue clientType, final CodeValue clientClassification, final Integer legalForm,
-            final String companyName,final String contactName,final Long officePhone,final Long homePhone,final Long mobile,final String fax,final String email,
-            final String gstnRegNo,final String panNo,final String etin,final String addressLine1,final String addressLine2,final String city,final String state,final String country,final Long pin) {
+            final LocalDate dateOfBirth, final CodeValue gender, final CodeValue clientType, final CodeValue clientClassification, final Integer legalForm) {
 
         if (StringUtils.isBlank(accountNo)) {
             this.accountNumber = new RandomPasswordGenerator(19).generate();
@@ -422,24 +352,6 @@ public final class Client extends AbstractPersistableCustom<Long> {
         this.clientType = clientType;
         this.clientClassification = clientClassification;
         this.setLegalForm(legalForm);
-        
-        this.companyName = companyName;
-        this.contactName = contactName;
-        this.officePhone = officePhone;
-        this.homePhone = homePhone;
-        this.mobile = mobile;
-        this.fax = fax;
-        this.email = email;
-        this.gstnRegNo = gstnRegNo;
-        this.panNo = panNo;
-        this.etin = etin;
-        this.addressLine1 = addressLine1;
-        this.addressLine2 = addressLine2;
-        this.city = city;
-        this.state = state;
-        this.country = country;
-        this.pin = pin;
-
         deriveDisplayName();
         validate();
     }
@@ -635,104 +547,6 @@ public final class Client extends AbstractPersistableCustom<Long> {
             final Long newValue = command.longValueOfParameterNamed(ClientApiConstants.clientClassificationIdParamName);
             actualChanges.put(ClientApiConstants.clientClassificationIdParamName, newValue);
         }
-        
-        if (command.isChangeInStringParameterNamed(ClientApiConstants.companyNameParamName, this.companyName)) {
-            final String newValue = command.stringValueOfParameterNamed(ClientApiConstants.companyNameParamName);
-            actualChanges.put(ClientApiConstants.companyNameParamName, newValue);
-            this.companyName = StringUtils.defaultIfEmpty(newValue, null);
-        }
-        
-        if (command.isChangeInStringParameterNamed(ClientApiConstants.contactNameParamName, this.contactName)) {
-            final String newValue = command.stringValueOfParameterNamed(ClientApiConstants.contactNameParamName);
-            actualChanges.put(ClientApiConstants.contactNameParamName, newValue);
-            this.contactName = StringUtils.defaultIfEmpty(newValue, null);
-        }
-        
-        if (command.isChangeInLongParameterNamed(ClientApiConstants.officePhoneParamName, this.officePhone)) {
-            final Long newValue = command.longValueOfParameterNamed(ClientApiConstants.officePhoneParamName);
-            actualChanges.put(ClientApiConstants.officePhoneParamName, newValue);
-            this.officePhone = newValue;
-        }
-        
-        if (command.isChangeInLongParameterNamed(ClientApiConstants.homePhoneParamName, this.homePhone)) {
-            final Long newValue = command.longValueOfParameterNamed(ClientApiConstants.homePhoneParamName);
-            actualChanges.put(ClientApiConstants.homePhoneParamName, newValue);
-            this.homePhone = newValue;
-        }
-        
-        if (command.isChangeInLongParameterNamed(ClientApiConstants.mobileParamName, this.mobile)) {
-            final Long newValue = command.longValueOfParameterNamed(ClientApiConstants.mobileParamName);
-            actualChanges.put(ClientApiConstants.mobileParamName, newValue);
-            this.mobile = newValue;
-        }
-        
-        if (command.isChangeInStringParameterNamed(ClientApiConstants.faxParamName, this.fax)) {
-            final String newValue = command.stringValueOfParameterNamed(ClientApiConstants.faxParamName);
-            actualChanges.put(ClientApiConstants.faxParamName, newValue);
-            this.fax = StringUtils.defaultIfEmpty(newValue, null);
-        }
-        
-        if (command.isChangeInStringParameterNamed(ClientApiConstants.emailParamName, this.email)) {
-            final String newValue = command.stringValueOfParameterNamed(ClientApiConstants.emailParamName);
-            actualChanges.put(ClientApiConstants.emailParamName, newValue);
-            this.email = StringUtils.defaultIfEmpty(newValue, null);
-        }
-        
-        if (command.isChangeInStringParameterNamed(ClientApiConstants.gstnRegNoParamName, this.gstnRegNo)) {
-            final String newValue = command.stringValueOfParameterNamed(ClientApiConstants.gstnRegNoParamName);
-            actualChanges.put(ClientApiConstants.gstnRegNoParamName, newValue);
-            this.gstnRegNo = StringUtils.defaultIfEmpty(newValue, null);
-        }
-        
-        if (command.isChangeInStringParameterNamed(ClientApiConstants.panNoParamName, this.panNo)) {
-            final String newValue = command.stringValueOfParameterNamed(ClientApiConstants.panNoParamName);
-            actualChanges.put(ClientApiConstants.panNoParamName, newValue);
-            this.panNo = StringUtils.defaultIfEmpty(newValue, null);
-        }
-        
-        if (command.isChangeInStringParameterNamed(ClientApiConstants.etinParamName, this.etin)) {
-            final String newValue = command.stringValueOfParameterNamed(ClientApiConstants.etinParamName);
-            actualChanges.put(ClientApiConstants.etinParamName, newValue);
-            this.etin = StringUtils.defaultIfEmpty(newValue, null);
-        }
-        
-        if (command.isChangeInStringParameterNamed(ClientApiConstants.addressLine1ParamName, this.addressLine1)) {
-            final String newValue = command.stringValueOfParameterNamed(ClientApiConstants.addressLine1ParamName);
-            actualChanges.put(ClientApiConstants.addressLine1ParamName, newValue);
-            this.addressLine1 = StringUtils.defaultIfEmpty(newValue, null);
-        }
-        
-        if (command.isChangeInStringParameterNamed(ClientApiConstants.addressLine2ParamName, this.addressLine2)) {
-            final String newValue = command.stringValueOfParameterNamed(ClientApiConstants.addressLine2ParamName);
-            actualChanges.put(ClientApiConstants.addressLine2ParamName, newValue);
-            this.addressLine2 = StringUtils.defaultIfEmpty(newValue, null);
-        }
-        
-        if (command.isChangeInStringParameterNamed(ClientApiConstants.cityParamName, this.city)) {
-            final String newValue = command.stringValueOfParameterNamed(ClientApiConstants.cityParamName);
-            actualChanges.put(ClientApiConstants.cityParamName, newValue);
-            this.city = StringUtils.defaultIfEmpty(newValue, null);
-        }
-        
-        if (command.isChangeInStringParameterNamed(ClientApiConstants.stateParamName, this.state)) {
-            final String newValue = command.stringValueOfParameterNamed(ClientApiConstants.stateParamName);
-            actualChanges.put(ClientApiConstants.stateParamName, newValue);
-            this.state = StringUtils.defaultIfEmpty(newValue, null);
-        }
-        
-        if (command.isChangeInStringParameterNamed(ClientApiConstants.countryParamName, this.country)) {
-            final String newValue = command.stringValueOfParameterNamed(ClientApiConstants.countryParamName);
-            actualChanges.put(ClientApiConstants.countryParamName, newValue);
-            this.country = StringUtils.defaultIfEmpty(newValue, null);
-        }
-        
-        if (command.isChangeInLongParameterNamed(ClientApiConstants.pinParamName, this.pin)) {
-            final Long newValue = command.longValueOfParameterNamed(ClientApiConstants.pinParamName);
-            actualChanges.put(ClientApiConstants.pinParamName, newValue);
-            this.pin = newValue;
-        }
-        
-        //
         
         if (command.isChangeInIntegerParameterNamed(ClientApiConstants.legalFormIdParamName, this.getLegalForm())) {
             final Integer newValue = command.integerValueOfParameterNamed(ClientApiConstants.legalFormIdParamName);
