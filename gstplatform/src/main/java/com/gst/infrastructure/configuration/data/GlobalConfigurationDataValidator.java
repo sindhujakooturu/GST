@@ -70,8 +70,8 @@ public class GlobalConfigurationDataValidator {
         }
 
         if (this.fromApiJsonHelper.parameterExists(VALUE, element)) {
-            final Long valueStr = this.fromApiJsonHelper.extractLongNamed(VALUE, element);
-            baseDataValidator.reset().parameter(ENABLED).value(valueStr).zeroOrPositiveAmount();
+            final String valueStr = this.fromApiJsonHelper.extractStringNamed(VALUE, element);
+            baseDataValidator.reset().parameter(VALUE).value(valueStr);
         }
         
         if (this.fromApiJsonHelper.parameterExists(DATE_VALUE, element)) {

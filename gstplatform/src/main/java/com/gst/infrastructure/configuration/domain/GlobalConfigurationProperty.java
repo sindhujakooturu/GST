@@ -43,7 +43,7 @@ public class GlobalConfigurationProperty extends AbstractPersistableCustom<Long>
     private boolean enabled;
 
     @Column(name = "value", nullable = true)
-    private Long value;
+    private String value;
     
     @Column(name = "date_value", nullable = true)
     private Date dateValue;
@@ -63,7 +63,7 @@ public class GlobalConfigurationProperty extends AbstractPersistableCustom<Long>
         this.isTrapDoor = false;
     }
 
-    public GlobalConfigurationProperty(final String name, final boolean enabled, final Long value, final Date dateValue ,final String description,
+    public GlobalConfigurationProperty(final String name, final boolean enabled, final String value, final Date dateValue ,final String description,
             final boolean isTrapDoor) {
         this.name = name;
         this.enabled = enabled;
@@ -77,7 +77,7 @@ public class GlobalConfigurationProperty extends AbstractPersistableCustom<Long>
         return this.enabled;
     }
 
-    public Long getValue() {
+    public String getValue() {
         return this.value;
     }
     
@@ -100,9 +100,9 @@ public class GlobalConfigurationProperty extends AbstractPersistableCustom<Long>
         }
 
         final String valueParamName = "value";
-        final Long previousValue = this.value;
-        if (command.isChangeInLongParameterNamed(valueParamName, this.value)) {
-            final Long newValue = command.longValueOfParameterNamed(valueParamName);
+        final String previousValue = this.value;
+        if (command.isChangeInStringParameterNamed(valueParamName, this.value)) {
+            final String newValue = command.stringValueOfParameterNamed(valueParamName);
             actualChanges.put(valueParamName, newValue);
             this.value = newValue;
         }
@@ -116,8 +116,8 @@ public class GlobalConfigurationProperty extends AbstractPersistableCustom<Long>
 
         final String passwordPropertyName = "force-password-reset-days";
         if (this.name.equalsIgnoreCase(passwordPropertyName)) {
-            if (this.enabled == true && command.hasParameter(valueParamName) && this.value == 0 || this.enabled == true
-                    && !command.hasParameter(valueParamName) && previousValue == 0) { throw new ForcePasswordResetException(); }
+            if (this.enabled == true && command.hasParameter(valueParamName) && this.value == "0" || this.enabled == true
+                    && !command.hasParameter(valueParamName) && previousValue == "0") { throw new ForcePasswordResetException(); }
         }
 
         return actualChanges;
