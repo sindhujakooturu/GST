@@ -41,12 +41,13 @@ public class CommandWrapperBuilder {
     private String transactionId;
     private Long productId;
     private Long templateId;
+    private String supportedEntityType;
    
 
     public CommandWrapper build() {
         return new CommandWrapper(this.officeId, this.groupId, this.clientId, this.loanId, this.savingsId, this.actionName,
                 this.entityName, this.entityId, this.subentityId, this.href, this.json, this.transactionId, this.productId,
-                this.templateId);
+                this.templateId,this.supportedEntityType);
     }
     
     public CommandWrapperBuilder addClientAddress(final long clientId,final long addressTypeId) {
@@ -2907,4 +2908,56 @@ public class CommandWrapperBuilder {
         this.href = "/company/"+companyId;
         return this;
     }
+    
+    public CommandWrapperBuilder createAddress(Long clientId) {
+		this.actionName = "CREATE";
+		this.entityName = "Address";
+		this.entityId = clientId;
+		this.href = "/address/template";
+		return this;
+	}
+    
+    public CommandWrapperBuilder updateAddress(final Long clientId) {
+		this.actionName = "UPDATE";
+		this.entityName = "ADDRESS";
+		this.entityId = clientId;
+		this.href = "/address/" + clientId;
+		return this;
+	}
+
+	public CommandWrapperBuilder deleteAddress(final Long addrId) {
+		this.actionName = "DELETE";
+		this.entityName = "ADDRESS";
+		this.entityId = addrId;
+		this.href = "/address/" + addrId;
+		return this;
+	}
+	
+	public CommandWrapperBuilder createLocation(final String entityType) {
+		this.actionName = "CREATE";
+		this.entityName = "LOCATION";
+		this.supportedEntityType = entityType;
+		this.href = "/address/" + entityType;
+		return this;
+	}
+	
+	public CommandWrapperBuilder updateLocation(final String entityType,
+			Long entityId) {
+		this.actionName = "UPDATE";
+		this.entityName = "LOCATION";
+		this.entityId = entityId;
+		this.supportedEntityType = entityType;
+		this.href = "/address/" + entityType + "/" + entityId;
+		return this;
+	}
+	
+	public CommandWrapperBuilder deleteLocation(final String entityType,
+			Long entityId) {
+		this.actionName = "DELETE";
+		this.entityName = "LOCATION";
+		this.entityId = entityId;
+		this.supportedEntityType = entityType;
+		this.href = "/address/" + entityType + "/" + entityId;
+		return this;
+	}
 }

@@ -65,6 +65,7 @@ public final class JsonCommand {
     private final String transactionId;
     private final String url;
     private final Long productId;
+    private final String supportedEntityType;
 
     public static JsonCommand from(final String jsonCommand, final JsonElement parsedCommand, final FromJsonHelper fromApiJsonHelper,
             final String entityName, final Long resourceId, final Long subresourceId, final Long groupId, final Long clientId,
@@ -94,13 +95,13 @@ public final class JsonCommand {
         final String jsonCommand = command.fromApiJsonHelper.toJson(parsedCommand);
         return new JsonCommand(command.commandId, jsonCommand, parsedCommand, command.fromApiJsonHelper, command.entityName,
                 command.resourceId, command.subresourceId, command.groupId, command.clientId, command.loanId, command.savingsId,
-                command.transactionId, command.url, command.productId);
+                command.transactionId, command.url, command.productId.command.supportedEntityType);
     }
 
     public JsonCommand(final Long commandId, final String jsonCommand, final JsonElement parsedCommand,
             final FromJsonHelper fromApiJsonHelper, final String entityName, final Long resourceId, final Long subresourceId,
             final Long groupId, final Long clientId, final Long loanId, final Long savingsId, final String transactionId, final String url,
-            final Long productId) {
+            final Long productId,final String supportedEntityType) {
 
         this.commandId = commandId;
         this.jsonCommand = jsonCommand;
@@ -116,6 +117,7 @@ public final class JsonCommand {
         this.transactionId = transactionId;
         this.url = url;
         this.productId = productId;
+        this.supportedEntityType = supportedEntityType;
     }
 
     public String json() {
@@ -568,6 +570,10 @@ public final class JsonCommand {
 
     public void checkForUnsupportedParameters(final Type typeOfMap, final String json, final Set<String> requestDataParameters) {
         this.fromApiJsonHelper.checkForUnsupportedParameters(typeOfMap, json, requestDataParameters);
+    }
+
+    public String getSupportedEntityType() {
+        return this.supportedEntityType;
     }
 
 }

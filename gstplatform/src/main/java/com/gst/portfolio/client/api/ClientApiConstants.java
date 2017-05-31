@@ -101,6 +101,7 @@ public class ClientApiConstants {
     public static final String emailParamName = "email";
     public static final String gstnRegNoParamName = "gstnRegNo";
     public static final String panNoParamName = "panNo";
+    public static final String etinParamName = "etin";
     public static final String addressLine1ParamName = "addressLine1";
     public static final String addressLine2ParamName = "addressLine2";
     public static final String cityParamName = "city";

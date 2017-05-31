@@ -153,6 +153,9 @@ public final class Client extends AbstractPersistableCustom<Long> {
     @Column(name = "pan_no", length = 20, nullable = false)
     private String panNo;
     
+    @Column(name = "etin", length = 10, nullable = false)
+    private String etin;
+    
     @Column(name = "address_line1", length = 50, nullable = false)
     private String addressLine1;
     
@@ -272,7 +275,7 @@ public final class Client extends AbstractPersistableCustom<Long> {
     private AppUser reopenedBy;
 
     /*{companyName,contactName,officePhone,
-        homePhone, mobile,fax,email,gstnRegNo,panNo,addressLine1,addressLine2,city,state,country,pin}*/
+        homePhone, mobile,fax,email,gstnRegNo,panNo,etin,addressLine1,addressLine2,city,state,country,pin}*/
     
     public static Client createNew(final AppUser currentUser, final Office clientOffice, final Group clientParentGroup, final Staff staff,
             final Long savingsProductId, final CodeValue gender, final CodeValue clientType, final CodeValue clientClassification,
@@ -296,6 +299,7 @@ public final class Client extends AbstractPersistableCustom<Long> {
         final String email = command.stringValueOfParameterNamed(ClientApiConstants.emailParamName);
         final String gstnRegNo = command.stringValueOfParameterNamed(ClientApiConstants.gstnRegNoParamName);
         final String panNo = command.stringValueOfParameterNamed(ClientApiConstants.panNoParamName);
+        final String etin = command.stringValueOfParameterNamed(ClientApiConstants.etinParamName);
         final String addressLine1 = command.stringValueOfParameterNamed(ClientApiConstants.addressLine1ParamName);
         final String addressLine2 = command.stringValueOfParameterNamed(ClientApiConstants.addressLine2ParamName);
         final String city = command.stringValueOfParameterNamed(ClientApiConstants.cityParamName);
@@ -330,7 +334,7 @@ public final class Client extends AbstractPersistableCustom<Long> {
         return new Client(currentUser, status, clientOffice, clientParentGroup, accountNo, firstname, middlename, lastname, fullname,
                 activationDate, officeJoiningDate, externalId, mobileNo, staff, submittedOnDate, savingsProductId, savingsAccountId, dataOfBirth,
                 gender, clientType, clientClassification, legalForm,companyName,contactName,officePhone,
-                homePhone, mobile,fax,email,gstnRegNo,panNo,addressLine1,addressLine2,city,state,country,pin);
+                homePhone, mobile,fax,email,gstnRegNo,panNo,etin,addressLine1,addressLine2,city,state,country,pin);
     }
 
     protected Client() {
@@ -343,7 +347,7 @@ public final class Client extends AbstractPersistableCustom<Long> {
             final Staff staff, final LocalDate submittedOnDate, final Long savingsProductId, final Long savingsAccountId,
             final LocalDate dateOfBirth, final CodeValue gender, final CodeValue clientType, final CodeValue clientClassification, final Integer legalForm,
             final String companyName,final String contactName,final Long officePhone,final Long homePhone,final Long mobile,final String fax,final String email,
-            final String gstnRegNo,final String panNo,final String addressLine1,final String addressLine2,final String city,final String state,final String country,final Long pin) {
+            final String gstnRegNo,final String panNo,final String etin,final String addressLine1,final String addressLine2,final String city,final String state,final String country,final Long pin) {
 
         if (StringUtils.isBlank(accountNo)) {
             this.accountNumber = new RandomPasswordGenerator(19).generate();
@@ -428,6 +432,7 @@ public final class Client extends AbstractPersistableCustom<Long> {
         this.email = email;
         this.gstnRegNo = gstnRegNo;
         this.panNo = panNo;
+        this.etin = etin;
         this.addressLine1 = addressLine1;
         this.addressLine2 = addressLine2;
         this.city = city;
@@ -683,6 +688,12 @@ public final class Client extends AbstractPersistableCustom<Long> {
             final String newValue = command.stringValueOfParameterNamed(ClientApiConstants.panNoParamName);
             actualChanges.put(ClientApiConstants.panNoParamName, newValue);
             this.panNo = StringUtils.defaultIfEmpty(newValue, null);
+        }
+        
+        if (command.isChangeInStringParameterNamed(ClientApiConstants.etinParamName, this.etin)) {
+            final String newValue = command.stringValueOfParameterNamed(ClientApiConstants.etinParamName);
+            actualChanges.put(ClientApiConstants.etinParamName, newValue);
+            this.etin = StringUtils.defaultIfEmpty(newValue, null);
         }
         
         if (command.isChangeInStringParameterNamed(ClientApiConstants.addressLine1ParamName, this.addressLine1)) {
