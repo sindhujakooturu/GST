@@ -100,6 +100,20 @@ public class GlobalConfigurationApiResource {
         return this.propertyDataJsonSerializer.serialize(settings, configurationData, this.RESPONSE_DATA_PARAMETERS);
     }
 
+    @GET
+    @Path("byname")
+    @Consumes({ MediaType.APPLICATION_JSON })
+    @Produces({ MediaType.APPLICATION_JSON })
+    public String retrieveOneByname(@QueryParam("configname") final String configname, @Context final UriInfo uriInfo) {
+
+        this.context.authenticatedUser().validateHasReadPermission(this.resourceNameForPermissions);
+
+        GlobalConfigurationPropertyData configurationData = null;
+        if(null != configname){configurationData = this.readPlatformService.retrieveGlobalConfiguration(configname);}
+
+        final ApiRequestJsonSerializationSettings settings = this.apiRequestParameterHelper.process(uriInfo.getQueryParameters());
+        return this.propertyDataJsonSerializer.serialize(settings, configurationData, this.RESPONSE_DATA_PARAMETERS);
+    }
 
     @PUT
     @Path("{configId}")
