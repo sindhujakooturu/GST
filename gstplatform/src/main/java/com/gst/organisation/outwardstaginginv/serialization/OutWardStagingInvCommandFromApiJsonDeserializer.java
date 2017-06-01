@@ -21,9 +21,6 @@ import com.gst.infrastructure.core.exception.PlatformApiDataValidationException;
 import com.gst.infrastructure.core.serialization.FromJsonHelper;
 
 /**
-<<<<<<< HEAD
- * @author hugo Deserializer for code JSON to validate API request.
-=======
  * @author Deserializer for code JSON to validate API request.
 >>>>>>> upstream/master
  */
@@ -33,15 +30,6 @@ public class OutWardStagingInvCommandFromApiJsonDeserializer {
 	/**
 	 * The parameters supported for this command.
 	 */
-<<<<<<< HEAD
-	final private Set<String> supportedParameters = new HashSet<String>(Arrays.asList("billFrequencyCode", "chargeCode","chargeDescription", "chargeDuration", "chargeType",
-					"dateFormat", "durationType", "locale", "taxInclusive"));
-	private final FromJsonHelper fromApiJsonHelper;
-
-	@Autowired
-	public OutWardStagingInvCommandFromApiJsonDeserializer(
-			final FromJsonHelper fromApiJsonHelper) {
-=======
 	final private Set<String> supportedParameters = new HashSet<String>(Arrays.asList("gstin","gstinPurchaser","cName","supplierInvNo",
 			          "supplierInvDate", "supplierInvValue", "supplyStateCode","orderNo" , "orderDate","etin","invoiceId",
 			          "receiptStateCode", "status", "errorCode", "errorDescripter","dateFormat", "locale"));
@@ -50,17 +38,12 @@ public class OutWardStagingInvCommandFromApiJsonDeserializer {
 
 	@Autowired
 	public OutWardStagingInvCommandFromApiJsonDeserializer(final FromJsonHelper fromApiJsonHelper) {
->>>>>>> upstream/master
 		this.fromApiJsonHelper = fromApiJsonHelper;
 	}
 
 	/**
 	 * @param json
-<<<<<<< HEAD
-	 * check validation for create charge codes
-=======
 	 * check validation for create OutWardStagingInv codes
->>>>>>> upstream/master
 	 */
 
 	public void validaForCreate(String json) {
@@ -72,37 +55,6 @@ public class OutWardStagingInvCommandFromApiJsonDeserializer {
 			private static final long serialVersionUID = 1L;
 		}.getType();
 
-<<<<<<< HEAD
-		fromApiJsonHelper.checkForUnsupportedParameters(typeOfMap, json,
-				supportedParameters);
-
-		final List<ApiParameterError> dataValidationErrors = new ArrayList<ApiParameterError>();
-		final DataValidatorBuilder baseDataValidator = new DataValidatorBuilder(
-				dataValidationErrors).resource("chargecode");
-
-		final JsonElement element = fromApiJsonHelper.parse(json);
-
-		final String chargeCode = fromApiJsonHelper.extractStringNamed("chargeCode", element);
-		baseDataValidator.reset().parameter("chargeCode").value(chargeCode).notBlank().notExceedingLengthOf(10);
-
-		final String chargeDescription = fromApiJsonHelper.extractStringNamed("chargeDescription", element);
-		baseDataValidator.reset().parameter("chargeDescription").value(chargeDescription).notBlank();
-
-		final String chargeType = fromApiJsonHelper.extractStringNamed("chargeType", element);
-		baseDataValidator.reset().parameter("chargeType").value(chargeType).notBlank();
-		
-		final Integer chargeDuration = fromApiJsonHelper.extractIntegerWithLocaleNamed("chargeDuration", element);
-		baseDataValidator.reset().parameter("chargeDuration").value(chargeDuration).notBlank().integerGreaterThanZero();
-	
-		final String durationType = fromApiJsonHelper.extractStringNamed("durationType", element);
-		baseDataValidator.reset().parameter("durationType").value(durationType).notBlank();
-
-		final boolean taxInclusive = fromApiJsonHelper.extractBooleanNamed("taxInclusive", element);
-		baseDataValidator.reset().parameter("taxInclusive").value(taxInclusive).notBlank();
-		
-		final String billFrequencyCode = fromApiJsonHelper.extractStringNamed("billFrequencyCode", element);
-		baseDataValidator.reset().parameter("billFrequencyCode").value(billFrequencyCode).notBlank();
-=======
 		fromApiJsonHelper.checkForUnsupportedParameters(typeOfMap, json,supportedParameters);
 
 		final List<ApiParameterError> dataValidationErrors = new ArrayList<ApiParameterError>();
@@ -154,7 +106,6 @@ public class OutWardStagingInvCommandFromApiJsonDeserializer {
 		
 		final String errorDescripter = fromApiJsonHelper.extractStringNamed("errorDescripter", element);
 		baseDataValidator.reset().parameter("errorDescripter").value(errorDescripter);
->>>>>>> upstream/master
 
 		throwExceptionIfValidationWarningsExist(dataValidationErrors);
 

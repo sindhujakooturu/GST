@@ -1,19 +1,13 @@
 package com.gst.organisation.outwardstaginginv.domain;
 
-<<<<<<< HEAD
-=======
 import java.util.Date;
->>>>>>> upstream/master
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-<<<<<<< HEAD
 import javax.persistence.UniqueConstraint;
-=======
->>>>>>> upstream/master
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -25,18 +19,12 @@ import com.gst.infrastructure.core.api.JsonCommand;
  * 
  */
 @Entity
-<<<<<<< HEAD
-@Table(name = "b_charge_codes", uniqueConstraints = {
-		@UniqueConstraint(name = "chargecode", columnNames = { "charge_code" }),
-		@UniqueConstraint(name = "chargedescription", columnNames = { "charge_description" }) })
-=======
 @Table(name = "b_charge_codes")
->>>>>>> upstream/master
 public class OutWardStagingInv extends AbstractPersistable<Long> {
 
 	private static final long serialVersionUID = 1L;
 
-<<<<<<< HEAD
+/*<<<<<<< HEAD
 	@Column(name = "charge_code")
 	private String chargeCode;
 
@@ -75,10 +63,10 @@ public class OutWardStagingInv extends AbstractPersistable<Long> {
 		this.billFrequencyCode = billFrequencyCode;
 	}
 
-	/**
+	*//**
 	 * @param command
 	 * @return chargeCode constructor
-	 */
+	 *//*
 	public static OutWardStagingInv fromJson(final JsonCommand command) {
 
 		final String chargeCode = command
@@ -109,9 +97,9 @@ public class OutWardStagingInv extends AbstractPersistable<Long> {
 				chargeDuration, durationType, tax, billFrequencyCode);
 	}
 
-	/**
+	*//**
 	 * @return the chargeCode
-	 */
+	 *//*
 	public String getChargeCode() {
 		return chargeCode;
 	}
@@ -120,9 +108,9 @@ public class OutWardStagingInv extends AbstractPersistable<Long> {
 		this.chargeCode = chargeCode;
 	}
 
-	/**
+	*//**
 	 * @return the chargeDescription
-	 */
+	 *//*
 	public String getChargeDescription() {
 		return chargeDescription;
 	}
@@ -131,9 +119,9 @@ public class OutWardStagingInv extends AbstractPersistable<Long> {
 		this.chargeDescription = chargeDescription;
 	}
 
-	/**
+	*//**
 	 * @return the chargeType
-	 */
+	 *//*
 	public String getChargeType() {
 		return chargeType;
 	}
@@ -142,9 +130,9 @@ public class OutWardStagingInv extends AbstractPersistable<Long> {
 		this.chargeType = chargeType;
 	}
 
-	/**
+	*//**
 	 * @return the chargeDuration
-	 */
+	 *//*
 	public Integer getChargeDuration() {
 		return chargeDuration;
 	}
@@ -153,9 +141,9 @@ public class OutWardStagingInv extends AbstractPersistable<Long> {
 		this.chargeDuration = chargeDuration;
 	}
 
-	/**
+	*//**
 	 * @return the durationType
-	 */
+	 *//*
 	public String getDurationType() {
 		return durationType;
 	}
@@ -164,9 +152,9 @@ public class OutWardStagingInv extends AbstractPersistable<Long> {
 		this.durationType = durationType;
 	}
 
-	/**
+	*//**
 	 * @return the taxInclusive
-	 */
+	 *//*
 	public Integer getTaxInclusive() {
 		return taxInclusive;
 	}
@@ -175,16 +163,16 @@ public class OutWardStagingInv extends AbstractPersistable<Long> {
 		this.taxInclusive = taxInclusive;
 	}
 
-	/**
+	*//**
 	 * @return the billFrequencyCode
-	 */
+	 *//*
 	public String getBillFrequencyCode() {
 		return billFrequencyCode;
 	}
 
 	public void setBillFrequencyCode(String billFrequencyCode) {
 		this.billFrequencyCode = billFrequencyCode;
-=======
+=======*/
 	@Column(name = "gstin")
 	private String gstin;
 
@@ -229,9 +217,6 @@ public class OutWardStagingInv extends AbstractPersistable<Long> {
 	
 	@Column(name = "error_descr")
 	private String errorDescripter;
-	
-	/*@Column(name = "error_descr")
-	private Integer modeNo;*/
 	
 	public OutWardStagingInv() {
 		
@@ -286,77 +271,11 @@ public class OutWardStagingInv extends AbstractPersistable<Long> {
 		return new OutWardStagingInv(gstin, gstinPurchaser, cName,
 				supplierInvNo, supplierInvDate, supplierInvValue, supplyStateCode,orderNo,orderDate,etin,invoiceId,receiptStateCode,
 				status,errorCode,errorDescripter);
->>>>>>> upstream/master
 	}
 
 	/**
 	 * @param command
-<<<<<<< HEAD
-	 * @return changes of chargeCode object
-	 */
-	public Map<String, Object> update(JsonCommand command) {
-
-		final Map<String, Object> actualChanges = new LinkedHashMap<String, Object>(
-				1);
-		if (command.isChangeInStringParameterNamed("chargeCode",
-				this.chargeCode)) {
-			final String newValue = command
-					.stringValueOfParameterNamed("chargeCode");
-			actualChanges.put("chargeCode", newValue);
-			this.chargeCode = StringUtils.defaultIfEmpty(newValue, null);
-		}
-		if (command.isChangeInStringParameterNamed("chargeDescription",
-				this.chargeDescription)) {
-			final String newValue = command
-					.stringValueOfParameterNamed("chargeDescription");
-			actualChanges.put("chargeDescription", newValue);
-			this.chargeDescription = StringUtils.defaultIfEmpty(newValue, null);
-		}
-		if (command.isChangeInStringParameterNamed("chargeType",
-				this.chargeType)) {
-			final String newValue = command
-					.stringValueOfParameterNamed("chargeType");
-			actualChanges.put("chargeType", newValue);
-			this.chargeType = StringUtils.defaultIfEmpty(newValue, null);
-		}
-		if (command.isChangeInIntegerParameterNamed("chargeDuration",
-				this.chargeDuration)) {
-			final Integer newValue = command
-					.integerValueOfParameterNamed("chargeDuration");
-			actualChanges.put("chargeDuration", newValue);
-			this.chargeDuration = newValue;
-		}
-		if (command.isChangeInStringParameterNamed("durationType",
-				this.durationType)) {
-			final String newValue = command
-					.stringValueOfParameterNamed("durationType");
-			actualChanges.put("durationType", newValue);
-			this.durationType = StringUtils.defaultIfEmpty(newValue, null);
-		}
-		if (command.isChangeInBooleanParameterNamed("taxInclusive",
-				this.taxInclusive == 1 ? true : false)) {
-			final boolean taxInclusive = command
-					.booleanPrimitiveValueOfParameterNamed("taxInclusive");
-
-			Integer newValue = null;
-
-			if (taxInclusive) {
-				newValue = 1;
-			} else {
-				newValue = 0;
-			}
-			actualChanges.put("taxInclusive", newValue);
-			this.taxInclusive = newValue;
-		}
-		if (command.isChangeInStringParameterNamed("billFrequencyCode",
-				this.billFrequencyCode)) {
-			final String newValue = command
-					.stringValueOfParameterNamed("billFrequencyCode");
-			actualChanges.put("billFrequencyCode", newValue);
-			this.billFrequencyCode = StringUtils.defaultIfEmpty(newValue, null);
-
-=======
-	 * @return changes of OutWardInv object
+	 * @return changes of OutWardStagingInv object
 	 */
 	public Map<String, Object> update(JsonCommand command) {
 
@@ -439,7 +358,6 @@ public class OutWardStagingInv extends AbstractPersistable<Long> {
 			final String newValue = command.stringValueOfParameterNamed("errorDescripter");
 			actualChanges.put("errorDescripter", newValue);
 			this.errorDescripter = StringUtils.defaultIfEmpty(newValue, null);
->>>>>>> upstream/master
 		}
 
 		return actualChanges;

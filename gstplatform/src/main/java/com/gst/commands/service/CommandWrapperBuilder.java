@@ -2885,7 +2885,6 @@ public class CommandWrapperBuilder {
         return this;
     }
     
-<<<<<<< HEAD
     public CommandWrapperBuilder createCompanyMaster() {
         this.actionName = "CREATE";
         this.entityName = "COMPANYMASTER";
@@ -2961,7 +2960,6 @@ public class CommandWrapperBuilder {
 		this.href = "/address/" + entityType + "/" + entityId;
 		return this;
 	}
-=======
     public CommandWrapperBuilder createOutWardInv() {
         this.actionName = "CREATE";
         this.entityName = "OUTWARDINV";
@@ -2977,5 +2975,4 @@ public class CommandWrapperBuilder {
         this.href = "/outwardinv/"+outWardInvId;
         return this;
     }
->>>>>>> upstream/master
 }
