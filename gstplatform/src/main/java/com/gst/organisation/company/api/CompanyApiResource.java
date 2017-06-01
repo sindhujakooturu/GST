@@ -1,4 +1,4 @@
-package com.gst.organisation.outwardstaginginv.api;
+package com.gst.organisation.company.api;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -28,55 +28,57 @@ import com.gst.infrastructure.core.data.CommandProcessingResult;
 import com.gst.infrastructure.core.serialization.ApiRequestJsonSerializationSettings;
 import com.gst.infrastructure.core.serialization.DefaultToApiJsonSerializer;
 import com.gst.infrastructure.security.service.PlatformSecurityContext;
-import com.gst.organisation.outwardstaginginv.data.OutWardStagingInvData;
-import com.gst.organisation.outwardstaginginv.service.OutWardStagingInvReadPlatformService;
+import com.gst.organisation.company.data.CompanyData;
+import com.gst.organisation.company.service.CompanyReadPlatformService;
 
 /**
  * @author 
  * 
  */
-@Path("/outwardinv")
+@Path("/company")
 @Component
 @Scope("singleton")
-public class OutWardStagingInvApiResource {
+public class CompanyApiResource {
 
 
-	private final Set<String> RESPONSE_PARAMETERS = new HashSet<String>(Arrays.asList("id", "gstin", "gstinPurchaser","cName",
-			"supplierInvNo", "supplierInvDate","supplierInvValue", "supplyStateCode","orderNo","orderDate","etin","invoiceId","receiptStateCode",
-			"status","errorCode","errorDescripter"));
-	private final String resourceNameForPermissions = "OUTWARDINV";
+	private final Set<String> RESPONSE_PARAMETERS = new HashSet<String>(Arrays.asList("id", "gstin","companyName", "contactName","officePhone",
+			                     "homePhone", "mobile","fax", "email","gstnRegNo","panNo","addressLine1","addressLine2","city",
+			                     "state","country","pin"));
+	
+
+	private final String resourceNameForPermissions = "COMPANY";
 	
 	private final PlatformSecurityContext context;
 	private final PortfolioCommandSourceWritePlatformService commandSourceWritePlatformService;
-	private final DefaultToApiJsonSerializer<OutWardStagingInvData> toApiJsonSerializer;
+	private final DefaultToApiJsonSerializer<CompanyData> toApiJsonSerializer;
 	private final ApiRequestParameterHelper apiRequestParameterHelper;
-	private final OutWardStagingInvReadPlatformService outWardStagingInvReadPlatformService;
+	private final CompanyReadPlatformService companyReadPlatformService;
 
 	@Autowired
-	public OutWardStagingInvApiResource(final PlatformSecurityContext context,final PortfolioCommandSourceWritePlatformService commandSourceWritePlatformService,
-			final DefaultToApiJsonSerializer<OutWardStagingInvData> toApiJsonSerializer,final ApiRequestParameterHelper apiRequestParameterHelper,
-			final OutWardStagingInvReadPlatformService outWardStagingInvReadPlatformService) {
+	public CompanyApiResource(final PlatformSecurityContext context,final PortfolioCommandSourceWritePlatformService commandSourceWritePlatformService,
+			final DefaultToApiJsonSerializer<CompanyData> toApiJsonSerializer,final ApiRequestParameterHelper apiRequestParameterHelper,
+			final CompanyReadPlatformService companyReadPlatformService) {
 		
 		this.context = context;
 		this.commandSourceWritePlatformService = commandSourceWritePlatformService;
 		this.toApiJsonSerializer = toApiJsonSerializer;
 		this.apiRequestParameterHelper = apiRequestParameterHelper;
-		this.outWardStagingInvReadPlatformService = outWardStagingInvReadPlatformService;
+		this.companyReadPlatformService = companyReadPlatformService;
 	}
 
 	/**
 	 * @param uriInfo
-	 * @return retrieved list of all outwardinv details
+	 * @return retrieved list of all Company details
 	 */
 	@GET
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Produces({ MediaType.APPLICATION_JSON })
-	public String retrieveAllOutWardInvData(@Context final UriInfo uriInfo) {
+	public String retrieveAllCompanyData(@Context final UriInfo uriInfo) {
 		
 	    context.authenticatedUser().validateHasReadPermission(resourceNameForPermissions);
-		final List<OutWardStagingInvData> outWardStagingInvData = this.outWardStagingInvReadPlatformService.retrieveAllOutWardInvData();
+		final List<CompanyData> companyData = this.companyReadPlatformService.retrieveAllCompanyData();
 		final ApiRequestJsonSerializationSettings settings = apiRequestParameterHelper.process(uriInfo.getQueryParameters());
-		return this.toApiJsonSerializer.serialize(settings, outWardStagingInvData,RESPONSE_PARAMETERS);
+		return this.toApiJsonSerializer.serialize(settings, companyData,RESPONSE_PARAMETERS);
 
 	}
 
@@ -89,25 +91,24 @@ public class OutWardStagingInvApiResource {
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Produces({ MediaType.APPLICATION_JSON })
 
-	public String createOutWardInvData(final String apiRequestBodyAsJson,@Context final UriInfo uriInfo) {
+	public String createCompanyData(final String apiRequestBodyAsJson,@Context final UriInfo uriInfo) {
 		
 		context.authenticatedUser().validateHasReadPermission(resourceNameForPermissions);
-		final CommandWrapper commandRequest = new CommandWrapperBuilder().createOutWardInv().withJson(apiRequestBodyAsJson).build();
+		final CommandWrapper commandRequest = new CommandWrapperBuilder().createCompany().withJson(apiRequestBodyAsJson).build();
 		final CommandProcessingResult result = this.commandSourceWritePlatformService.logCommandSource(commandRequest);
 		return this.toApiJsonSerializer.serialize(result);
 	
 	}
 
-
 	@GET
-	@Path("{outWardInvId}")
+	@Path("{companyId}")
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Produces({ MediaType.APPLICATION_JSON })
 
-	public String retrieveSingleOutWardInvDataDetails(@PathParam("outWardInvId") final Long outWardInvId,@Context final UriInfo uriInfo) {
+	public String retrieveSingleCompanyDetails(@PathParam("companyId") final Long companyId,@Context final UriInfo uriInfo) {
 	   
 		context.authenticatedUser().validateHasReadPermission(resourceNameForPermissions);
-		OutWardStagingInvData outWardStagingInvData = this.outWardStagingInvReadPlatformService.retrieveSingleOutWardStagingInvDetails(outWardInvId);
+		CompanyData outWardStagingInvData = this.companyReadPlatformService.retrieveSingleCompanyDetails(companyId);
 		final ApiRequestJsonSerializationSettings settings = apiRequestParameterHelper.process(uriInfo.getQueryParameters());
 		return this.toApiJsonSerializer.serialize(settings,outWardStagingInvData,RESPONSE_PARAMETERS);
 	}
@@ -115,17 +116,17 @@ public class OutWardStagingInvApiResource {
 	/**
 	 * @param outWardInvId
 	 * @param apiRequestBodyAsJson
-	 * @return update outWardInvId here
+	 * @return update companyId here
 	 */
 	@PUT
-	@Path("{outWardInvId}")
+	@Path("{companyId}")
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Produces({ MediaType.APPLICATION_JSON })
 
-	public String updateSingleOutWardInvData(@PathParam("outWardInvId") final Long outWardInvId,final String apiRequestBodyAsJson) {
+	public String updateSingleCompanyData(@PathParam("companyId") final Long companyId,final String apiRequestBodyAsJson) {
 	   
 		context.authenticatedUser().validateHasReadPermission(resourceNameForPermissions);
-		final CommandWrapper commandRequest = new CommandWrapperBuilder().updateOutWardInv(outWardInvId).withJson(apiRequestBodyAsJson)	.build();
+		final CommandWrapper commandRequest = new CommandWrapperBuilder().updateCompany(companyId).withJson(apiRequestBodyAsJson).build();
 		final CommandProcessingResult result = this.commandSourceWritePlatformService.logCommandSource(commandRequest);
 		return this.toApiJsonSerializer.serialize(result);
 	}

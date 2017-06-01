@@ -1,12 +1,14 @@
 package com.gst.organisation.outwardstaginginv.service;
 
 import java.util.Map;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.gst.infrastructure.core.api.JsonCommand;
 import com.gst.infrastructure.core.data.CommandProcessingResult;
 import com.gst.infrastructure.core.data.CommandProcessingResultBuilder;
@@ -65,26 +67,7 @@ public class OutWardStagingInvWritePlatformServiceImp implements OutWardStagingI
 
 	private void handleDataIntegrityIssues(final JsonCommand command,
 			final DataIntegrityViolationException dve) {
-		/*final Throwable realCause = dve.getMostSpecificCause();
-		if (realCause.getMessage().contains("chargecode")) {
-			throw new PlatformDataIntegrityException("error.msg.chargecode.duplicate.name", "A code with name'"
-			    + command.stringValueOfParameterNamed("chargeCode")+ "'already exists", "chargeCode",command.stringValueOfParameterNamed("chargeCode"));
-		}
-
-		if (realCause.getMessage().contains("chargedescription")) {
-			throw new PlatformDataIntegrityException(
-					"error.msg.chargecode.duplicate.name",
-					"A description with name'" + command.stringValueOfParameterNamed("charge_description")
-					 + "'already exists", "chargeDescription", command.stringValueOfParameterNamed("charge_description"));
-		}
-		
-		if (realCause.getMessage().contains("foreign key constraint")) {
-			throw new PlatformDataIntegrityException(
-					"error.msg.chargecode.can not.delete or update already used",
-					"A code with name'" + command.stringValueOfParameterNamed("chargeCode")
-					+ "'already used", "chargeCode",command.stringValueOfParameterNamed("chargeCode"));
-		}*/
-		LOGGER.error(dve.getMessage(), dve);
+		   LOGGER.error(dve.getMessage(), dve);
 	}
 
 	/*

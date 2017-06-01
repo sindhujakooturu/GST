@@ -239,6 +239,7 @@ public final class Client extends AbstractPersistableCustom<Long> {
         final String lastname = command.stringValueOfParameterNamed(ClientApiConstants.lastnameParamName);
         final String fullname = command.stringValueOfParameterNamed(ClientApiConstants.fullnameParamName);
 
+
         final LocalDate dataOfBirth = command.localDateValueOfParameterNamed(ClientApiConstants.dateOfBirthParamName);
 
         ClientStatus status = ClientStatus.PENDING;
@@ -351,7 +352,6 @@ public final class Client extends AbstractPersistableCustom<Long> {
         this.clientType = clientType;
         this.clientClassification = clientClassification;
         this.setLegalForm(legalForm);
-
         deriveDisplayName();
         validate();
     }

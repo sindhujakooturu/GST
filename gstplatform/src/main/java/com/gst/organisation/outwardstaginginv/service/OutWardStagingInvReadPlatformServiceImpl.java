@@ -84,7 +84,6 @@ public class OutWardStagingInvReadPlatformServiceImpl implements OutWardStagingI
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see #retrieveSingleOutWardStagingInvDetails(java.lang.Long)
 	 */
 	public OutWardStagingInvData retrieveSingleOutWardStagingInvDetails(final Long outWardInvId) {
 
