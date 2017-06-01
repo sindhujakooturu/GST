@@ -2883,4 +2883,20 @@ public class CommandWrapperBuilder {
         this.href = "/b2binvoice/"+id;
         return this;
     }
+    
+    public CommandWrapperBuilder createOutWardInv() {
+        this.actionName = "CREATE";
+        this.entityName = "OUTWARDINV";
+        this.entityId = null;
+        this.href = "/outwardinv/";
+        return this;
+    }
+    
+    public CommandWrapperBuilder updateOutWardInv(final Long outWardInvId) {
+        this.actionName = "UPDATE";
+        this.entityName = "OUTWARDINV";
+        this.entityId = null;
+        this.href = "/outwardinv/"+outWardInvId;
+        return this;
+    }
 }
