@@ -2975,4 +2975,20 @@ public class CommandWrapperBuilder {
         this.href = "/outwardinv/"+outWardInvId;
         return this;
     }
+    
+    public CommandWrapperBuilder createCompany() {
+        this.actionName = "CREATE";
+        this.entityName = "COMPANY";
+        this.entityId = null;
+        this.href = "/company/";
+        return this;
+    }
+    
+    public CommandWrapperBuilder updateCompany(final Long companyId) {
+        this.actionName = "UPDATE";
+        this.entityName = "COMPANY";
+        this.entityId = null;
+        this.href = "/company/"+companyId;
+        return this;
+    }
 }

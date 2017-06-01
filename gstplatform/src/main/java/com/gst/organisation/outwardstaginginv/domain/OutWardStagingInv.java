@@ -7,172 +7,22 @@ import java.util.Map;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import javax.persistence.UniqueConstraint;
 
 import org.apache.commons.lang.StringUtils;
-import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import com.gst.infrastructure.core.api.JsonCommand;
+import com.gst.infrastructure.core.domain.AbstractPersistableCustom;
 
 /**
- * @author hugo
+ * @author Trigital
  * 
  */
 @Entity
-@Table(name = "b_charge_codes")
-public class OutWardStagingInv extends AbstractPersistable<Long> {
+@Table(name = "m_ow_stg_invoice")
+public class OutWardStagingInv extends AbstractPersistableCustom<Long> {
 
 	private static final long serialVersionUID = 1L;
 
-/*<<<<<<< HEAD
-	@Column(name = "charge_code")
-	private String chargeCode;
-
-	@Column(name = "charge_description")
-	private String chargeDescription;
-
-	@Column(name = "charge_type")
-	private String chargeType;
-
-	@Column(name = "charge_duration")
-	private Integer chargeDuration;
-
-	@Column(name = "duration_type")
-	private String durationType;
-
-	@Column(name = "tax_inclusive")
-	private Integer taxInclusive;
-
-	@Column(name = "billfrequency_code")
-	private String billFrequencyCode;
-
-	public OutWardStagingInv() {
-	}
-
-	public OutWardStagingInv(final String chargeCode, final String chargeDescription,
-			final String chargeType, final Integer chargeDuration,
-			final String durationType, final Integer taxInclusive,
-			final String billFrequencyCode) {
-
-		this.chargeCode = chargeCode;
-		this.chargeDescription = chargeDescription;
-		this.chargeType = chargeType;
-		this.chargeDuration = chargeDuration;
-		this.durationType = durationType;
-		this.taxInclusive = taxInclusive;
-		this.billFrequencyCode = billFrequencyCode;
-	}
-
-	*//**
-	 * @param command
-	 * @return chargeCode constructor
-	 *//*
-	public static OutWardStagingInv fromJson(final JsonCommand command) {
-
-		final String chargeCode = command
-				.stringValueOfParameterNamed("chargeCode");
-		final String chargeDescription = command
-				.stringValueOfParameterNamed("chargeDescription");
-		final Integer chargeDuration = command
-				.integerValueOfParameterNamed("chargeDuration");
-		final String chargeType = command
-				.stringValueOfParameterNamed("chargeType");
-		final String durationType = command
-				.stringValueOfParameterNamed("durationType");
-		final boolean taxInclusive = command
-				.booleanPrimitiveValueOfParameterNamed("taxInclusive");
-
-		Integer tax = null;
-
-		if (taxInclusive) {
-			tax = 1;
-		} else {
-			tax = 0;
-		}
-
-		final String billFrequencyCode = command
-				.stringValueOfParameterNamed("billFrequencyCode");
-
-		return new OutWardStagingInv(chargeCode, chargeDescription, chargeType,
-				chargeDuration, durationType, tax, billFrequencyCode);
-	}
-
-	*//**
-	 * @return the chargeCode
-	 *//*
-	public String getChargeCode() {
-		return chargeCode;
-	}
-
-	public void setChargeCode(String chargeCode) {
-		this.chargeCode = chargeCode;
-	}
-
-	*//**
-	 * @return the chargeDescription
-	 *//*
-	public String getChargeDescription() {
-		return chargeDescription;
-	}
-
-	public void setChargeDescription(String chargeDescription) {
-		this.chargeDescription = chargeDescription;
-	}
-
-	*//**
-	 * @return the chargeType
-	 *//*
-	public String getChargeType() {
-		return chargeType;
-	}
-
-	public void setChargeType(String chargeType) {
-		this.chargeType = chargeType;
-	}
-
-	*//**
-	 * @return the chargeDuration
-	 *//*
-	public Integer getChargeDuration() {
-		return chargeDuration;
-	}
-
-	public void setChargeDuration(Integer chargeDuration) {
-		this.chargeDuration = chargeDuration;
-	}
-
-	*//**
-	 * @return the durationType
-	 *//*
-	public String getDurationType() {
-		return durationType;
-	}
-
-	public void setDurationType(String durationType) {
-		this.durationType = durationType;
-	}
-
-	*//**
-	 * @return the taxInclusive
-	 *//*
-	public Integer getTaxInclusive() {
-		return taxInclusive;
-	}
-
-	public void setTaxInclusive(Integer taxInclusive) {
-		this.taxInclusive = taxInclusive;
-	}
-
-	*//**
-	 * @return the billFrequencyCode
-	 *//*
-	public String getBillFrequencyCode() {
-		return billFrequencyCode;
-	}
-
-	public void setBillFrequencyCode(String billFrequencyCode) {
-		this.billFrequencyCode = billFrequencyCode;
-=======*/
 	@Column(name = "gstin")
 	private String gstin;
 

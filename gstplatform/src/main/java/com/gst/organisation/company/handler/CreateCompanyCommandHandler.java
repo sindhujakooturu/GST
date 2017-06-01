@@ -1,4 +1,4 @@
-package com.gst.organisation.outwardstaginginv.handler;
+package com.gst.organisation.company.handler;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -8,24 +8,24 @@ import com.gst.commands.annotation.CommandType;
 import com.gst.commands.handler.NewCommandSourceHandler;
 import com.gst.infrastructure.core.api.JsonCommand;
 import com.gst.infrastructure.core.data.CommandProcessingResult;
+import com.gst.organisation.company.service.CompanyWritePlatformService;
 import com.gst.organisation.outwardstaginginv.service.OutWardStagingInvWritePlatformService;
 
 @Service
-@CommandType(entity = "OUTWARDINV", action = "CREATE")
-public class CreateOutWardStagingInvCommandHandler implements NewCommandSourceHandler {
+@CommandType(entity = "COMPANY", action = "CREATE")
+public class CreateCompanyCommandHandler implements NewCommandSourceHandler {
 
-	private final OutWardStagingInvWritePlatformService outWardStagingInvWritePlatformService;
+	private final CompanyWritePlatformService companyWritePlatformService;
 
 	@Autowired
-	public CreateOutWardStagingInvCommandHandler(
-			final OutWardStagingInvWritePlatformService outWardStagingInvWritePlatformService) {
-		this.outWardStagingInvWritePlatformService = outWardStagingInvWritePlatformService;
+	public CreateCompanyCommandHandler(final CompanyWritePlatformService companyWritePlatformService) {
+		this.companyWritePlatformService = companyWritePlatformService;
 	}
 
 	@Transactional
 	@Override
 	public CommandProcessingResult processCommand(final JsonCommand command) {
-		return outWardStagingInvWritePlatformService.createOutWardInv(command);
+		return companyWritePlatformService.createCompany(command);
 	}
 
 }

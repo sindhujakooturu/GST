@@ -22,7 +22,6 @@ import com.gst.infrastructure.core.serialization.FromJsonHelper;
 
 /**
  * @author Deserializer for code JSON to validate API request.
->>>>>>> upstream/master
  */
 @Component
 public class OutWardStagingInvCommandFromApiJsonDeserializer {
