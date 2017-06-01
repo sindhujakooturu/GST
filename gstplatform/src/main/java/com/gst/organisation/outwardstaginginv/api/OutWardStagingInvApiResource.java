@@ -30,7 +30,10 @@ import com.gst.infrastructure.core.serialization.DefaultToApiJsonSerializer;
 import com.gst.infrastructure.security.service.PlatformSecurityContext;
 import com.gst.organisation.outwardstaginginv.data.OutWardStagingInvData;
 import com.gst.organisation.outwardstaginginv.service.OutWardStagingInvReadPlatformService;
+<<<<<<< HEAD
 import com.gst.organisation.outwardstaginginv.service.OutWardStagingInvWritePlatformService;
+=======
+>>>>>>> upstream/master
 
 /**
  * @author 
@@ -44,7 +47,11 @@ public class OutWardStagingInvApiResource {
 
 	private final Set<String> RESPONSE_PARAMETERS = new HashSet<String>(Arrays.asList("id", "gstin", "gstinPurchaser","cName",
 			"supplierInvNo", "supplierInvDate","supplierInvValue", "supplyStateCode","orderNo","orderDate","etin","invoiceId","receiptStateCode",
+<<<<<<< HEAD
 			"status","errorCode","errorDescripter","modeNo"));
+=======
+			"status","errorCode","errorDescripter"));
+>>>>>>> upstream/master
 	
 	private final String resourceNameForPermissions = "OUTWARDINV";
 	private final PlatformSecurityContext context;
@@ -52,19 +59,29 @@ public class OutWardStagingInvApiResource {
 	private final DefaultToApiJsonSerializer<OutWardStagingInvData> toApiJsonSerializer;
 	private final ApiRequestParameterHelper apiRequestParameterHelper;
 	private final OutWardStagingInvReadPlatformService outWardStagingInvReadPlatformService;
+<<<<<<< HEAD
 	private final OutWardStagingInvWritePlatformService outWardStagingInvWritePlatformService;
+=======
+>>>>>>> upstream/master
 
 	@Autowired
 	public OutWardStagingInvApiResource(final PlatformSecurityContext context,final PortfolioCommandSourceWritePlatformService commandSourceWritePlatformService,
 			final DefaultToApiJsonSerializer<OutWardStagingInvData> toApiJsonSerializer,final ApiRequestParameterHelper apiRequestParameterHelper,
+<<<<<<< HEAD
 			final OutWardStagingInvReadPlatformService outWardStagingInvReadPlatformService,final OutWardStagingInvWritePlatformService outWardStagingInvWritePlatformService) {
+=======
+			final OutWardStagingInvReadPlatformService outWardStagingInvReadPlatformService) {
+>>>>>>> upstream/master
 		
 		this.context = context;
 		this.commandSourceWritePlatformService = commandSourceWritePlatformService;
 		this.toApiJsonSerializer = toApiJsonSerializer;
 		this.apiRequestParameterHelper = apiRequestParameterHelper;
 		this.outWardStagingInvReadPlatformService = outWardStagingInvReadPlatformService;
+<<<<<<< HEAD
 		this.outWardStagingInvWritePlatformService = outWardStagingInvWritePlatformService;
+=======
+>>>>>>> upstream/master
 	}
 
 	/**
@@ -85,6 +102,7 @@ public class OutWardStagingInvApiResource {
 
 	/**
 	 * @param uriInfo
+<<<<<<< HEAD
 	 * @return retrieved template data for creating charge codes
 	 *//*
 	@GET
@@ -106,6 +124,8 @@ public class OutWardStagingInvApiResource {
 
 	/**
 	 * @param uriInfo
+=======
+>>>>>>> upstream/master
 	 * @param apiRequestBodyAsJson
 	 * @return
 	 */
@@ -116,13 +136,18 @@ public class OutWardStagingInvApiResource {
 	public String createOutWardInvData(final String apiRequestBodyAsJson,@Context final UriInfo uriInfo) {
 		
 		context.authenticatedUser().validateHasReadPermission(resourceNameForPermissions);
+<<<<<<< HEAD
 		final CommandWrapper commandRequest = new CommandWrapperBuilder().createChargeCode().withJson(apiRequestBodyAsJson).build();
+=======
+		final CommandWrapper commandRequest = new CommandWrapperBuilder().createOutWardInv().withJson(apiRequestBodyAsJson).build();
+>>>>>>> upstream/master
 		final CommandProcessingResult result = this.commandSourceWritePlatformService.logCommandSource(commandRequest);
 		return this.toApiJsonSerializer.serialize(result);
 	
 	}
 
 	/**
+<<<<<<< HEAD
 	 * @param chargeCodeId
 	 * @param uriInfo
 	 * @return retrieved single charge code details
@@ -159,10 +184,44 @@ public class OutWardStagingInvApiResource {
 	   
 		context.authenticatedUser().validateHasReadPermission(resourceNameForPermissions);
 		final CommandWrapper commandRequest = new CommandWrapperBuilder().updateChargeCode(chargeCodeId).withJson(apiRequestBodyAsJson)	.build();
+=======
+	 * @param outWardInvId
+	 * @param uriInfo
+	 * @return retrieved single outWardInvId details
+	 */
+	@GET
+	@Path("{outWardInvId}")
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Produces({ MediaType.APPLICATION_JSON })
+
+	public String retrieveSingleOutWardInvDataDetails(@PathParam("outWardInvId") final Long outWardInvId,@Context final UriInfo uriInfo) {
+	   
+		context.authenticatedUser().validateHasReadPermission(resourceNameForPermissions);
+		OutWardStagingInvData outWardStagingInvData = this.outWardStagingInvReadPlatformService.retrieveSingleOutWardStagingInvDetails(outWardInvId);
+		final ApiRequestJsonSerializationSettings settings = apiRequestParameterHelper.process(uriInfo.getQueryParameters());
+		return this.toApiJsonSerializer.serialize(settings,outWardStagingInvData,RESPONSE_PARAMETERS);
+	}
+
+	/**
+	 * @param outWardInvId
+	 * @param apiRequestBodyAsJson
+	 * @return update outWardInvId here
+	 */
+	@PUT
+	@Path("{outWardInvId}")
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Produces({ MediaType.APPLICATION_JSON })
+
+	public String updateSingleOutWardInvData(@PathParam("outWardInvId") final Long outWardInvId,final String apiRequestBodyAsJson) {
+	   
+		context.authenticatedUser().validateHasReadPermission(resourceNameForPermissions);
+		final CommandWrapper commandRequest = new CommandWrapperBuilder().updateOutWardInv(outWardInvId).withJson(apiRequestBodyAsJson)	.build();
+>>>>>>> upstream/master
 		final CommandProcessingResult result = this.commandSourceWritePlatformService.logCommandSource(commandRequest);
 		return this.toApiJsonSerializer.serialize(result);
 	}
 	
+<<<<<<< HEAD
 	/**
 	 * @param uriInfo
 	 * @return retrieved template data for creating charge codes
@@ -193,5 +252,7 @@ public class OutWardStagingInvApiResource {
 		return this.toApiJsonSerializer.serialize(settings, chargeCodeData, RESPONSE_PARAMETERS);
 
 	}*/
+=======
+>>>>>>> upstream/master
 
 }

@@ -2885,6 +2885,7 @@ public class CommandWrapperBuilder {
         return this;
     }
     
+<<<<<<< HEAD
     public CommandWrapperBuilder createCompanyMaster() {
         this.actionName = "CREATE";
         this.entityName = "COMPANYMASTER";
@@ -2960,4 +2961,21 @@ public class CommandWrapperBuilder {
 		this.href = "/address/" + entityType + "/" + entityId;
 		return this;
 	}
+=======
+    public CommandWrapperBuilder createOutWardInv() {
+        this.actionName = "CREATE";
+        this.entityName = "OUTWARDINV";
+        this.entityId = null;
+        this.href = "/outwardinv/";
+        return this;
+    }
+    
+    public CommandWrapperBuilder updateOutWardInv(final Long outWardInvId) {
+        this.actionName = "UPDATE";
+        this.entityName = "OUTWARDINV";
+        this.entityId = null;
+        this.href = "/outwardinv/"+outWardInvId;
+        return this;
+    }
+>>>>>>> upstream/master
 }

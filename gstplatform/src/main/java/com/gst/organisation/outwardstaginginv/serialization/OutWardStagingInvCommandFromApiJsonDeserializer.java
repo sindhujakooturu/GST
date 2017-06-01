@@ -21,7 +21,11 @@ import com.gst.infrastructure.core.exception.PlatformApiDataValidationException;
 import com.gst.infrastructure.core.serialization.FromJsonHelper;
 
 /**
+<<<<<<< HEAD
  * @author hugo Deserializer for code JSON to validate API request.
+=======
+ * @author Deserializer for code JSON to validate API request.
+>>>>>>> upstream/master
  */
 @Component
 public class OutWardStagingInvCommandFromApiJsonDeserializer {
@@ -29,6 +33,7 @@ public class OutWardStagingInvCommandFromApiJsonDeserializer {
 	/**
 	 * The parameters supported for this command.
 	 */
+<<<<<<< HEAD
 	final private Set<String> supportedParameters = new HashSet<String>(Arrays.asList("billFrequencyCode", "chargeCode","chargeDescription", "chargeDuration", "chargeType",
 					"dateFormat", "durationType", "locale", "taxInclusive"));
 	private final FromJsonHelper fromApiJsonHelper;
@@ -36,12 +41,26 @@ public class OutWardStagingInvCommandFromApiJsonDeserializer {
 	@Autowired
 	public OutWardStagingInvCommandFromApiJsonDeserializer(
 			final FromJsonHelper fromApiJsonHelper) {
+=======
+	final private Set<String> supportedParameters = new HashSet<String>(Arrays.asList("gstin","gstinPurchaser","cName","supplierInvNo",
+			          "supplierInvDate", "supplierInvValue", "supplyStateCode","orderNo" , "orderDate","etin","invoiceId",
+			          "receiptStateCode", "status", "errorCode", "errorDescripter","dateFormat", "locale"));
+	
+	private final FromJsonHelper fromApiJsonHelper;
+
+	@Autowired
+	public OutWardStagingInvCommandFromApiJsonDeserializer(final FromJsonHelper fromApiJsonHelper) {
+>>>>>>> upstream/master
 		this.fromApiJsonHelper = fromApiJsonHelper;
 	}
 
 	/**
 	 * @param json
+<<<<<<< HEAD
 	 * check validation for create charge codes
+=======
+	 * check validation for create OutWardStagingInv codes
+>>>>>>> upstream/master
 	 */
 
 	public void validaForCreate(String json) {
@@ -53,6 +72,7 @@ public class OutWardStagingInvCommandFromApiJsonDeserializer {
 			private static final long serialVersionUID = 1L;
 		}.getType();
 
+<<<<<<< HEAD
 		fromApiJsonHelper.checkForUnsupportedParameters(typeOfMap, json,
 				supportedParameters);
 
@@ -82,6 +102,59 @@ public class OutWardStagingInvCommandFromApiJsonDeserializer {
 		
 		final String billFrequencyCode = fromApiJsonHelper.extractStringNamed("billFrequencyCode", element);
 		baseDataValidator.reset().parameter("billFrequencyCode").value(billFrequencyCode).notBlank();
+=======
+		fromApiJsonHelper.checkForUnsupportedParameters(typeOfMap, json,supportedParameters);
+
+		final List<ApiParameterError> dataValidationErrors = new ArrayList<ApiParameterError>();
+		final DataValidatorBuilder baseDataValidator = new DataValidatorBuilder(dataValidationErrors).resource("outwardinv");
+
+		final JsonElement element = fromApiJsonHelper.parse(json);
+
+		final String gstin = fromApiJsonHelper.extractStringNamed("gstin", element);
+		baseDataValidator.reset().parameter("gstin").value(gstin);
+
+		final String gstinPurchaser = fromApiJsonHelper.extractStringNamed("gstinPurchaser", element);
+		baseDataValidator.reset().parameter("gstinPurchaser").value(gstinPurchaser);
+
+		final String cName = fromApiJsonHelper.extractStringNamed("cName", element);
+		baseDataValidator.reset().parameter("cName").value(cName);
+		
+		final Integer supplierInvNo = fromApiJsonHelper.extractIntegerWithLocaleNamed("supplierInvNo", element);
+		baseDataValidator.reset().parameter("supplierInvNo").value(supplierInvNo);
+	
+		final String supplierInvDate = fromApiJsonHelper.extractStringNamed("supplierInvDate", element);
+		baseDataValidator.reset().parameter("supplierInvDate").value(supplierInvDate);
+
+		final Long supplierInvValue = fromApiJsonHelper.extractLongNamed("supplierInvValue", element);
+		baseDataValidator.reset().parameter("supplierInvValue").value(supplierInvValue);
+		
+		final String supplyStateCode = fromApiJsonHelper.extractStringNamed("supplyStateCode", element);
+		baseDataValidator.reset().parameter("supplyStateCode").value(supplyStateCode);
+		
+		final String orderNo = fromApiJsonHelper.extractStringNamed("orderNo", element);
+		baseDataValidator.reset().parameter("orderNo").value(orderNo);
+
+		final String orderDate = fromApiJsonHelper.extractStringNamed("orderDate", element);
+		baseDataValidator.reset().parameter("orderDate").value(orderDate);
+
+		final String etin = fromApiJsonHelper.extractStringNamed("etin", element);
+		baseDataValidator.reset().parameter("etin").value(etin);
+		
+		final Long invoiceId = fromApiJsonHelper.extractLongNamed("invoiceId", element);
+		baseDataValidator.reset().parameter("invoiceId").value(invoiceId);
+	
+		final String receiptStateCode = fromApiJsonHelper.extractStringNamed("receiptStateCode", element);
+		baseDataValidator.reset().parameter("receiptStateCode").value(receiptStateCode);
+
+		final Long status = fromApiJsonHelper.extractLongNamed("status", element);
+		baseDataValidator.reset().parameter("status").value(status);
+		
+		final String errorCode = fromApiJsonHelper.extractStringNamed("errorCode", element);
+		baseDataValidator.reset().parameter("errorCode").value(errorCode);
+		
+		final String errorDescripter = fromApiJsonHelper.extractStringNamed("errorDescripter", element);
+		baseDataValidator.reset().parameter("errorDescripter").value(errorDescripter);
+>>>>>>> upstream/master
 
 		throwExceptionIfValidationWarningsExist(dataValidationErrors);
 

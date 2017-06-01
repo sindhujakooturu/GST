@@ -1,8 +1,12 @@
 package com.gst.organisation.outwardstaginginv.data;
 
+<<<<<<< HEAD
 import java.math.BigDecimal;
 import java.util.List;
 
+=======
+import java.util.Date;
+>>>>>>> upstream/master
 
 public class OutWardStagingInvData {
 
@@ -11,6 +15,7 @@ public class OutWardStagingInvData {
 	private String gstinPurchaser;
 	private String cName;
 	private String supplierInvNo;
+<<<<<<< HEAD
 	private String supplierInvDate;
 	private Long supplierInvValue;
 	private String supplyStateCode;
@@ -24,17 +29,38 @@ public class OutWardStagingInvData {
 	private String errorDescripter;
 	int modeNo;
 
+=======
+	private Date supplierInvDate;
+	private Long supplierInvValue;
+	private String supplyStateCode;
+	private String orderNo;
+	private Date orderDate;
+	private String etin;
+	private Long invoiceId;
+	private String receiptStateCode;
+	private Long status;
+	private String errorCode;
+	private String errorDescripter;
+>>>>>>> upstream/master
 
 	public OutWardStagingInvData() {
 		
 	}
 
+<<<<<<< HEAD
 	
 	public OutWardStagingInvData(final Long id, final String gstin, final String gstinPurchaser,
 			final String cName, final String supplierInvNo, final String supplierInvDate,
 			final Long supplierInvValue, final String supplyStateCode,final String orderNo ,final String orderDate,
 			final String etin,final Long invoiceId,final String receiptStateCode,final Integer status,final String errorCode,final String errorDescripter,
 			final Integer modeNo) {
+=======
+	public OutWardStagingInvData(final Long id, final String gstin, final String gstinPurchaser,
+			final String cName, final String supplierInvNo, final Date supplierInvDate,
+			final Long supplierInvValue, final String supplyStateCode,final String orderNo ,final Date orderDate,
+			final String etin,final Long invoiceId,final String receiptStateCode,final Long status,final String errorCode,
+			final String errorDescripter) {
+>>>>>>> upstream/master
 		
 		this.id = id;
 		this.gstin = gstin;
@@ -52,7 +78,10 @@ public class OutWardStagingInvData {
 		this.status = status;
 		this.errorCode = errorCode;
 		this.errorDescripter = errorDescripter;
+<<<<<<< HEAD
 		this.modeNo = modeNo;
+=======
+>>>>>>> upstream/master
 	}
 
 
@@ -96,11 +125,19 @@ public class OutWardStagingInvData {
 		this.supplierInvNo = supplierInvNo;
 	}
 
+<<<<<<< HEAD
 	public String getSupplierInvDate() {
 		return supplierInvDate;
 	}
 
 	public void setSupplierInvDate(String supplierInvDate) {
+=======
+	public Date getSupplierInvDate() {
+		return supplierInvDate;
+	}
+
+	public void setSupplierInvDate(Date supplierInvDate) {
+>>>>>>> upstream/master
 		this.supplierInvDate = supplierInvDate;
 	}
 
@@ -128,11 +165,19 @@ public class OutWardStagingInvData {
 		this.orderNo = orderNo;
 	}
 
+<<<<<<< HEAD
 	public String getOrderDate() {
 		return orderDate;
 	}
 
 	public void setOrderDate(String orderDate) {
+=======
+	public Date getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(Date orderDate) {
+>>>>>>> upstream/master
 		this.orderDate = orderDate;
 	}
 
@@ -160,11 +205,19 @@ public class OutWardStagingInvData {
 		this.receiptStateCode = receiptStateCode;
 	}
 
+<<<<<<< HEAD
 	public int getStatus() {
 		return status;
 	}
 
 	public void setStatus(int status) {
+=======
+	public Long getStatus() {
+		return status;
+	}
+
+	public void setStatus(Long status) {
+>>>>>>> upstream/master
 		this.status = status;
 	}
 
@@ -184,6 +237,7 @@ public class OutWardStagingInvData {
 		this.errorDescripter = errorDescripter;
 	}
 
+<<<<<<< HEAD
 	public int getModeNo() {
 		return modeNo;
 	}
@@ -193,4 +247,6 @@ public class OutWardStagingInvData {
 	}
 
 
+=======
+>>>>>>> upstream/master
 }

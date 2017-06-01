@@ -1,8 +1,14 @@
 package com.gst.organisation.outwardstaginginv.service;
 
+<<<<<<< HEAD
 import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+=======
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Date;
+>>>>>>> upstream/master
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,18 +21,31 @@ import com.gst.infrastructure.core.service.RoutingDataSource;
 import com.gst.organisation.outwardstaginginv.data.OutWardStagingInvData;
 
 /**
+<<<<<<< HEAD
  * @author hugo
  * 
  */
 @Service
 public class OutWardStagingInvReadPlatformServiceImpl implements
              OutWardStagingInvReadPlatformService {
+=======
+ * @author Trigital
+ * 
+ */
+@Service
+public class OutWardStagingInvReadPlatformServiceImpl implements OutWardStagingInvReadPlatformService {
+>>>>>>> upstream/master
 
 	private final JdbcTemplate jdbcTemplate;
 
 	@Autowired
+<<<<<<< HEAD
 	public OutWardStagingInvReadPlatformServiceImpl(
 			final RoutingDataSource dataSource) {
+=======
+	public OutWardStagingInvReadPlatformServiceImpl(final RoutingDataSource dataSource) {
+		
+>>>>>>> upstream/master
 		this.jdbcTemplate = new JdbcTemplate(dataSource);
 	}
 
@@ -48,9 +67,16 @@ public class OutWardStagingInvReadPlatformServiceImpl implements
 			RowMapper<OutWardStagingInvData> {
 
 		public String schema() {
+<<<<<<< HEAD
 			return "id as id, charge_code as chargeCode, charge_description as chargeDescription, charge_type as chargeType,"
 					+ "charge_duration as chargeDuration, duration_type as durationType, tax_inclusive as taxInclusive,"
 					+ "billfrequency_code as billFrequencyCode from b_charge_codes";
+=======
+			return " osi.id as id, osi.gstin as gstin, osi.gstin_purchaser as gstinPurchaser, osi.c_name as cName, osi.supplier_inv_no as supplierInvNo, osi.supplier_inv_date as supplierInvDate,"
+					+ " osi.supplier_inv_value as supplierIinvValue, osi.supply_state_code as supplyStateCode,osi.order_no as orderNo , osi.order_date as orderDate, osi.etin as etin, osi.invoice_id as invoiceId,"
+					+ " osi.receipt_state_code as receiptStateCode,osi.status as status, osi.error_code as errorCode, osi.error_descripter as errorDescripter "
+					+ " from m_ow_stg_invoice osi";
+>>>>>>> upstream/master
 		}
 
 		@Override
@@ -62,6 +88,7 @@ public class OutWardStagingInvReadPlatformServiceImpl implements
 			final String gstinPurchaser = rs.getString("gstinPurchaser");
 			final String cName = rs.getString("cName");
 			final String supplierInvNo = rs.getString("supplierInvNo");
+<<<<<<< HEAD
 			final String supplierInvDate = rs.getString("supplierInvDate");
 			final Long supplierInvValue = rs.getLong("supplierInvValue");
 			final String supplyStateCode = rs.getString("supplyStateCode");
@@ -172,10 +199,31 @@ public class OutWardStagingInvReadPlatformServiceImpl implements
 			return new BillFrequencyCodeData(id, billFrequencyCode);
 		}
 	}*/
+=======
+			final Date supplierInvDate = rs.getDate("supplierInvDate");
+			final Long supplierInvValue = rs.getLong("supplierInvValue");
+			final String supplyStateCode = rs.getString("supplyStateCode");
+			final String orderNo = rs.getString("orderNo");
+			final Date orderDate = rs.getDate("orderDate");
+			final String etin = rs.getString("etin");
+			final Long invoiceId = rs.getLong("invoiceId");
+			final String receiptStateCode = rs.getString("receiptStateCode");
+			final Long status = rs.getLong("status");
+			final String errorCode = rs.getString("errorCode");
+			final String errorDescripter = rs.getString("errorDescripter");
+			
+
+			return new OutWardStagingInvData(id, gstin, gstinPurchaser, cName, supplierInvNo, supplierInvDate,
+					               supplierInvValue, supplyStateCode,orderNo , orderDate, etin, invoiceId, receiptStateCode, 
+					               status, errorCode, errorDescripter);
+		}
+	}
+>>>>>>> upstream/master
 
 	/*
 	 * (non-Javadoc)
 	 * 
+<<<<<<< HEAD
 	 * @see #retrieveSingleChargeCodeDetails(java.lang.Long)
 	 */
 	public OutWardStagingInvData retrieveSingleChargeCodeDetails(
@@ -232,6 +280,19 @@ public class OutWardStagingInvReadPlatformServiceImpl implements
 			return jdbcTemplate.queryForObject(sql, mapper, new Object[] { priceId});
 
 
+=======
+	 * @see #retrieveSingleOutWardStagingInvDetails(java.lang.Long)
+	 */
+	public OutWardStagingInvData retrieveSingleOutWardStagingInvDetails(final Long outWardInvId) {
+
+		try {
+
+			final OutWardInvDataMapper mapper = new OutWardInvDataMapper();
+
+			final String sql = "select " + mapper.schema() + " where osi.id = ?";
+
+			return jdbcTemplate.queryForObject(sql, mapper, new Object[] { outWardInvId });
+>>>>>>> upstream/master
 		} catch (EmptyResultDataAccessException accessException) {
 			return null;
 		}
