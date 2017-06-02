@@ -208,7 +208,20 @@ public class CommandWrapperBuilder {
         this.href = "/staff/template";
         return this;
     }
-
+    public CommandWrapperBuilder createSupplier() {
+        this.actionName = "CREATE";
+        this.entityName = "SUPPLIER";
+        this.entityId = null;
+        this.href = "/supplier/template";
+        return this;
+    }
+    public CommandWrapperBuilder updateSupplier(final Long id) {
+        this.actionName = "UPDATE";
+        this.entityName = "SUPPLIER";
+        this.entityId = id;
+        this.href = "/supplier/" + id;
+        return this;
+    }
     public CommandWrapperBuilder updateStaff(final Long staffId) {
         this.actionName = "UPDATE";
         this.entityName = "STAFF";

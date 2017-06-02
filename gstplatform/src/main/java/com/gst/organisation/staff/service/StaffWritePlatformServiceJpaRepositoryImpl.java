@@ -53,6 +53,7 @@ public class StaffWritePlatformServiceJpaRepositoryImpl implements StaffWritePla
     @Autowired
     public StaffWritePlatformServiceJpaRepositoryImpl(final StaffCommandFromApiJsonDeserializer fromApiJsonDeserializer,
             final StaffRepository staffRepository, final OfficeRepositoryWrapper officeRepositoryWrapper) {
+    	
         this.fromApiJsonDeserializer = fromApiJsonDeserializer;
         this.staffRepository = staffRepository;
         this.officeRepositoryWrapper = officeRepositoryWrapper;
