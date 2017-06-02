@@ -48,7 +48,7 @@ public class OutWardStagingInvReadPlatformServiceImpl implements OutWardStagingI
 
 		public String schema() {
 			return " osi.id as id, osi.gstin as gstin, osi.gstin_purchaser as gstinPurchaser, osi.c_name as cName, osi.supplier_inv_no as supplierInvNo, osi.supplier_inv_date as supplierInvDate,"
-					+ " osi.supplier_inv_value as supplierIinvValue, osi.supply_state_code as supplyStateCode,osi.order_no as orderNo , osi.order_date as orderDate, osi.etin as etin, osi.invoice_id as invoiceId,"
+					+ " osi.supplier_inv_value as supplierInvValue, osi.supply_state_code as supplyStateCode,osi.order_no as orderNo , osi.order_date as orderDate, osi.etin as etin, osi.invoice_id as invoiceId,"
 					+ " osi.receipt_state_code as receiptStateCode,osi.status as status, osi.error_code as errorCode, osi.error_descr as errorDescripter "
 					+ " from m_ow_stg_invoice osi";
 		}

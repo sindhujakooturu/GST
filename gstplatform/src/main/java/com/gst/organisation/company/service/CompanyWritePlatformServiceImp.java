@@ -54,7 +54,7 @@ public class CompanyWritePlatformServiceImp implements CompanyWritePlatformServi
 			context.authenticatedUser();
 			this.apiJsonDeserializer.validaForCreate(command.json());
 			
-			Company companyData  = Company.fromJson(command);
+			final Company companyData  = Company.fromJson(command);
 			this.companyRepository.save(companyData);
 			
 			return new CommandProcessingResultBuilder().withCommandId(command.commandId()).withEntityId(companyData.getId()).build();
@@ -83,7 +83,7 @@ public class CompanyWritePlatformServiceImp implements CompanyWritePlatformServi
 		try {
 			context.authenticatedUser();
 			this.apiJsonDeserializer.validaForCreate(command.json());
-			Company companyData = retrieveCompanyById(companyId);
+			final Company companyData = retrieveCompanyById(companyId);
 			
 			final Map<String, Object> changes = companyData.update(command);
 			if (!changes.isEmpty()) {
@@ -99,10 +99,10 @@ public class CompanyWritePlatformServiceImp implements CompanyWritePlatformServi
 		}
 	}
 
-	private Company retrieveCompanyById(final Long outWardInvId) {
-		final Company company = this.companyRepository.findOne(outWardInvId);
+	private Company retrieveCompanyById(final Long companyId) {
+		final Company company = this.companyRepository.findOne(companyId);
 		if (company == null) {
-			throw new CompanyNotFoundException(outWardInvId);
+			throw new CompanyNotFoundException(companyId);
 		}
 		return company;
 	}
