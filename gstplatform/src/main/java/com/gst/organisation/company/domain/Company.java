@@ -17,7 +17,7 @@ import com.gst.infrastructure.core.domain.AbstractPersistableCustom;
  * 
  */
 @Entity
-@Table(name = "m_company")
+@Table(name = "company_t")
 public class Company extends AbstractPersistableCustom<Long> {
 
 	private static final long serialVersionUID = 1L;
