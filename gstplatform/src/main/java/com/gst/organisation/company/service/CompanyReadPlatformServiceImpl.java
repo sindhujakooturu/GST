@@ -49,7 +49,7 @@ public class CompanyReadPlatformServiceImpl implements CompanyReadPlatformServic
 			return " c.id as id, c.gstin as gstin, c.company_name as companyName, c.contact_name as contactName, c.office_phone as officePhone, c.home_phone as homePhone, c.mobile as mobile,"
 					+ " c.fax as fax, c.email as email,c.gstn_reg_no as gstnRegNo , c.pan_no as panNo, c.address_line1 as addressLine1, c.address_line2 as addressLine2,"
 					+ " c.city as city,c.state as state, c.country as country, c.pin as pin "
-					+ " from m_country c";
+					+ " from company_t c";
 		}
 
 		@Override
