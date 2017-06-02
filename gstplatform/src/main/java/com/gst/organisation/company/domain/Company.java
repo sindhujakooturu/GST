@@ -74,7 +74,6 @@ public class Company extends AbstractPersistableCustom<Long> {
 		
 	}
 	
-
 	public Company(final String gstin, final String companyName, final String contactName,
 			final String officePhone, final String homePhone,
 			final String mobile, final String fax,

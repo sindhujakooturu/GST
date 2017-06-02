@@ -55,7 +55,7 @@ public class OutWardStagingInvWritePlatformServiceImp implements OutWardStagingI
 			context.authenticatedUser();
 			this.apiJsonDeserializer.validaForCreate(command.json());
 			
-			OutWardStagingInv utWardStagingInvData  = OutWardStagingInv.fromJson(command);
+			final OutWardStagingInv utWardStagingInvData  = OutWardStagingInv.fromJson(command);
 			this.outWardStagingInvRepository.save(utWardStagingInvData);
 			
 			return new CommandProcessingResultBuilder().withCommandId(command.commandId()).withEntityId(utWardStagingInvData.getId()).build();
@@ -84,7 +84,7 @@ public class OutWardStagingInvWritePlatformServiceImp implements OutWardStagingI
 		try {
 			context.authenticatedUser();
 			this.apiJsonDeserializer.validaForCreate(command.json());
-			OutWardStagingInv outWardStagingInv = retrieveChargeCodeById(outWardInvId);
+			final OutWardStagingInv outWardStagingInv = retrieveChargeCodeById(outWardInvId);
 			
 			final Map<String, Object> changes = outWardStagingInv.update(command);
 			if (!changes.isEmpty()) {
