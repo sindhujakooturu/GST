@@ -17,7 +17,7 @@ import com.gst.infrastructure.core.domain.AbstractPersistableCustom;
  * 
  */
 @Entity
-@Table(name = "m_company")
+@Table(name = "company_t")
 public class Company extends AbstractPersistableCustom<Long> {
 
 	private static final long serialVersionUID = 1L;
@@ -74,7 +74,6 @@ public class Company extends AbstractPersistableCustom<Long> {
 		
 	}
 	
-
 	public Company(final String gstin, final String companyName, final String contactName,
 			final String officePhone, final String homePhone,
 			final String mobile, final String fax,

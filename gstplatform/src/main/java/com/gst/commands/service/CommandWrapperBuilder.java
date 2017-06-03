@@ -2998,7 +2998,7 @@ public class CommandWrapperBuilder {
     public CommandWrapperBuilder updateOutWardInv(final Long outWardInvId) {
         this.actionName = "UPDATE";
         this.entityName = "OUTWARDINV";
-        this.entityId = null;
+        this.entityId = outWardInvId;
         this.href = "/outwardinv/"+outWardInvId;
         return this;
     }
@@ -3014,7 +3014,7 @@ public class CommandWrapperBuilder {
     public CommandWrapperBuilder updateCompany(final Long companyId) {
         this.actionName = "UPDATE";
         this.entityName = "COMPANY";
-        this.entityId = null;
+        this.entityId = companyId;
         this.href = "/company/"+companyId;
         return this;
     }

@@ -92,7 +92,7 @@ public class CompanyCommandFromApiJsonDeserializer {
 		final String addressLine1 = fromApiJsonHelper.extractStringNamed("addressLine1", element);
 		baseDataValidator.reset().parameter("addressLine1").value(addressLine1);
 		
-		final Long addressLine2 = fromApiJsonHelper.extractLongNamed("addressLine2", element);
+		final String addressLine2 = fromApiJsonHelper.extractStringNamed("addressLine2", element);
 		baseDataValidator.reset().parameter("addressLine2").value(addressLine2);
 	
 		final String city = fromApiJsonHelper.extractStringNamed("city", element);
