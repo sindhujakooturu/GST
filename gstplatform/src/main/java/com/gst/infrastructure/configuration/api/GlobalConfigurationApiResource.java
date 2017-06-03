@@ -22,11 +22,24 @@ import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DefaultValue;
+import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
+import com.amazonaws.util.json.JSONException;
+import com.amazonaws.util.json.JSONObject;
 import com.gst.commands.domain.CommandWrapper;
 import com.gst.commands.service.CommandWrapperBuilder;
 import com.gst.commands.service.PortfolioCommandSourceWritePlatformService;
@@ -38,9 +51,6 @@ import com.gst.infrastructure.core.data.CommandProcessingResult;
 import com.gst.infrastructure.core.serialization.ApiRequestJsonSerializationSettings;
 import com.gst.infrastructure.core.serialization.DefaultToApiJsonSerializer;
 import com.gst.infrastructure.security.service.PlatformSecurityContext;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 @Path("/configurations")
 @Component
@@ -104,15 +114,17 @@ public class GlobalConfigurationApiResource {
     @Path("byname")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    public String retrieveOneByname(@QueryParam("configname") final String configname, @Context final UriInfo uriInfo) {
+    public String retrieveOneByname(@QueryParam("configname") final String configname, @Context final UriInfo uriInfo) throws JSONException {
 
         this.context.authenticatedUser().validateHasReadPermission(this.resourceNameForPermissions);
 
         GlobalConfigurationPropertyData configurationData = null;
-        if(null != configname){configurationData = this.readPlatformService.retrieveGlobalConfiguration(configname);}
+        if(null != configname){
+        	configurationData = this.readPlatformService.retrieveGlobalConfiguration(configname);}
+        System.out.println(configurationData.getValue());
 
         final ApiRequestJsonSerializationSettings settings = this.apiRequestParameterHelper.process(uriInfo.getQueryParameters());
-        return this.propertyDataJsonSerializer.serialize(settings, configurationData, this.RESPONSE_DATA_PARAMETERS);
+        return new JSONObject(configurationData).toString();
     }
 
     @PUT
