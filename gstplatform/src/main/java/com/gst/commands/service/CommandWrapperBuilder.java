@@ -216,11 +216,25 @@ public class CommandWrapperBuilder {
         this.href = "/supplier/template";
         return this;
     }
-    public CommandWrapperBuilder updateSupplier(final Long id) {
+    public CommandWrapperBuilder createPurchaser() {
+        this.actionName = "CREATE";
+        this.entityName = "PURCHASER";
+        this.entityId = null;
+        this.href = "/purchaser/template";
+        return this;
+    }
+    public CommandWrapperBuilder updatePurchaser(final Long purchaserId) {
+        this.actionName = "UPDATE";
+        this.entityName = "PURCHASER";
+        this.entityId = purchaserId;
+        this.href = "/purchaser/" + purchaserId;
+        return this;
+    }
+    public CommandWrapperBuilder updateSupplier(final Long supplierId) {
         this.actionName = "UPDATE";
         this.entityName = "SUPPLIER";
-        this.entityId = id;
-        this.href = "/supplier/" + id;
+        this.entityId = supplierId;
+        this.href = "/supplier/" + supplierId;
         return this;
     }
     public CommandWrapperBuilder updateStaff(final Long staffId) {

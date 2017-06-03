@@ -1,4 +1,4 @@
-package com.gst.organisation.supplier.domain;
+package com.gst.organisation.purchaser.domain;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -11,8 +11,8 @@ import com.gst.infrastructure.core.api.JsonCommand;
 import com.gst.infrastructure.core.domain.AbstractPersistableCustom;
 
 @Entity
-@Table(name="supplier_t")
-public class Supplier extends AbstractPersistableCustom<Long> {
+@Table(name="purchaser_t")
+public class Purchaser extends AbstractPersistableCustom<Long> {
 	
 	/**
 	 * 
@@ -70,11 +70,11 @@ public class Supplier extends AbstractPersistableCustom<Long> {
 	@Column(name="pin", length = 10)
     private  String pin;
 	
-	public Supplier(){
+	public Purchaser(){
 		
 	}
 	
-	 public static Supplier fromJson(final JsonCommand command) {
+	 public static Purchaser fromJson(final JsonCommand command) {
 
 	        final String gstinParamName = "gstin";
 	        final String gstin = command.stringValueOfParameterNamed(gstinParamName);
@@ -128,11 +128,11 @@ public class Supplier extends AbstractPersistableCustom<Long> {
 	        final String pinParamName= "pin";
 	        final String pin= command.stringValueOfParameterNamedAllowingNull(pinParamName);
 
-	        return new Supplier(gstin, gstinComp, supplierName, contactName, officePhone, homePhone, rmn
+	        return new Purchaser(gstin, gstinComp, supplierName, contactName, officePhone, homePhone, rmn
 	        		,fax,rmail,panNo,etin,addrLine1,addrLine2,city,state,country,pin);
 	    }
 	
-	public Supplier(final String gstin,final String gstinComp,final String supplierName,
+	public Purchaser(final String gstin,final String gstinComp,final String supplierName,
 			final String contactName, final String officePhone, final String homePhone,
 			final String rmn,final String fax,final String rmail,final String panNo,
 			final String etin,final String addrLine1,final String addrLine2,final String city,

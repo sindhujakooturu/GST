@@ -1,4 +1,4 @@
-package com.gst.organisation.supplier.api;
+package com.gst.organisation.purchaser.api;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -28,29 +28,29 @@ import com.gst.infrastructure.core.data.CommandProcessingResult;
 import com.gst.infrastructure.core.serialization.ApiRequestJsonSerializationSettings;
 import com.gst.infrastructure.core.serialization.DefaultToApiJsonSerializer;
 import com.gst.infrastructure.security.service.PlatformSecurityContext;
-import com.gst.organisation.supplier.data.SupplierData;
-import com.gst.organisation.supplier.service.SupplierReadPlatformService;
+import com.gst.organisation.purchaser.data.PurchaserData;
+import com.gst.organisation.purchaser.service.PurchaserReadPlatformService;
 
 
-@Path("/supplier")
+@Path("/purchaser")
 @Component
 @Scope("singleton")
-public class SupplierApiResource {
+public class PurchaserApiResource {
 	
 	private final Set<String> RESPONSE_DATA_PARAMETERS = new HashSet<>(Arrays.asList("id","gstin", "gstinComp", "supplierName", "contactName",
             "officePhone", "homePhone", "rmn", "fax", "rmail", "panNo", "etin", "addrLine1","addrLine2","city","state","country","pin"));
 				
-    private final String resourceNameForPermissions = "SUPPLIER";
+    private final String resourceNameForPermissions = "PURCHASER";
 
     private final PlatformSecurityContext context;
-    private final SupplierReadPlatformService readPlatformService;
-    private final DefaultToApiJsonSerializer<SupplierData> toApiJsonSerializer;
+    private final PurchaserReadPlatformService readPlatformService;
+    private final DefaultToApiJsonSerializer<PurchaserData> toApiJsonSerializer;
     private final ApiRequestParameterHelper apiRequestParameterHelper;
     private final PortfolioCommandSourceWritePlatformService commandsSourceWritePlatformService;
     
     @Autowired
-    public SupplierApiResource(final PlatformSecurityContext context, final SupplierReadPlatformService readPlatformService,
-             final DefaultToApiJsonSerializer<SupplierData> toApiJsonSerializer,
+    public PurchaserApiResource(final PlatformSecurityContext context, final PurchaserReadPlatformService readPlatformService,
+             final DefaultToApiJsonSerializer<PurchaserData> toApiJsonSerializer,
              final ApiRequestParameterHelper apiRequestParameterHelper,
              final PortfolioCommandSourceWritePlatformService commandsSourceWritePlatformService) {
     	
@@ -64,12 +64,12 @@ public class SupplierApiResource {
     @GET
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    public String retrieveSupplier(@Context final UriInfo uriInfo) {
+    public String retrievePurchaser(@Context final UriInfo uriInfo) {
 
     	 this.context.authenticatedUser().validateHasReadPermission(this.resourceNameForPermissions);
-         final Collection<SupplierData> supplier = this.readPlatformService.retrieveAllSupplier();
+         final Collection<PurchaserData> purchaser = this.readPlatformService.retrieveAllPurchaser();
          final ApiRequestJsonSerializationSettings settings = this.apiRequestParameterHelper.process(uriInfo.getQueryParameters());
-         return this.toApiJsonSerializer.serialize(settings,supplier, this.RESPONSE_DATA_PARAMETERS);
+         return this.toApiJsonSerializer.serialize(settings,purchaser, this.RESPONSE_DATA_PARAMETERS);
     }
     
     @POST
@@ -77,20 +77,19 @@ public class SupplierApiResource {
     @Produces({ MediaType.APPLICATION_JSON })
     public String createSupplier(final String apiRequestBodyAsJson) {
 
-        final CommandWrapper commandRequest = new CommandWrapperBuilder().createSupplier().withJson(apiRequestBodyAsJson).build();
+        final CommandWrapper commandRequest = new CommandWrapperBuilder().createPurchaser().withJson(apiRequestBodyAsJson).build();
 
         final CommandProcessingResult result = this.commandsSourceWritePlatformService.logCommandSource(commandRequest);
 
         return this.toApiJsonSerializer.serialize(result);
     }
-    
     @PUT
-    @Path("{supplierId}")
+    @Path("{purchaserId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    public String updateStaff(@PathParam("supplierId") final Long supplierId, final String apiRequestBodyAsJson) {
+    public String updateStaff(@PathParam("purchaserId") final Long purchaserId, final String apiRequestBodyAsJson) {
 
-        final CommandWrapper commandRequest = new CommandWrapperBuilder().updateSupplier(supplierId).withJson(apiRequestBodyAsJson).build();
+        final CommandWrapper commandRequest = new CommandWrapperBuilder().updatePurchaser(purchaserId).withJson(apiRequestBodyAsJson).build();
 
         final CommandProcessingResult result = this.commandsSourceWritePlatformService.logCommandSource(commandRequest);
 

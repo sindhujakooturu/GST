@@ -1,10 +1,9 @@
-package com.gst.organisation.supplier.data;
+package com.gst.organisation.purchaser.data;
 
 
 
 
-public class SupplierData {
-	
+public class PurchaserData {
 	private final Long id;
 	private final String gstin;
     private final String gstinComp;
@@ -24,19 +23,17 @@ public class SupplierData {
     private final String country;
     private final String pin;
 
-    public static SupplierData lookup(final Long id, final String gstin) {
-        return new SupplierData(id, null, gstin, null, null, null, null, null, null, null, null, null,null,null,null
+    public static PurchaserData lookup(final Long id, final String gstin) {
+        return new PurchaserData(id, null, gstin, null, null, null, null, null, null, null, null, null,null,null,null
         		,null,null,null);
     }
-    
-    public SupplierData(final Long id,final String gstin,final String gstinComp,
+    public PurchaserData(final Long id,final String gstin,final String gstinComp,
     		final String supplierName,final String contactName,final String officePhone,
     		final String homePhone,final String rmn,final String fax,final String rmail,
     		final String panNo, final String etin, String addrLine1,
     		final String addrLine2, final String city,final String state,final String country,
     		final String pin) {
     	
-		// TODO Auto-generated constructor stub
     	this.id=id;
     	this.gstin=gstin;
     	this.gstinComp=gstinComp;

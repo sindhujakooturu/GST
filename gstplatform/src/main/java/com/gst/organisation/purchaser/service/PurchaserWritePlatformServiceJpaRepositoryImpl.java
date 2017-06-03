@@ -1,4 +1,4 @@
-package com.gst.organisation.supplier.service;
+package com.gst.organisation.purchaser.service;
 
 
 
@@ -15,40 +15,40 @@ import com.gst.infrastructure.core.data.CommandProcessingResult;
 import com.gst.infrastructure.core.data.CommandProcessingResultBuilder;
 import com.gst.infrastructure.core.exception.PlatformDataIntegrityException;
 import com.gst.infrastructure.security.service.PlatformSecurityContext;
-import com.gst.organisation.supplier.domain.Supplier;
-import com.gst.organisation.supplier.domain.SupplierRepository;
+import com.gst.organisation.purchaser.domain.Purchaser;
+import com.gst.organisation.purchaser.domain.PurchaserRepository;
 import com.gst.organisation.supplier.serialization.SupplierCommandFromApiJsonDeserializer;
 
 @Service
-public class SupplierWritePlatformServiceJpaRepositoryImpl implements SupplierWritePlatformService{
+public class PurchaserWritePlatformServiceJpaRepositoryImpl implements PurchaserWritePlatformService{
 	private final PlatformSecurityContext context;
     private final SupplierCommandFromApiJsonDeserializer fromApiJsonDeserializer;
-    private final SupplierRepository supplierRepository;
+    private final PurchaserRepository purchaserRepository;
     
     @Autowired
-    public SupplierWritePlatformServiceJpaRepositoryImpl(final SupplierCommandFromApiJsonDeserializer fromApiJsonDeserializer,
-    		final SupplierRepository supplierRepository,final PlatformSecurityContext context) {
+    public PurchaserWritePlatformServiceJpaRepositoryImpl(final SupplierCommandFromApiJsonDeserializer fromApiJsonDeserializer,
+    		final PurchaserRepository purchaserRepository,final PlatformSecurityContext context) {
     	this.context = context;
         this.fromApiJsonDeserializer = fromApiJsonDeserializer;
-        this.supplierRepository=supplierRepository;
+        this.purchaserRepository=purchaserRepository;
     }
     @Transactional
     @Override
-    public CommandProcessingResult createSupplier(final JsonCommand command) {
+    public CommandProcessingResult createPurchaser(final JsonCommand command) {
 
     	try {
 			context.authenticatedUser();
 			this.fromApiJsonDeserializer.validateForCreate(command.json());
-			Supplier supplier = Supplier.fromJson(command);
-			this.supplierRepository.save(supplier);
-			return new CommandProcessingResult(supplier.getId());
+			Purchaser purchaser = Purchaser.fromJson(command);
+			this.purchaserRepository.save(purchaser);
+			return new CommandProcessingResult(purchaser.getId());
 
 		} catch (DataIntegrityViolationException dve) {
-			handleSupplierDataIntegrityIssues(command, dve);
+			handlePurchaserDataIntegrityIssues(command, dve);
 			return CommandProcessingResult.empty();
 		}
     }
-    private void handleSupplierDataIntegrityIssues(final JsonCommand command,final DataIntegrityViolationException dve) {
+    private void handlePurchaserDataIntegrityIssues(final JsonCommand command,final DataIntegrityViolationException dve) {
 
     	final Throwable realCause = dve.getMostSpecificCause();
 		if (realCause.getMessage().contains("gstin")) {
@@ -63,31 +63,31 @@ public class SupplierWritePlatformServiceJpaRepositoryImpl implements SupplierWr
     }
     
     @Override
-	public CommandProcessingResult updateSupplier(final Long supplierId,final JsonCommand command) {
+	public CommandProcessingResult updatePurchaser(final Long purchaserId,final JsonCommand command) {
 		
 		try {
 			context.authenticatedUser();
 			this.fromApiJsonDeserializer.validateForCreate(command.json());
-			final Supplier supplier = retrieveCodeBy(supplierId);
-			final Map<String, Object> changes = supplier.update(command);
+			final Purchaser purchaser = retrieveCodeBy(purchaserId);
+			final Map<String, Object> changes = purchaser.update(command);
 			if (!changes.isEmpty()) {
-				this.supplierRepository.saveAndFlush(supplier);
+				this.purchaserRepository.saveAndFlush(purchaser);
 			}
-			return new CommandProcessingResultBuilder().withCommandId(command.commandId()).withEntityId(supplierId).with(changes).build();
+			return new CommandProcessingResultBuilder().withCommandId(command.commandId()).withEntityId(purchaserId).with(changes).build();
 
 		} catch (DataIntegrityViolationException dve) {
-			handleSupplierDataIntegrityIssues(command, dve);
+			handlePurchaserDataIntegrityIssues(command, dve);
 			return new CommandProcessingResult(Long.valueOf(-1));
 		}
 
 	}
 
-	private Supplier retrieveCodeBy(final Long supplierId) {
-		final Supplier supplier = this.supplierRepository.findOne(supplierId);
-		if (supplier == null) {
-			throw new CodeNotFoundException(supplierId.toString());
+	private Purchaser retrieveCodeBy(final Long purchaserId) {
+		final Purchaser purchaser = this.purchaserRepository.findOne(purchaserId);
+		if (purchaser == null) {
+			throw new CodeNotFoundException(purchaserId.toString());
 		}
-		return supplier;
+		return purchaser;
 	}
 
 }

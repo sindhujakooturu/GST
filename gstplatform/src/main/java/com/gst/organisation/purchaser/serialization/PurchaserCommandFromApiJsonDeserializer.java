@@ -1,4 +1,4 @@
-package com.gst.organisation.supplier.serialization;
+package com.gst.organisation.purchaser.serialization;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ import com.gst.infrastructure.core.exception.PlatformApiDataValidationException;
 import com.gst.infrastructure.core.serialization.FromJsonHelper;
 
 @Component
-public class SupplierCommandFromApiJsonDeserializer {
+public class PurchaserCommandFromApiJsonDeserializer {
 	
 	private final Set<String> supportedParameters = new HashSet<>(Arrays.asList("id","gstin", "gstinComp", "supplierName", "contactName",
             "officePhone", "homePhone", "rmn", "fax", "rmail", "panNo", "etin","addrLine1","addrLine2","city","state","country","pin"));
@@ -29,7 +29,7 @@ public class SupplierCommandFromApiJsonDeserializer {
     private final FromJsonHelper fromApiJsonHelper;
     
    @Autowired
-    public SupplierCommandFromApiJsonDeserializer(final FromJsonHelper fromApiJsonHelper) {
+    public PurchaserCommandFromApiJsonDeserializer(final FromJsonHelper fromApiJsonHelper) {
         this.fromApiJsonHelper = fromApiJsonHelper;
     }
    
@@ -40,7 +40,7 @@ public class SupplierCommandFromApiJsonDeserializer {
         this.fromApiJsonHelper.checkForUnsupportedParameters(typeOfMap, json, this.supportedParameters);
 
         final List<ApiParameterError> dataValidationErrors = new ArrayList<>();
-        final DataValidatorBuilder baseDataValidator = new DataValidatorBuilder(dataValidationErrors).resource("supplier");
+        final DataValidatorBuilder baseDataValidator = new DataValidatorBuilder(dataValidationErrors).resource("purchaser");
 
         final JsonElement element = this.fromApiJsonHelper.parse(json);
 
