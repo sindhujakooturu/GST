@@ -70,7 +70,7 @@ public class OutWardStagingInvCommandFromApiJsonDeserializer {
 		final String cName = fromApiJsonHelper.extractStringNamed("cName", element);
 		baseDataValidator.reset().parameter("cName").value(cName);
 		
-		final Integer supplierInvNo = fromApiJsonHelper.extractIntegerWithLocaleNamed("supplierInvNo", element);
+		final String supplierInvNo = fromApiJsonHelper.extractStringNamed("supplierInvNo", element);
 		baseDataValidator.reset().parameter("supplierInvNo").value(supplierInvNo);
 	
 		final String supplierInvDate = fromApiJsonHelper.extractStringNamed("supplierInvDate", element);
