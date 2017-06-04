@@ -31,15 +31,16 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Component;
+
 import com.gst.batch.domain.BatchRequest;
 import com.gst.batch.domain.BatchResponse;
 import com.gst.batch.serialization.BatchRequestJsonHelper;
 import com.gst.batch.service.BatchApiService;
 import com.gst.infrastructure.core.serialization.ToApiJsonSerializer;
 import com.gst.infrastructure.security.service.PlatformSecurityContext;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Scope;
-import org.springframework.stereotype.Component;
 
 /**
  * Provides a REST resource for Batch Requests. This class acts as a proxy to
