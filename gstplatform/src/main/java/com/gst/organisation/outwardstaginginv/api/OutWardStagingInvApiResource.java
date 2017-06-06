@@ -91,7 +91,7 @@ public class OutWardStagingInvApiResource {
 
 	public String createOutWardInvData(final String apiRequestBodyAsJson,@Context final UriInfo uriInfo) {
 		
-		context.authenticatedUser().validateHasReadPermission(resourceNameForPermissions);
+		this.context.authenticatedUser().validateHasReadPermission(resourceNameForPermissions);
 		final CommandWrapper commandRequest = new CommandWrapperBuilder().createOutWardInv().withJson(apiRequestBodyAsJson).build();
 		final CommandProcessingResult result = this.commandSourceWritePlatformService.logCommandSource(commandRequest);
 		return this.toApiJsonSerializer.serialize(result);
