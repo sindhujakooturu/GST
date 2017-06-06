@@ -2991,4 +2991,12 @@ public class CommandWrapperBuilder {
         this.href = "/company/"+companyId;
         return this;
     }
+    
+    public CommandWrapperBuilder createOutWardItem(final Long outWardInvoiceId) {
+        this.actionName = "CREATE";
+        this.entityName = "OUTWARDITEM";
+        this.entityId = outWardInvoiceId;
+        this.href = "/outwarditem/"+outWardInvoiceId;
+        return this;
+    }
 }

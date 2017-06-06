@@ -18,7 +18,7 @@ import com.gst.infrastructure.core.domain.AbstractPersistableCustom;
  * 
  */
 @Entity
-@Table(name = "m_ow_stg_invoice")
+@Table(name = "g_ow_stg_invoice")
 public class OutWardStagingInv extends AbstractPersistableCustom<Long> {
 
 	private static final long serialVersionUID = 1L;

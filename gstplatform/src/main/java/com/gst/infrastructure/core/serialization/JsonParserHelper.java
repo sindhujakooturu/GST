@@ -439,6 +439,22 @@ public class JsonParserHelper {
         }
         return value;
     }
+    
+    public Double extractDoubleNamed(final String parameterName, final JsonElement element, final Set<String> parametersPassedInRequest) {
+        Double value = null;
+        if (element.isJsonObject()) {
+            final JsonObject object = element.getAsJsonObject();
+            if (object.has(parameterName) && object.get(parameterName).isJsonPrimitive()) {
+                parametersPassedInRequest.add(parameterName);
+                final JsonPrimitive primitive = object.get(parameterName).getAsJsonPrimitive();
+                final String stringValue = primitive.getAsString();
+                if (StringUtils.isNotBlank(stringValue)) {
+                    value = Double.valueOf(stringValue);
+                }
+            }
+        }
+        return value;
+    }
 
     public static LocalDate convertFrom(final String dateAsString, final String parameterName, final String dateFormat,
             final Locale clientApplicationLocale) {
