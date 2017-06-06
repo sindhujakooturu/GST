@@ -2941,8 +2941,7 @@ public class CommandWrapperBuilder {
 		return this;
 	}
 	
-	public CommandWrapperBuilder updateLocation(final String entityType,
-			Long entityId) {
+	public CommandWrapperBuilder updateLocation(final String entityType,Long entityId) {
 		this.actionName = "UPDATE";
 		this.entityName = "LOCATION";
 		this.entityId = entityId;
@@ -2951,8 +2950,7 @@ public class CommandWrapperBuilder {
 		return this;
 	}
 	
-	public CommandWrapperBuilder deleteLocation(final String entityType,
-			Long entityId) {
+	public CommandWrapperBuilder deleteLocation(final String entityType,Long entityId) {
 		this.actionName = "DELETE";
 		this.entityName = "LOCATION";
 		this.entityId = entityId;
