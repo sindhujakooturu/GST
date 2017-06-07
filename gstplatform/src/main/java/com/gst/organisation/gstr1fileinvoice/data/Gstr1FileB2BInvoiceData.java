@@ -8,7 +8,6 @@ public class Gstr1FileB2BInvoiceData {
 	private Long id;
 	private String gstin;
 	private Date fp;
-	private String grossTurnover;
 	private String fileNo;
 	private String supplierInvNo;
 	private String supplierInvDate;
@@ -20,6 +19,7 @@ public class Gstr1FileB2BInvoiceData {
 	private Long invoiceId;
 	private String flag;
 	private String checkSum;
+	//private String grossTurnover;
 	private int isReverse;
 	private int isProvisional;
 	private int recordType;
@@ -27,22 +27,22 @@ public class Gstr1FileB2BInvoiceData {
 	private String errorCode;
 	private String errorDescriptor;
 	
-	
+	  
 	private Collection<Gstr1FileB2BItemData> gstr1FileB2BItemData;
 	
 	public Gstr1FileB2BInvoiceData() {
+		
 	}
 
 
-	public Gstr1FileB2BInvoiceData(Long id, String gstin, Date fp, String grossTurnover, String fileNo,
-			String supplierInvNo, String supplierInvDate, Double supplierInvValue, String supplyPlace, String orderNo,
-			Date orderDate, String etin, Long invoiceId, String flag, String checkSum, int isReverse, int isProvisional,
-			int recordType, String status, String errorCode, String errorDescriptor) {
+	public Gstr1FileB2BInvoiceData(final Long id, final String gstin, final Date fp, final String fileNo,
+			final String supplierInvNo, final String supplierInvDate, final Double supplierInvValue, final String supplyPlace, final String orderNo,
+			final Date orderDate, final String etin, final Long invoiceId, final String flag, final String checkSum, final Integer isReverse, final Integer isProvisional,
+			final Integer recordType, final String status, final String errorCode, final String errorDescriptor) {
 
 		this.id = id;
 		this.gstin = gstin;
 		this.fp = fp;
-		this.grossTurnover = grossTurnover;
 		this.fileNo = fileNo;
 		this.supplierInvNo = supplierInvNo;
 		this.supplierInvDate = supplierInvDate;
@@ -91,17 +91,6 @@ public class Gstr1FileB2BInvoiceData {
 	public void setFp(Date fp) {
 		this.fp = fp;
 	}
-
-
-	public String getGrossTurnover() {
-		return grossTurnover;
-	}
-
-
-	public void setGrossTurnover(String grossTurnover) {
-		this.grossTurnover = grossTurnover;
-	}
-
 
 	public String getFileNo() {
 		return fileNo;

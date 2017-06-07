@@ -9,8 +9,8 @@ public class Gstr1FileInvoiceData {
 	private Date fp;
 	private String grossTurnover;
 	private String fileNo;
-	private int version;
-	private int status;
+	private Integer version;
+	private Integer status;
 	private String assignedTo;
 	private String errorCode;
 	private String errorDescriptor;
@@ -23,8 +23,9 @@ public class Gstr1FileInvoiceData {
 	}
 
 
-	public Gstr1FileInvoiceData(Long id, String gstin, Date fp, String grossTurnover, String fileNo, int version,
-			int status, String assignedTo, String errorCode, String errorDescriptor, String reviewComments) {
+	public Gstr1FileInvoiceData(final Long id, final String gstin,final Date fp, final String grossTurnover, final String fileNo, final Integer version,
+			final Integer status, final String assignedTo, final String errorCode, final String errorDescriptor, final String reviewComments) {
+		
 		this.id = id;
 		this.gstin = gstin;
 		this.fp = fp;

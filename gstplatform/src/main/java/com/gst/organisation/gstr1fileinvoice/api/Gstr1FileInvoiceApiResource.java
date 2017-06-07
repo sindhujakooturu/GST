@@ -7,7 +7,10 @@ import java.util.Set;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -17,8 +20,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.gst.commands.domain.CommandWrapper;
+import com.gst.commands.service.CommandWrapperBuilder;
 import com.gst.commands.service.PortfolioCommandSourceWritePlatformService;
 import com.gst.infrastructure.core.api.ApiRequestParameterHelper;
+import com.gst.infrastructure.core.data.CommandProcessingResult;
 import com.gst.infrastructure.core.serialization.ApiRequestJsonSerializationSettings;
 import com.gst.infrastructure.core.serialization.DefaultToApiJsonSerializer;
 import com.gst.infrastructure.security.service.PlatformSecurityContext;
@@ -36,7 +42,7 @@ public class Gstr1FileInvoiceApiResource {
 	private final Set<String> RESPONSE_DATA_PARAMETERS = new HashSet<>(Arrays.asList("id"));
 	
 	private final DefaultToApiJsonSerializer<Gstr1FileInvoiceData> toApiJsonSerializer;
-    private final PortfolioCommandSourceWritePlatformService commandsSourceWritePlatformService;
+    private final PortfolioCommandSourceWritePlatformService commandSourceWritePlatformService;
     private final PlatformSecurityContext context;
     private final ApiRequestParameterHelper apiRequestParameterHelper;
 	private final Gstr1FileInvoiceReadPlatformService gstr1FileInvoiceReadPlatformService;
@@ -44,13 +50,13 @@ public class Gstr1FileInvoiceApiResource {
 	
 	@Autowired
     public Gstr1FileInvoiceApiResource(final DefaultToApiJsonSerializer<Gstr1FileInvoiceData> toApiJsonSerializer,
-			final PortfolioCommandSourceWritePlatformService commandsSourceWritePlatformService,
+			final PortfolioCommandSourceWritePlatformService commandSourceWritePlatformService,
 			final PlatformSecurityContext context, final ApiRequestParameterHelper apiRequestParameterHelper,
 			final Gstr1FileInvoiceReadPlatformService gstr1FileInvoiceReadPlatformService,
 			final Gstr1FileB2BInvoiceReadPlatformService gstr1FileB2BInvoiceReadPlatformService) {
  
     	this.toApiJsonSerializer = toApiJsonSerializer;
-		this.commandsSourceWritePlatformService = commandsSourceWritePlatformService;
+		this.commandSourceWritePlatformService = commandSourceWritePlatformService;
 		this.context = context;
 		this.apiRequestParameterHelper = apiRequestParameterHelper;
 		this.gstr1FileInvoiceReadPlatformService = gstr1FileInvoiceReadPlatformService;
@@ -75,5 +81,41 @@ public class Gstr1FileInvoiceApiResource {
         final ApiRequestJsonSerializationSettings settings = this.apiRequestParameterHelper.process(uriInfo.getQueryParameters());
         return this.toApiJsonSerializer.serialize(settings, gstr1FileInvoiceDatas, RESPONSE_DATA_PARAMETERS);
     }
+	
+	/**
+	 * @param uriInfo
+	 * @param apiRequestBodyAsJson
+	 * @return
+	 */
+	@POST
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Produces({ MediaType.APPLICATION_JSON })
+
+	public String createGstr1FileInvoice(final String apiRequestBodyAsJson,@Context final UriInfo uriInfo) {
+		
+		this.context.authenticatedUser().validateHasReadPermission(GSTR1FILEINVOICEDATA_RESOURCE_NAME);
+		final CommandWrapper commandRequest = new CommandWrapperBuilder().createGstr1FileInvoice().withJson(apiRequestBodyAsJson).build();
+		final CommandProcessingResult result = this.commandSourceWritePlatformService.logCommandSource(commandRequest);
+		return this.toApiJsonSerializer.serialize(result);
+	
+	}
+	
+	/**
+	 * @param outWardInvId
+	 * @param apiRequestBodyAsJson
+	 * @return update Gstr1FileInvoiceId here
+	 */
+	@PUT
+	@Path("{gstr1FileInvId}")
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Produces({ MediaType.APPLICATION_JSON })
+
+	public String updateGstr1FileInvoice(@PathParam("gstr1FileInvId") final Long gstr1FileInvId,final String apiRequestBodyAsJson) {
+	   
+		context.authenticatedUser().validateHasReadPermission(GSTR1FILEINVOICEDATA_RESOURCE_NAME);
+		final CommandWrapper commandRequest = new CommandWrapperBuilder().updateGstr1FileInvoice(gstr1FileInvId).withJson(apiRequestBodyAsJson).build();
+		final CommandProcessingResult result = this.commandSourceWritePlatformService.logCommandSource(commandRequest);
+		return this.toApiJsonSerializer.serialize(result);
+	}
 
 }

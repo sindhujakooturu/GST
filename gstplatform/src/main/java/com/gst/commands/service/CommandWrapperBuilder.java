@@ -2997,4 +2997,36 @@ public class CommandWrapperBuilder {
         this.href = "/outwarditem/"+outWardInvoiceId;
         return this;
     }
+    
+    public CommandWrapperBuilder createGstr1FileInvoice() {
+        this.actionName = "CREATE";
+        this.entityName = "GSTR1FILEINVOICE";
+        this.entityId = null;
+        this.href = "/gstr1fileinvoicedata/";
+        return this;
+    }
+    
+    public CommandWrapperBuilder updateGstr1FileInvoice(final Long gstr1FileInvId) {
+        this.actionName = "UPDATE";
+        this.entityName = "GSTR1FILEINVOICE";
+        this.entityId = gstr1FileInvId;
+        this.href = "/gstr1fileinvoicedata/"+gstr1FileInvId;
+        return this;
+    }
+    
+    public CommandWrapperBuilder createGstr1Fileb2b2Invoice() {
+        this.actionName = "CREATE";
+        this.entityName = "GSTR1FILEB2BINVOICE";
+        this.entityId = null;
+        this.href = "/gstr1fileb2binvoice/";
+        return this;
+    }
+    
+    public CommandWrapperBuilder updateGstr1Fileb2bInvoice(final Long gstr1Fileb2bInvId) {
+        this.actionName = "UPDATE";
+        this.entityName = "GSTR1FILEB2BINVOICE";
+        this.entityId = gstr1Fileb2bInvId;
+        this.href = "/gstr1fileb2binvoice/"+gstr1Fileb2bInvId;
+        return this;
+    }
 }
