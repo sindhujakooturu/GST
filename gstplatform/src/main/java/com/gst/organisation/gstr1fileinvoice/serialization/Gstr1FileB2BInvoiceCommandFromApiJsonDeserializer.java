@@ -9,6 +9,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -23,8 +24,10 @@ import com.gst.infrastructure.core.serialization.FromJsonHelper;
 @Component
 public class Gstr1FileB2BInvoiceCommandFromApiJsonDeserializer {
 	
-	final private Set<String> supportedParameters = new HashSet<String>(Arrays.asList("invoiceId", "itemType", "itemCode", "taxValue", "igstRate",
-			"igstAmount","cgstRate","cgstAmount", "sgstRate", "sgstAmount", "cessRate", "cessAmount","dateFormat", "locale"));
+	final private Set<String> supportedParameters = new HashSet<String>(Arrays.asList("gstin", "fp", "fileNo", "supplierInvNo", "supplierInvDate",
+			"supplerInvValue","supplyPlace","orderNo", "orderDate", "etin", "invoiceId", "flag","chkSum","isReverse","isProvisional","recordType","status",
+			"errorCode","errorDescr","dateFormat", "locale"));
+	
 
 	private final FromJsonHelper fromApiJsonHelper;
 
@@ -38,7 +41,7 @@ public class Gstr1FileB2BInvoiceCommandFromApiJsonDeserializer {
 		if (StringUtils.isBlank(json)) {
 			throw new InvalidJsonException();
 		}
-
+         
 		final Type typeOfMap = new TypeToken<Map<String, Object>>() {
 			private static final long serialVersionUID = 1L;
 		}.getType();
@@ -49,43 +52,64 @@ public class Gstr1FileB2BInvoiceCommandFromApiJsonDeserializer {
 		final DataValidatorBuilder baseDataValidator = new DataValidatorBuilder(dataValidationErrors).resource("outwarditem");
 
 		final JsonElement element = this.fromApiJsonHelper.parse(json);
+		
+		final String gstin = this.fromApiJsonHelper.extractStringNamed("gstin", element);
+		baseDataValidator.reset().parameter("gstin").value(gstin);
 
+		final LocalDate fp = this.fromApiJsonHelper.extractLocalDateNamed("fp", element);
+		baseDataValidator.reset().parameter("fp").value(fp);
+
+		final String fileNo = this.fromApiJsonHelper.extractStringNamed("fileNo", element);
+		baseDataValidator.reset().parameter("fileNo").value(fileNo);
+		
+		final String  supplierInvNo = this.fromApiJsonHelper.extractStringNamed("supplierInvNo", element);
+		baseDataValidator.reset().parameter("supplierInvNo").value(supplierInvNo);
+		
+		final String supplierInvDate = this.fromApiJsonHelper.extractStringNamed("supplierInvDate", element);
+		baseDataValidator.reset().parameter("supplierInvDate").value(supplierInvDate);
+		
+		final Double supplerInvValue = this.fromApiJsonHelper.extractDoubleNamed("supplerInvValue", element);
+		baseDataValidator.reset().parameter("supplerInvValue").value(supplerInvValue);
+		
+		final String supplyPlace = this.fromApiJsonHelper.extractStringNamed("supplyPlace", element);
+		baseDataValidator.reset().parameter("supplyPlace").value(supplyPlace);
+		
+		final String orderNo = this.fromApiJsonHelper.extractStringNamed("orderNo", element);
+		baseDataValidator.reset().parameter("orderNo").value(orderNo);
+		
+		final LocalDate orderDate = this.fromApiJsonHelper.extractLocalDateNamed("orderDate", element);
+		baseDataValidator.reset().parameter("orderDate").value(orderDate);
+		
+		final String etin = this.fromApiJsonHelper.extractStringNamed("etin", element);
+		baseDataValidator.reset().parameter("etin").value(etin);
+		
+		final Long invoiceId = this.fromApiJsonHelper.extractLongNamed("invoiceId", element);
 		baseDataValidator.reset().parameter("invoiceId").value(invoiceId);
 		
-		final String itemType = this.fromApiJsonHelper.extractStringNamed("itemType", element);
-		baseDataValidator.reset().parameter("itemType").value(itemType);
-
-		final String itemCode = this.fromApiJsonHelper.extractStringNamed("itemCode", element);
-		baseDataValidator.reset().parameter("itemCode").value(itemCode);
-
-		final Double taxValue = this.fromApiJsonHelper.extractDoubleNamed("taxValue", element);
-		baseDataValidator.reset().parameter("taxValue").value(taxValue);
+		final String flag = this.fromApiJsonHelper.extractStringNamed("flag", element);
+		baseDataValidator.reset().parameter("flag").value(flag);
 		
-		final Double  igstRate = this.fromApiJsonHelper.extractDoubleNamed("igstRate", element);
-		baseDataValidator.reset().parameter("igstRate").value(igstRate);
+		final String chkSum = this.fromApiJsonHelper.extractStringNamed("chkSum", element);
+		baseDataValidator.reset().parameter("chkSum").value(chkSum);
 		
-		final Double igstAmount = this.fromApiJsonHelper.extractDoubleNamed("igstAmount", element);
-		baseDataValidator.reset().parameter("igstAmount").value(igstAmount);
+		final Integer isReverse = this.fromApiJsonHelper.extractIntegerNamed("isReverse", element, this.fromApiJsonHelper.extractLocaleParameter(element.getAsJsonObject()));
+		baseDataValidator.reset().parameter("isReverse").value(isReverse);
 		
-		final Double cgstRate = this.fromApiJsonHelper.extractDoubleNamed("cgstRate", element);
-		baseDataValidator.reset().parameter("cgstRate").value(cgstRate);
+		final Integer isProvisional = this.fromApiJsonHelper.extractIntegerNamed("isProvisional", element, this.fromApiJsonHelper.extractLocaleParameter(element.getAsJsonObject()));
+		baseDataValidator.reset().parameter("isProvisional").value(isProvisional);
 		
-		final Double cgstAmount = this.fromApiJsonHelper.extractDoubleNamed("cgstAmount", element);
-		baseDataValidator.reset().parameter("cgstAmount").value(cgstAmount);
+		final Integer recordType = this.fromApiJsonHelper.extractIntegerNamed("recordType", element, this.fromApiJsonHelper.extractLocaleParameter(element.getAsJsonObject()));
+		baseDataValidator.reset().parameter("recordType").value(recordType);
 		
-		final Double sgstRate = this.fromApiJsonHelper.extractDoubleNamed("sgstRate", element);
-		baseDataValidator.reset().parameter("sgstRate").value(sgstRate);
+		final String status = this.fromApiJsonHelper.extractStringNamed("status", element);
+		baseDataValidator.reset().parameter("status").value(status);
 		
-		final Double sgstAmount = this.fromApiJsonHelper.extractDoubleNamed("sgstAmount", element);
-		baseDataValidator.reset().parameter("sgstAmount").value(sgstAmount);
+		final String errorCode = this.fromApiJsonHelper.extractStringNamed("errorCode", element);
+		baseDataValidator.reset().parameter("errorCode").value(errorCode);
 		
+		final String errorDescr = this.fromApiJsonHelper.extractStringNamed("errorDescr", element);
+		baseDataValidator.reset().parameter("errorDescr").value(errorDescr);
 		
-		final Double cessRate = this.fromApiJsonHelper.extractDoubleNamed("cessRate", element);
-		baseDataValidator.reset().parameter("cessRate").value(cessRate);
-		
-		final Double cessAmount = this.fromApiJsonHelper.extractDoubleNamed("cessAmount", element);
-		baseDataValidator.reset().parameter("cessAmount").value(cessAmount);
-	
 
 		throwExceptionIfValidationWarningsExist(dataValidationErrors);
 

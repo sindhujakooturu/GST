@@ -126,7 +126,7 @@ public class OutWardStagingInvWritePlatformServiceImp implements OutWardStagingI
 		try {
 			context.authenticatedUser();
 			this.apiJsonDeserializer.validaForCreate(command.json());
-			final OutWardStagingInv outWardStagingInv = retrieveChargeCodeById(outWardInvId);
+			final OutWardStagingInv outWardStagingInv = retrieveOutWardInvById(outWardInvId);
 			
 			final Map<String, Object> changes = outWardStagingInv.update(command);
 			if (!changes.isEmpty()) {
@@ -142,7 +142,7 @@ public class OutWardStagingInvWritePlatformServiceImp implements OutWardStagingI
 		}
 	}
 
-	private OutWardStagingInv retrieveChargeCodeById(final Long outWardInvId) {
+	private OutWardStagingInv retrieveOutWardInvById(final Long outWardInvId) {
 		final OutWardStagingInv outWardStagingInv = this.outWardStagingInvRepository.findOne(outWardInvId);
 		if (outWardStagingInv == null) {
 			throw new OutWardStagingInvNotFoundException(outWardInvId);

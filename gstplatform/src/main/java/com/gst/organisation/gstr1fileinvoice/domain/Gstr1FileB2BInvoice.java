@@ -18,7 +18,7 @@ import com.gst.infrastructure.core.domain.AbstractPersistableCustom;
  * 
  */
 @Entity
-@Table(name = "g_ow_stg_invoice")
+@Table(name = "g_gstr1_file_b2b_invoice")
 public class Gstr1FileB2BInvoice extends AbstractPersistableCustom<Long> {
 
 	private static final long serialVersionUID = 1L;
@@ -26,11 +26,11 @@ public class Gstr1FileB2BInvoice extends AbstractPersistableCustom<Long> {
 	@Column(name = "gstin")
 	private String gstin;
 
-	@Column(name = "gstin_purchaser")
-	private String gstinPurchaser;
+	@Column(name = "fp")
+	private Date fp;
 
-	@Column(name = "c_name")
-	private String cName;
+	@Column(name = "file_no")
+	private String fileNo;
 
 	@Column(name = "supplier_inv_no")
 	private String supplierInvNo;
@@ -41,8 +41,8 @@ public class Gstr1FileB2BInvoice extends AbstractPersistableCustom<Long> {
 	@Column(name = "supplier_inv_value")
 	private Long supplierInvValue;
 
-	@Column(name = "supply_state_code")
-	private String supplyStateCode;
+	@Column(name = "supply_place")
+	private String supplyPlace;
 	
 	@Column(name = "order_no")
 	private String orderNo;
@@ -56,44 +56,62 @@ public class Gstr1FileB2BInvoice extends AbstractPersistableCustom<Long> {
 	@Column(name = "invoice_id")
 	private Long invoiceId;
 
-	@Column(name = "receipt_state_code")
-	private String receiptStateCode;
+	@Column(name = "flag")
+	private String flag;
+
+	@Column(name = "check_sum")
+	private String checkSum;
+
+	@Column(name = "is_reverse")
+	private Integer isReverse;
+	
+	@Column(name = "is_provisional")
+	private Integer isProvisional;
+	
+	@Column(name = "record_type")
+	private Integer recordType;
 
 	@Column(name = "status")
-	private Integer status;
+	private String status;
 
 	@Column(name = "error_code")
 	private String errorCode;
+
+	@Column(name = "error_descriptor")
+	private String errorDescriptor;
 	
-	@Column(name = "error_descr")
-	private String errorDescripter;
 	
 	public Gstr1FileB2BInvoice() {
 		
 	}
 
-	public Gstr1FileB2BInvoice(final String gstin, final String gstinPurchaser,
-			final String cName, final String supplierInvNo,
+	public Gstr1FileB2BInvoice(final String gstin, final Date fp,
+			final String fileNo, final String supplierInvNo,
 			final Date supplierInvDate, final Long supplierInvValue,
-			final String supplyStateCode,final String orderNo,final Date orderDate,
-			final String etin,final Long invoiceId,final String receiptStateCode,final Integer status,
-			final String errorCode,final String errorDescripter) {
+			final String supplyPlace,final String orderNo,final Date orderDate,
+			final String etin,final Long invoiceId,final String flag,final String checkSum,
+			final Integer isReverse,final Integer isProvisional,final Integer recordType,
+			final String status,final String errorCode,final String errorDescriptor) {
 
 		this.gstin = gstin;
-		this.gstinPurchaser = gstinPurchaser;
-		this.cName = cName;
+		this.fp = fp;
+		this.fileNo = fileNo;
 		this.supplierInvNo = supplierInvNo;
 		this.supplierInvDate = supplierInvDate;
 		this.supplierInvValue = supplierInvValue;
-		this.supplyStateCode = supplyStateCode;
+		this.supplyPlace = supplyPlace;
 		this.orderNo = orderNo;
 		this.orderDate = orderDate;
 		this.etin = etin;
 		this.invoiceId = invoiceId;
-		this.receiptStateCode = receiptStateCode;
+		this.flag = flag;
+		this.checkSum = checkSum;
+		this.isReverse = isReverse;
+		this.isProvisional = isProvisional;
+		this.recordType = recordType;
 		this.status = status;
 		this.errorCode = errorCode;
-		this.errorDescripter = errorDescripter;
+		this.errorDescriptor = errorDescriptor;
 	}
 	
 	/**
@@ -103,24 +121,28 @@ public class Gstr1FileB2BInvoice extends AbstractPersistableCustom<Long> {
 	public static Gstr1FileB2BInvoice fromJson(final JsonCommand command) {
 
 		final String gstin = command.stringValueOfParameterNamed("gstin");
-		final String gstinPurchaser = command.stringValueOfParameterNamed("gstinPurchaser");
-		final String cName = command.stringValueOfParameterNamed("cName");
+		final Date fp = command.DateValueOfParameterNamed("fp");
+		final String fileNo = command.stringValueOfParameterNamed("fileNo");
 		final String supplierInvNo = command.stringValueOfParameterNamed("supplierInvNo");
 		final Date supplierInvDate = command.DateValueOfParameterNamed("supplierInvDate");
 		final Long supplierInvValue = command.longValueOfParameterNamed("supplierInvValue");
-		final String supplyStateCode = command.stringValueOfParameterNamed("supplyStateCode");
+		final String supplyPlace = command.stringValueOfParameterNamed("supplyPlace");
 		final String orderNo = command.stringValueOfParameterNamed("orderNo");
 		final Date orderDate = command.DateValueOfParameterNamed("orderDate");
 		final String etin = command.stringValueOfParameterNamed("etin");
 		final Long invoiceId = command.longValueOfParameterNamed("invoiceId");
-		final String receiptStateCode = command.stringValueOfParameterNamed("receiptStateCode");
-		final Integer status = command.integerValueOfParameterNamed("status");
+		final String flag = command.stringValueOfParameterNamed("flag");
+		final String checkSum = command.stringValueOfParameterNamed("checkSum");
+		final Integer isReverse = command.integerValueOfParameterNamed("isReverse");
+		final Integer isProvisional = command.integerValueOfParameterNamed("isProvisional");
+		final Integer recordType = command.integerValueOfParameterNamed("recordType");
+		final String status = command.stringValueOfParameterNamed("status");
 		final String errorCode = command.stringValueOfParameterNamed("errorCode");
-		final String errorDescripter = command.stringValueOfParameterNamed("errorDescripter");
+		final String errorDescriptor = command.stringValueOfParameterNamed("errorDescriptor");
 
-		return new Gstr1FileB2BInvoice(gstin, gstinPurchaser, cName,
-				supplierInvNo, supplierInvDate, supplierInvValue, supplyStateCode,orderNo,orderDate,etin,invoiceId,receiptStateCode,
-				status,errorCode,errorDescripter);
+		return new Gstr1FileB2BInvoice(gstin, fp, fileNo, supplierInvNo, supplierInvDate, supplierInvValue, 
+				supplyPlace,orderNo,orderDate,etin,invoiceId,flag,checkSum,isReverse,isProvisional,
+				recordType,status,errorCode,errorDescriptor);
 	}
 
 	/**
@@ -136,15 +158,15 @@ public class Gstr1FileB2BInvoice extends AbstractPersistableCustom<Long> {
 			actualChanges.put("gstin", newValue);
 			this.gstin = StringUtils.defaultIfEmpty(newValue, null);
 		}
-		if (command.isChangeInStringParameterNamed("gstinPurchaser",this.gstinPurchaser)) {
-			final String newValue = command.stringValueOfParameterNamed("gstinPurchaser");
-			actualChanges.put("gstinPurchaser", newValue);
-			this.gstinPurchaser = StringUtils.defaultIfEmpty(newValue, null);
+		if (command.isChangeInDateParameterNamed("fp",this.fp)) {
+			final Date newValue = command.DateValueOfParameterNamed("fp");
+			actualChanges.put("fp", newValue);
+			this.fp = newValue;
 		}
-		if (command.isChangeInStringParameterNamed("cName",this.cName)) {
-			final String newValue = command.stringValueOfParameterNamed("cName");
-			actualChanges.put("cName", newValue);
-			this.cName = StringUtils.defaultIfEmpty(newValue, null);
+		if (command.isChangeInStringParameterNamed("fileNo",this.fileNo)) {
+			final String newValue = command.stringValueOfParameterNamed("fileNo");
+			actualChanges.put("fileNo", newValue);
+			this.fileNo = StringUtils.defaultIfEmpty(newValue, null);
 		}
 		if (command.isChangeInStringParameterNamed("supplierInvNo",this.supplierInvNo)) {
 			final String newValue = command.stringValueOfParameterNamed("supplierInvNo");
@@ -163,10 +185,10 @@ public class Gstr1FileB2BInvoice extends AbstractPersistableCustom<Long> {
 			this.supplierInvValue = newValue;
 		}
 		
-		if (command.isChangeInStringParameterNamed("supplyStateCode",this.supplyStateCode)) {
-			final String newValue = command.stringValueOfParameterNamed("supplyStateCode");
-			actualChanges.put("supplyStateCode", newValue);
-			this.supplyStateCode = StringUtils.defaultIfEmpty(newValue, null);
+		if (command.isChangeInStringParameterNamed("supplyPlace",this.supplyPlace)) {
+			final String newValue = command.stringValueOfParameterNamed("supplyPlace");
+			actualChanges.put("supplyPlace", newValue);
+			this.supplyPlace = StringUtils.defaultIfEmpty(newValue, null);
 		}
 		if (command.isChangeInStringParameterNamed("orderNo",this.orderNo)) {
 			final String newValue = command.stringValueOfParameterNamed("orderNo");
@@ -188,13 +210,35 @@ public class Gstr1FileB2BInvoice extends AbstractPersistableCustom<Long> {
 			actualChanges.put("invoiceId", newValue);
 			this.invoiceId = newValue;
 		}
-		if (command.isChangeInStringParameterNamed("receiptStateCode",this.receiptStateCode)) {
-			final String newValue = command.stringValueOfParameterNamed("receiptStateCode");
-			actualChanges.put("receiptStateCode", newValue);
-			this.receiptStateCode = newValue;
+		if (command.isChangeInStringParameterNamed("flag",this.flag)) {
+			final String newValue = command.stringValueOfParameterNamed("flag");
+			actualChanges.put("flag", newValue);
+			this.flag = newValue;
 		}
-		if (command.isChangeInIntegerParameterNamed("status",this.status)) {
-			final Integer newValue = command.integerValueOfParameterNamed("status");
+		
+		if (command.isChangeInStringParameterNamed("checkSum",this.checkSum)) {
+			final String newValue = command.stringValueOfParameterNamed("checkSum");
+			actualChanges.put("checkSum", newValue);
+			this.checkSum = newValue;
+		}
+		if (command.isChangeInIntegerParameterNamed("isReverse",this.isReverse)) {
+			final Integer newValue = command.integerValueOfParameterNamed("isReverse");
+			actualChanges.put("isReverse", newValue);
+			this.isReverse = newValue;
+		}
+		if (command.isChangeInIntegerParameterNamed("isProvisional",this.isProvisional)) {
+			final Integer newValue = command.integerValueOfParameterNamed("isProvisional");
+			actualChanges.put("isProvisional", newValue);
+			this.isProvisional = newValue;
+		}
+		if (command.isChangeInIntegerParameterNamed("recordType",this.recordType)) {
+			final Integer newValue = command.integerValueOfParameterNamed("recordType");
+			actualChanges.put("recordType", newValue);
+			this.recordType = newValue;
+		}
+		
+		if (command.isChangeInStringParameterNamed("status",this.status)) {
+			final String newValue = command.stringValueOfParameterNamed("status");
 			actualChanges.put("status", newValue);
 			this.status = newValue;
 		}
@@ -204,10 +248,10 @@ public class Gstr1FileB2BInvoice extends AbstractPersistableCustom<Long> {
 			actualChanges.put("errorCode", newValue);
 			this.errorCode = StringUtils.defaultIfEmpty(newValue, null);
 		}
-		if (command.isChangeInStringParameterNamed("errorDescripter",this.errorDescripter)) {
-			final String newValue = command.stringValueOfParameterNamed("errorDescripter");
-			actualChanges.put("errorDescripter", newValue);
-			this.errorDescripter = StringUtils.defaultIfEmpty(newValue, null);
+		if (command.isChangeInStringParameterNamed("errorDescriptor",this.errorDescriptor)) {
+			final String newValue = command.stringValueOfParameterNamed("errorDescriptor");
+			actualChanges.put("errorDescriptor", newValue);
+			this.errorDescriptor = StringUtils.defaultIfEmpty(newValue, null);
 		}
 
 		return actualChanges;

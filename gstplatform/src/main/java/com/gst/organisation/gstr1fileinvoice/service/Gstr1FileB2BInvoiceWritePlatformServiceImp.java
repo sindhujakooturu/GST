@@ -16,9 +16,8 @@ import com.gst.infrastructure.core.serialization.FromJsonHelper;
 import com.gst.infrastructure.security.service.PlatformSecurityContext;
 import com.gst.organisation.gstr1fileinvoice.domain.Gstr1FileB2BInvoice;
 import com.gst.organisation.gstr1fileinvoice.domain.Gstr1FileB2BInvoiceRepository;
+import com.gst.organisation.gstr1fileinvoice.exception.Gstr1FileB2BInvoiceNotFoundException;
 import com.gst.organisation.gstr1fileinvoice.serialization.Gstr1FileB2BInvoiceCommandFromApiJsonDeserializer;
-import com.gst.organisation.outwardstaginginv.domain.OutWardStagingInv;
-import com.gst.organisation.outwardstaginginv.exception.OutWardStagingInvNotFoundException;
 
 /**
  * @author Trigital
@@ -59,44 +58,12 @@ public class Gstr1FileB2BInvoiceWritePlatformServiceImp implements Gstr1FileB2BI
 			this.apiJsonDeserializer.validaForCreate(command.json());
 			final Gstr1FileB2BInvoice utWardStagingInvData  = Gstr1FileB2BInvoice.fromJson(command);
 			this.gstr1FileB2BInvoiceRepository.save(utWardStagingInvData);
-			//if(true == command.booleanPrimitiveValueOfParameterNamed("isDetails")){this.addOutwardStagingItemDetails(command);}			
 			return new CommandProcessingResultBuilder().withCommandId(command.commandId()).withEntityId(utWardStagingInvData.getId()).build();
 		} catch (final DataIntegrityViolationException dve) {
 			handleDataIntegrityIssues(command, dve);
 			return new CommandProcessingResult(Long.valueOf(-1L));
 		}
 	}
-
-	/*private void addOutwardStagingItemDetails(JsonCommand command) {
-		final Long invoiceId = command.longValueOfParameterNamed("invoiceId");
-		List<OutWardStagingItem> outWardStagingItemsList = new ArrayList<OutWardStagingItem>();
-		final JsonArray outWardStagingItemArray = command.arrayOfParameterNamed("itemDetails").getAsJsonArray();
-		String[] outWardStagingItems = new String[outWardStagingItemArray.size()];
-		for(int i = 0; i < outWardStagingItemArray.size(); i++){
-			outWardStagingItems[i] = outWardStagingItemArray.get(i).toString();
-	}
-	
-		for (final String outWardStagingItem : outWardStagingItems) {
-					
-				final JsonElement element = this.fromApiJsonHelper.parse(outWardStagingItem);
-				final String itemType = this.fromApiJsonHelper.extractStringNamed("itemType",element);
-				final String itemCode = this.fromApiJsonHelper.extractStringNamed("itemCode",element);
-				final Double taxValue = this.fromApiJsonHelper.extractDoubleNamed("taxValue",element);
-				final Double igstRate = this.fromApiJsonHelper.extractDoubleNamed("igstRate",element);
-				final Double igstAmount = this.fromApiJsonHelper.extractDoubleNamed("igstAmount",element);
-				final Double cgstRate = this.fromApiJsonHelper.extractDoubleNamed("cgstRate",element);
-				final Double cgstAmount = this.fromApiJsonHelper.extractDoubleNamed("cgstAmount",element);
-				final Double sgstRate = this.fromApiJsonHelper.extractDoubleNamed("sgstRate",element);
-				final Double sgstAmount = this.fromApiJsonHelper.extractDoubleNamed("sgstAmount",element);
-				final Double cessRate = this.fromApiJsonHelper.extractDoubleNamed("cessRate",element);
-				final Double cessAmount = this.fromApiJsonHelper.extractDoubleNamed("cessAmount",element);
-			
-				outWardStagingItemsList.add(new OutWardStagingItem(invoiceId, itemType, itemCode, taxValue, igstRate, igstAmount, cgstRate, cgstAmount,
-					sgstRate, sgstAmount, cessRate, cessAmount));
-			
-		}
-		this.outWardStagingItemRepository.save(outWardStagingItemsList);
-	}*/
 
 	private void handleDataIntegrityIssues(final JsonCommand command,
 			final DataIntegrityViolationException dve) {
@@ -113,32 +80,28 @@ public class Gstr1FileB2BInvoiceWritePlatformServiceImp implements Gstr1FileB2BI
 	@Override
 	public CommandProcessingResult updateGstr1Fileb2bInvoice(final JsonCommand command,final Long gstr1Fileb2bInvId) {
 		
-		//OutWardStagingInv chargeCode = null;
 		try {
 			context.authenticatedUser();
 			this.apiJsonDeserializer.validaForCreate(command.json());
-			final Gstr1FileB2BInvoice outWardStagingInv = retrieveChargeCodeById(outWardInvId);
+			final Gstr1FileB2BInvoice gstr1FileB2BInvoice = retrieveGstr1Fileb2bInvoiceById(gstr1Fileb2bInvId);
 			
-			final Map<String, Object> changes = outWardStagingInv.update(command);
+			final Map<String, Object> changes = gstr1FileB2BInvoice.update(command);
 			if (!changes.isEmpty()) {
-				gstr1FileB2BInvoiceRepository.saveAndFlush(outWardStagingInv);
+				gstr1FileB2BInvoiceRepository.saveAndFlush(gstr1FileB2BInvoice);
 			}
 
-			return new CommandProcessingResultBuilder().withCommandId(command.commandId()).withEntityId(outWardStagingInv.getId()).with(changes).build();
+			return new CommandProcessingResultBuilder().withCommandId(command.commandId()).withEntityId(gstr1FileB2BInvoice.getId()).with(changes).build();
 		} catch (DataIntegrityViolationException dve) {
-			/*if (dve.getCause() instanceof ConstraintViolationException) {
-				handleDataIntegrityIssues(command, dve);
-			}*/
 			return new CommandProcessingResult(Long.valueOf(-1L));
 		}
 	}
 
-	private Gstr1FileB2BInvoice retrieveChargeCodeById(final Long outWardInvId) {
-		final Gstr1FileB2BInvoice outWardStagingInv = this.gstr1FileB2BInvoiceRepository.findOne(outWardInvId);
-		if (outWardStagingInv == null) {
-			throw new OutWardStagingInvNotFoundException(outWardInvId);
+	private Gstr1FileB2BInvoice retrieveGstr1Fileb2bInvoiceById(final Long gstr1Fileb2bInvId) {
+		final Gstr1FileB2BInvoice gstr1FileB2BInvoice = this.gstr1FileB2BInvoiceRepository.findOne(gstr1Fileb2bInvId);
+		if (gstr1FileB2BInvoice == null) {
+			throw new Gstr1FileB2BInvoiceNotFoundException(gstr1Fileb2bInvId);
 		}
-		return outWardStagingInv;
+		return gstr1FileB2BInvoice;
 	}
 
 }

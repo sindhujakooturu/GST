@@ -51,7 +51,6 @@ public class Gstr1FileB2BInvoiceApiResource {
     private final PlatformSecurityContext context;
     private final ApiRequestParameterHelper apiRequestParameterHelper;
 	private final Gstr1FileB2BInvoiceReadPlatformService gstr1FileB2BInvoiceReadPlatformService;
-	//private final Gstr1FileB2BInvoiceReadPlatformService gstr1FileB2BInvoiceReadPlatformService;    
 	
 	@Autowired
     public Gstr1FileB2BInvoiceApiResource(final DefaultToApiJsonSerializer<Gstr1FileB2BInvoiceData> toApiJsonSerializer,
@@ -72,31 +71,13 @@ public class Gstr1FileB2BInvoiceApiResource {
 	@Produces({ MediaType.APPLICATION_JSON })
 	public String retrieveGstr1Fileb2bInvoiceDatas(@Context final UriInfo uriInfo) {
 		
+		String fileNo = null;
 	    context.authenticatedUser().validateHasReadPermission(resourceNameForPermissions);
-		final List<Gstr1FileB2BInvoiceData> gstr1FileB2BInvoiceData = this.gstr1FileB2BInvoiceReadPlatformService.retriveGstr1FileB2BInvoiceData(null);
+		final List<Gstr1FileB2BInvoiceData> gstr1FileB2BInvoiceData = this.gstr1FileB2BInvoiceReadPlatformService.retriveGstr1FileB2BInvoiceData(fileNo);
 		final ApiRequestJsonSerializationSettings settings = apiRequestParameterHelper.process(uriInfo.getQueryParameters());
 		return this.toApiJsonSerializer.serialize(settings, gstr1FileB2BInvoiceData,RESPONSE_PARAMETERS);
 
 	}
-	
-	/*@GET
-    @Consumes({ MediaType.APPLICATION_JSON })
-    @Produces({ MediaType.APPLICATION_JSON })
-    public String retrieveGstr1Fileb2bInvoiceDatas(@Context final UriInfo uriInfo) {
-
-        this.context.authenticatedUser().validateHasReadPermission(resourceNameForPermissions);
-        Collection<Gstr1FileInvoiceData> gstr1FileInvoiceDatas = this.gstr1FileInvoiceReadPlatformService.retriveGstr1FileInvoiceData();
-        for(Gstr1FileInvoiceData gstr1FileInvoiceData:gstr1FileInvoiceDatas){
-        	Collection<Gstr1FileB2BInvoiceData> gstr1FileB2BInvoiceDatas = this.gstr1FileB2BInvoiceReadPlatformService.retriveGstr1FileB2BInvoiceData(gstr1FileInvoiceData.getFileNo());
-        	for(Gstr1FileB2BInvoiceData gstr1FileB2BInvoiceData:gstr1FileB2BInvoiceDatas){
-        		this.gstr1FileB2BInvoiceReadPlatformService.retriveB2BinvoiceItems(gstr1FileB2BInvoiceData.getInvoiceId());
-        	}
-        	gstr1FileInvoiceData.setGstr1FileB2BInvoiceData(gstr1FileB2BInvoiceDatas);
-        }
-       
-        final ApiRequestJsonSerializationSettings settings = this.apiRequestParameterHelper.process(uriInfo.getQueryParameters());
-        return this.toApiJsonSerializer.serialize(settings, gstr1FileInvoiceDatas, RESPONSE_DATA_PARAMETERS);
-    }*/
 	
 	/**
 	 * @param uriInfo
