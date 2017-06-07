@@ -38,7 +38,7 @@ public class OutWardStagingInvReadPlatformServiceImpl implements OutWardStagingI
 
 		final OutWardInvDataMapper mapper = new OutWardInvDataMapper();
 
-		final String sql = "Select " + mapper.schema();
+		final String sql = "Select Distinct " + mapper.schema();
 
 		return this.jdbcTemplate.query(sql, mapper, new Object[] {});
 	}

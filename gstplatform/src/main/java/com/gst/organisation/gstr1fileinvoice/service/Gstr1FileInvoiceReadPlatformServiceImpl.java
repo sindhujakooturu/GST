@@ -49,7 +49,7 @@ public class Gstr1FileInvoiceReadPlatformServiceImpl implements Gstr1FileInvoice
         public Gstr1FileInvoiceData mapRow(final ResultSet rs, @SuppressWarnings("unused") final int rowNum) throws SQLException {
             
         	final Long id = rs.getLong("id");
-        	final String gstin = rs.getString("");
+        	final String gstin = rs.getString("gstin");
         	final Date fp = rs.getDate("fp");
 			final String grossTurnover = rs.getString("grossTurnover");
 			final String fileNo = rs.getString("fileNo");

@@ -34,7 +34,6 @@ public class Gstr1FileB2BInvoiceData {
 		
 	}
 
-
 	public Gstr1FileB2BInvoiceData(final Long id, final String gstin, final Date fp, final String fileNo,
 			final String supplierInvNo, final String supplierInvDate, final Double supplierInvValue, final String supplyPlace, final String orderNo,
 			final Date orderDate, final String etin, final Long invoiceId, final String flag, final String checkSum, final Integer isReverse, final Integer isProvisional,
@@ -259,6 +258,16 @@ public class Gstr1FileB2BInvoiceData {
 
 	public void setErrorDescriptor(String errorDescriptor) {
 		this.errorDescriptor = errorDescriptor;
+	}
+
+
+	public Collection<Gstr1FileB2BItemData> getGstr1FileB2BItemData() {
+		return gstr1FileB2BItemData;
+	}
+
+
+	public void setGstr1FileB2BItemData(Collection<Gstr1FileB2BItemData> gstr1FileB2BItemData) {
+		this.gstr1FileB2BItemData = gstr1FileB2BItemData;
 	}
 
 	
