@@ -6,7 +6,7 @@ import java.util.Date;
 public class Gstr1FileInvoiceData {
 	private Long id;
 	private String gstin;
-	private Date fp;
+	private String fp;
 	private String grossTurnover;
 	private String fileNo;
 	private int version;
@@ -23,7 +23,7 @@ public class Gstr1FileInvoiceData {
 	}
 
 
-	public Gstr1FileInvoiceData(Long id, String gstin, Date fp, String grossTurnover, String fileNo, int version,
+	public Gstr1FileInvoiceData(Long id, String gstin, String fp, String grossTurnover, String fileNo, int version,
 			int status, String assignedTo, String errorCode, String errorDescriptor, String reviewComments) {
 		this.id = id;
 		this.gstin = gstin;
@@ -59,12 +59,12 @@ public class Gstr1FileInvoiceData {
 	}
 
 
-	public Date getFp() {
+	public String getFp() {
 		return fp;
 	}
 
 
-	public void setFp(Date fp) {
+	public void setFp(String fp) {
 		this.fp = fp;
 	}
 

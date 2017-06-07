@@ -7,14 +7,14 @@ public class Gstr1FileB2BInvoiceData {
 	
 	private Long id;
 	private String gstin;
-	private Date fp;
+	private String fp;
 	private String fileNo;
 	private String supplierInvNo;
 	private String supplierInvDate;
 	private Double supplierInvValue;
 	private String supplyPlace;
 	private String orderNo;
-	private Date orderDate;
+	private String orderDate;
 	private String etin;
 	private Long invoiceId;
 	private String flag;
@@ -33,9 +33,9 @@ public class Gstr1FileB2BInvoiceData {
 	}
 
 
-	public Gstr1FileB2BInvoiceData(Long id, String gstin, Date fp, String fileNo,
+	public Gstr1FileB2BInvoiceData(Long id, String gstin, String fp, String fileNo,
 			String supplierInvNo, String supplierInvDate, Double supplierInvValue, String supplyPlace, String orderNo,
-			Date orderDate, String etin, Long invoiceId, String flag, String checkSum, int isReverse, int isProvisional,
+			String orderDate, String etin, Long invoiceId, String flag, String checkSum, int isReverse, int isProvisional,
 			int recordType, String status, String errorCode, String errorDescriptor) {
 
 		this.id = id;
@@ -81,12 +81,12 @@ public class Gstr1FileB2BInvoiceData {
 	}
 
 
-	public Date getFp() {
+	public String getFp() {
 		return fp;
 	}
 
 
-	public void setFp(Date fp) {
+	public void setFp(String fp) {
 		this.fp = fp;
 	}
 
@@ -150,12 +150,12 @@ public class Gstr1FileB2BInvoiceData {
 	}
 
 
-	public Date getOrderDate() {
+	public String getOrderDate() {
 		return orderDate;
 	}
 
 
-	public void setOrderDate(Date orderDate) {
+	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
 	}
 
