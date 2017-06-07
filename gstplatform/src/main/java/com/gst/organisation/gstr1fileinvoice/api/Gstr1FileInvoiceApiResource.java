@@ -6,9 +6,11 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
@@ -34,7 +36,6 @@ public class Gstr1FileInvoiceApiResource {
 	
 	private final String GSTR1FILEINVOICEDATA_RESOURCE_NAME = "GSTR1FILEINVOICEDATA";
 	private final Set<String> RESPONSE_DATA_PARAMETERS = new HashSet<>(Arrays.asList("id"));
-	
 	private final DefaultToApiJsonSerializer<Gstr1FileInvoiceData> toApiJsonSerializer;
     private final PortfolioCommandSourceWritePlatformService commandsSourceWritePlatformService;
     private final PlatformSecurityContext context;
@@ -60,18 +61,19 @@ public class Gstr1FileInvoiceApiResource {
 	@GET
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    public String retrieveGstr1FileInvoiceDatas(@Context final UriInfo uriInfo) {
+    public String retrieveGstr1FileInvoiceDatas(@Context final UriInfo uriInfo,@DefaultValue("false") @QueryParam("isDetails") final boolean isDetails) {
 
         this.context.authenticatedUser().validateHasReadPermission(GSTR1FILEINVOICEDATA_RESOURCE_NAME);
         Collection<Gstr1FileInvoiceData> gstr1FileInvoiceDatas = this.gstr1FileInvoiceReadPlatformService.retriveGstr1FileInvoiceData();
-        for(Gstr1FileInvoiceData gstr1FileInvoiceData:gstr1FileInvoiceDatas){
-        	Collection<Gstr1FileB2BInvoiceData> gstr1FileB2BInvoiceDatas = this.gstr1FileB2BInvoiceReadPlatformService.retriveGstr1FileB2BInvoiceData(gstr1FileInvoiceData.getFileNo());
-        	for(Gstr1FileB2BInvoiceData gstr1FileB2BInvoiceData:gstr1FileB2BInvoiceDatas){
-        		this.gstr1FileB2BInvoiceReadPlatformService.retriveB2BinvoiceItems(gstr1FileB2BInvoiceData.getInvoiceId());
+        if(isDetails){
+        	for(Gstr1FileInvoiceData gstr1FileInvoiceData:gstr1FileInvoiceDatas){
+        		Collection<Gstr1FileB2BInvoiceData> gstr1FileB2BInvoiceDatas = this.gstr1FileB2BInvoiceReadPlatformService.retriveGstr1FileB2BInvoiceData(gstr1FileInvoiceData.getFileNo());
+        		for(Gstr1FileB2BInvoiceData gstr1FileB2BInvoiceData:gstr1FileB2BInvoiceDatas){
+        			gstr1FileB2BInvoiceData.setGstr1FileB2BItemData(this.gstr1FileB2BInvoiceReadPlatformService.retriveB2BinvoiceItems(gstr1FileB2BInvoiceData.getInvoiceId()));
+        		}
+        		gstr1FileInvoiceData.setGstr1FileB2BInvoiceData(gstr1FileB2BInvoiceDatas);
         	}
-        	gstr1FileInvoiceData.setGstr1FileB2BInvoiceData(gstr1FileB2BInvoiceDatas);
         }
-       
         final ApiRequestJsonSerializationSettings settings = this.apiRequestParameterHelper.process(uriInfo.getQueryParameters());
         return this.toApiJsonSerializer.serialize(settings, gstr1FileInvoiceDatas, RESPONSE_DATA_PARAMETERS);
     }
