@@ -8,7 +8,6 @@ public class Gstr1FileB2BInvoiceData {
 	private Long id;
 	private String gstin;
 	private Date fp;
-	private String grossTurnover;
 	private String fileNo;
 	private String supplierInvNo;
 	private String supplierInvDate;
@@ -34,7 +33,7 @@ public class Gstr1FileB2BInvoiceData {
 	}
 
 
-	public Gstr1FileB2BInvoiceData(Long id, String gstin, Date fp, String grossTurnover, String fileNo,
+	public Gstr1FileB2BInvoiceData(Long id, String gstin, Date fp, String fileNo,
 			String supplierInvNo, String supplierInvDate, Double supplierInvValue, String supplyPlace, String orderNo,
 			Date orderDate, String etin, Long invoiceId, String flag, String checkSum, int isReverse, int isProvisional,
 			int recordType, String status, String errorCode, String errorDescriptor) {
@@ -42,7 +41,6 @@ public class Gstr1FileB2BInvoiceData {
 		this.id = id;
 		this.gstin = gstin;
 		this.fp = fp;
-		this.grossTurnover = grossTurnover;
 		this.fileNo = fileNo;
 		this.supplierInvNo = supplierInvNo;
 		this.supplierInvDate = supplierInvDate;
@@ -91,17 +89,6 @@ public class Gstr1FileB2BInvoiceData {
 	public void setFp(Date fp) {
 		this.fp = fp;
 	}
-
-
-	public String getGrossTurnover() {
-		return grossTurnover;
-	}
-
-
-	public void setGrossTurnover(String grossTurnover) {
-		this.grossTurnover = grossTurnover;
-	}
-
 
 	public String getFileNo() {
 		return fileNo;
@@ -270,6 +257,16 @@ public class Gstr1FileB2BInvoiceData {
 
 	public void setErrorDescriptor(String errorDescriptor) {
 		this.errorDescriptor = errorDescriptor;
+	}
+
+
+	public Collection<Gstr1FileB2BItemData> getGstr1FileB2BItemData() {
+		return gstr1FileB2BItemData;
+	}
+
+
+	public void setGstr1FileB2BItemData(Collection<Gstr1FileB2BItemData> gstr1FileB2BItemData) {
+		this.gstr1FileB2BItemData = gstr1FileB2BItemData;
 	}
 
 	

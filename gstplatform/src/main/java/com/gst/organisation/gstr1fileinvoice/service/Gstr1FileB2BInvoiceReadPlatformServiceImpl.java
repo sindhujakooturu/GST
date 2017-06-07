@@ -33,7 +33,8 @@ public class Gstr1FileB2BInvoiceReadPlatformServiceImpl implements Gstr1FileB2BI
 	public Collection<Gstr1FileB2BInvoiceData> retriveGstr1FileB2BInvoiceData(final String fileNo) {
 
 		final Gstr1FileB2BInvoiceMapper mapper = new Gstr1FileB2BInvoiceMapper();
-		String sql = "SELECT DISTINCT " + mapper.schema()+" where fbi.file_no = '"+fileNo+"' ";
+		String sql = "SELECT DISTINCT " + mapper.schema();
+		if(null != fileNo)sql = sql + " where fbi.file_no = '"+fileNo+"' ";
 
 
         return this.jdbcTemplate.query(sql, mapper, new Object[] {});
@@ -43,7 +44,7 @@ public class Gstr1FileB2BInvoiceReadPlatformServiceImpl implements Gstr1FileB2BI
 	private static final class Gstr1FileB2BInvoiceMapper implements RowMapper<Gstr1FileB2BInvoiceData> {
 
         public String schema() {
-            return " fbi.id as id, fbi.gstin as gstin, fbi.fp as fp, fbi.gross_turnover as grossTurnover, fbi.file_no as fileNo, "+
+            return " fbi.id as id, fbi.gstin as gstin, fbi.fp as fp, fbi.file_no as fileNo, "+
             	   " fbi.supplier_inv_no as supplierInvNo, fbi.supplier_inv_date as supplierInvDate, fbi.supplier_inv_value as supplierInvValue, "+
                    " fbi.supply_place as supplyPlace, fbi.order_no as orderNo, fbi.order_date as orderdate, fbi.etin as etin, "+
                    " fbi.invoice_id as invoiceId, fbi.flag as flag, fbi.chk_sum as chkSum, fbi.is_reverse as isReverse, "+
@@ -57,7 +58,6 @@ public class Gstr1FileB2BInvoiceReadPlatformServiceImpl implements Gstr1FileB2BI
         	final Long id = rs.getLong("id");
         	final String gstin = rs.getString("gstin"); 
         	final Date fp = rs.getDate("fp");
-        	final String grossTurnover = rs.getString("grossTurnover");
         	final String fileNo = rs.getString("fileNo");
         	final String supplierInvNo = rs.getString("supplierInvNo");
         	final String supplierInvDate = rs.getString("supplierInvDate");
@@ -68,7 +68,7 @@ public class Gstr1FileB2BInvoiceReadPlatformServiceImpl implements Gstr1FileB2BI
         	final String etin = rs.getString("etin");
         	final Long invoiceId = rs.getLong("invoiceId"); 
         	final String flag = rs.getString("flag");
-        	final String checkSum = rs.getString("checkSum");
+        	final String checkSum = rs.getString("chkSum");
         	final int isReverse = rs.getInt("isReverse");
         	final int isProvisional = rs.getInt("isProvisional");
         	final int recordType = rs.getInt("recordType");
@@ -76,7 +76,7 @@ public class Gstr1FileB2BInvoiceReadPlatformServiceImpl implements Gstr1FileB2BI
         	final String errorCode = rs.getString("errorCode");
         	final String errorDescriptor = rs.getString("errorDescriptor");
 			
-        	return new Gstr1FileB2BInvoiceData(id, gstin, fp, grossTurnover, fileNo, supplierInvNo, supplierInvDate, 
+        	return new Gstr1FileB2BInvoiceData(id, gstin, fp, fileNo, supplierInvNo, supplierInvDate, 
         			supplierInvValue, supplyPlace, orderNo, orderDate, etin, invoiceId, flag, 
         			checkSum, isReverse, isProvisional, recordType, status, errorCode, errorDescriptor);
             		
