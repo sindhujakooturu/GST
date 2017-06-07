@@ -1,25 +1,23 @@
 package com.gst.organisation.gstr1fileinvoice.data;
 
 import java.util.Collection;
-import java.util.Date;
 
 public class Gstr1FileB2BInvoiceData {
 	
 	private Long id;
 	private String gstin;
-	private Date fp;
+	private String fp;
 	private String fileNo;
 	private String supplierInvNo;
 	private String supplierInvDate;
 	private Double supplierInvValue;
 	private String supplyPlace;
 	private String orderNo;
-	private Date orderDate;
+	private String orderDate;
 	private String etin;
 	private Long invoiceId;
 	private String flag;
 	private String checkSum;
-	//private String grossTurnover;
 	private int isReverse;
 	private int isProvisional;
 	private int recordType;
@@ -34,10 +32,12 @@ public class Gstr1FileB2BInvoiceData {
 		
 	}
 
-	public Gstr1FileB2BInvoiceData(final Long id, final String gstin, final Date fp, final String fileNo,
+
+	public Gstr1FileB2BInvoiceData(final Long id, final String gstin, final String fp, final String fileNo,
 			final String supplierInvNo, final String supplierInvDate, final Double supplierInvValue, final String supplyPlace, final String orderNo,
-			final Date orderDate, final String etin, final Long invoiceId, final String flag, final String checkSum, final Integer isReverse, final Integer isProvisional,
-			final Integer recordType, final String status, final String errorCode, final String errorDescriptor) {
+			final String orderDate, final String etin, final Long invoiceId, final String flag, final String checkSum, final int isReverse, final int isProvisional,
+			final int recordType, final String status, final String errorCode, final String errorDescriptor) {
+
 
 		this.id = id;
 		this.gstin = gstin;
@@ -82,12 +82,12 @@ public class Gstr1FileB2BInvoiceData {
 	}
 
 
-	public Date getFp() {
+	public String getFp() {
 		return fp;
 	}
 
 
-	public void setFp(Date fp) {
+	public void setFp(String fp) {
 		this.fp = fp;
 	}
 
@@ -151,12 +151,12 @@ public class Gstr1FileB2BInvoiceData {
 	}
 
 
-	public Date getOrderDate() {
+	public String getOrderDate() {
 		return orderDate;
 	}
 
 
-	public void setOrderDate(Date orderDate) {
+	public void setOrderDate(String orderDate) {
 		this.orderDate = orderDate;
 	}
 

@@ -57,14 +57,14 @@ public class Gstr1FileB2BInvoiceReadPlatformServiceImpl implements Gstr1FileB2BI
             
         	final Long id = rs.getLong("id");
         	final String gstin = rs.getString("gstin"); 
-        	final Date fp = rs.getDate("fp");
+        	final String fp = rs.getString("fp");
         	final String fileNo = rs.getString("fileNo");
         	final String supplierInvNo = rs.getString("supplierInvNo");
         	final String supplierInvDate = rs.getString("supplierInvDate");
         	final Double supplierInvValue = rs.getDouble("supplierInvValue");
         	final String supplyPlace = rs.getString("supplyPlace");
         	final String orderNo = rs.getString("orderNo");
-        	final Date orderDate = rs.getDate("orderDate");
+        	final String orderDate = rs.getString("orderDate");
         	final String etin = rs.getString("etin");
         	final Long invoiceId = rs.getLong("invoiceId"); 
         	final String flag = rs.getString("flag");

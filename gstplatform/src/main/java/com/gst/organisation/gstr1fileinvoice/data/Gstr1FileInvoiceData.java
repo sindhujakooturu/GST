@@ -1,12 +1,11 @@
 package com.gst.organisation.gstr1fileinvoice.data;
 
 import java.util.Collection;
-import java.util.Date;
 
 public class Gstr1FileInvoiceData {
 	private Long id;
 	private String gstin;
-	private Date fp;
+	private String fp;
 	private String grossTurnover;
 	private String fileNo;
 	private Integer version;
@@ -23,9 +22,9 @@ public class Gstr1FileInvoiceData {
 	}
 
 
-	public Gstr1FileInvoiceData(final Long id, final String gstin,final Date fp, final String grossTurnover, final String fileNo, final Integer version,
-			final Integer status, final String assignedTo, final String errorCode, final String errorDescriptor, final String reviewComments) {
-		
+	public Gstr1FileInvoiceData(final Long id, final String gstin, final String fp, final String grossTurnover, final String fileNo, final int version,
+			final int status, final String assignedTo, final String errorCode, final String errorDescriptor, final String reviewComments) {
+
 		this.id = id;
 		this.gstin = gstin;
 		this.fp = fp;
@@ -60,12 +59,12 @@ public class Gstr1FileInvoiceData {
 	}
 
 
-	public Date getFp() {
+	public String getFp() {
 		return fp;
 	}
 
 
-	public void setFp(Date fp) {
+	public void setFp(String fp) {
 		this.fp = fp;
 	}
 

@@ -2,6 +2,7 @@ package com.gst.organisation.gstr1fileinvoice.service;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
 
@@ -46,11 +47,12 @@ public class Gstr1FileInvoiceReadPlatformServiceImpl implements Gstr1FileInvoice
         }
 
         @Override
-        public Gstr1FileInvoiceData mapRow(final ResultSet rs, @SuppressWarnings("unused") final int rowNum) throws SQLException {
-            
+        public Gstr1FileInvoiceData mapRow(final ResultSet rs, @SuppressWarnings("unused") final int rowNum) {
+            try{
         	final Long id = rs.getLong("id");
         	final String gstin = rs.getString("gstin");
-        	final Date fp = rs.getDate("fp");
+        	//final Date fp = rs.getDate("fp");
+        	final String fp = rs.getString("fp");
 			final String grossTurnover = rs.getString("grossTurnover");
 			final String fileNo = rs.getString("fileNo");
 			final int version = rs.getInt("version") ;
@@ -62,7 +64,10 @@ public class Gstr1FileInvoiceReadPlatformServiceImpl implements Gstr1FileInvoice
 			
 			return new Gstr1FileInvoiceData(id, gstin, fp, grossTurnover, fileNo,  
 				  version, status, assignedTo, errorCode, errorDescriptor, reviewComments);
-            		
+            }catch(Exception e){
+            	return null;
+            }
+			
         }
 
     }
