@@ -21,7 +21,7 @@ public class UpdateOutWardStagingInvCommandHandler implements NewCommandSourceHa
 
 	@Override
 	public CommandProcessingResult processCommand(final JsonCommand command) {
-		return outWardStagingInvWritePlatformService.updateChargeCode(command,command.entityId());
+		return outWardStagingInvWritePlatformService.updateOutWardInv(command,command.entityId());
 	}
 
 }
