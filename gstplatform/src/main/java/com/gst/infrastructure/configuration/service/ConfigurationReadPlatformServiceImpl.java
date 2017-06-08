@@ -76,10 +76,8 @@ public class ConfigurationReadPlatformServiceImpl implements ConfigurationReadPl
 
         final String sql = "SELECT c.id, c.name, c.enabled, c.value, c.date_value, c.description, c.is_trap_door FROM "
                 + "c_configuration c where c.name=? order by c.id";
-        final GlobalConfigurationPropertyData globalConfiguration = this.jdbcTemplate.queryForObject(sql, this.rm,
-                new Object[] { name });
 
-        return globalConfiguration;
+        return this.jdbcTemplate.queryForObject(sql, this.rm, new Object[] { name });
     }
 
     @Override
@@ -104,7 +102,7 @@ public class ConfigurationReadPlatformServiceImpl implements ConfigurationReadPl
 
             final String name = rs.getString("name");
             final boolean enabled = rs.getBoolean("enabled");
-            final Long value = rs.getLong("value");
+            final String value = rs.getString("value");
             final Date dateValue = rs.getDate("date_value");
             final String description = rs.getString("description");
             final Long id = rs.getLong("id");

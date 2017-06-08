@@ -44,8 +44,8 @@ public class OutWardStagingInvApiResource {
 	private final Set<String> RESPONSE_PARAMETERS = new HashSet<String>(Arrays.asList("id", "gstin", "gstinPurchaser","cName",
 			"supplierInvNo", "supplierInvDate","supplierInvValue", "supplyStateCode","orderNo","orderDate","etin","invoiceId","receiptStateCode",
 			"status","errorCode","errorDescripter"));
-	
 	private final String resourceNameForPermissions = "OUTWARDINV";
+	
 	private final PlatformSecurityContext context;
 	private final PortfolioCommandSourceWritePlatformService commandSourceWritePlatformService;
 	private final DefaultToApiJsonSerializer<OutWardStagingInvData> toApiJsonSerializer;
@@ -91,18 +91,14 @@ public class OutWardStagingInvApiResource {
 
 	public String createOutWardInvData(final String apiRequestBodyAsJson,@Context final UriInfo uriInfo) {
 		
-		context.authenticatedUser().validateHasReadPermission(resourceNameForPermissions);
+		this.context.authenticatedUser().validateHasReadPermission(resourceNameForPermissions);
 		final CommandWrapper commandRequest = new CommandWrapperBuilder().createOutWardInv().withJson(apiRequestBodyAsJson).build();
 		final CommandProcessingResult result = this.commandSourceWritePlatformService.logCommandSource(commandRequest);
 		return this.toApiJsonSerializer.serialize(result);
 	
 	}
 
-	/**
-	 * @param outWardInvId
-	 * @param uriInfo
-	 * @return retrieved single outWardInvId details
-	 */
+
 	@GET
 	@Path("{outWardInvId}")
 	@Consumes({ MediaType.APPLICATION_JSON })

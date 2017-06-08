@@ -2,6 +2,7 @@ package com.gst.organisation.outwardstaginginv.data;
 
 import java.util.Date;
 
+
 public class OutWardStagingInvData {
 
 	private Long id;

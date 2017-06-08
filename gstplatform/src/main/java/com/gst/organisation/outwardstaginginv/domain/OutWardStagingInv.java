@@ -9,17 +9,17 @@ import javax.persistence.Entity;
 import javax.persistence.Table;
 
 import org.apache.commons.lang.StringUtils;
-import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import com.gst.infrastructure.core.api.JsonCommand;
+import com.gst.infrastructure.core.domain.AbstractPersistableCustom;
 
 /**
- * @author hugo
+ * @author Trigital
  * 
  */
 @Entity
-@Table(name = "b_charge_codes")
-public class OutWardStagingInv extends AbstractPersistable<Long> {
+@Table(name = "g_ow_stg_invoice")
+public class OutWardStagingInv extends AbstractPersistableCustom<Long> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -67,9 +67,6 @@ public class OutWardStagingInv extends AbstractPersistable<Long> {
 	
 	@Column(name = "error_descr")
 	private String errorDescripter;
-	
-	/*@Column(name = "error_descr")
-	private Integer modeNo;*/
 	
 	public OutWardStagingInv() {
 		
@@ -128,7 +125,7 @@ public class OutWardStagingInv extends AbstractPersistable<Long> {
 
 	/**
 	 * @param command
-	 * @return changes of OutWardInv object
+	 * @return changes of OutWardStagingInv object
 	 */
 	public Map<String, Object> update(JsonCommand command) {
 
