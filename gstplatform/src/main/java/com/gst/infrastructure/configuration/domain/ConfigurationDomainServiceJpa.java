@@ -127,14 +127,14 @@ public class ConfigurationDomainServiceJpa implements ConfigurationDomainService
     public Long retrievePenaltyWaitPeriod() {
         final String propertyName = "penalty-wait-period";
         final GlobalConfigurationPropertyData property = getGlobalConfigurationPropertyData(propertyName);
-        return property.getValue();
+        return Long.valueOf(property.getValue());
     }
 
     @Override
     public Long retrieveGraceOnPenaltyPostingPeriod() {
         final String propertyName = "grace-on-penalty-posting";
         final GlobalConfigurationPropertyData property = getGlobalConfigurationPropertyData(propertyName);
-        return property.getValue();
+        return Long.valueOf(property.getValue());
     }
 
     @Override
@@ -148,14 +148,14 @@ public class ConfigurationDomainServiceJpa implements ConfigurationDomainService
     public Long retrievePasswordLiveTime() {
         final String propertyName = "force-password-reset-days";
         final GlobalConfigurationPropertyData property = getGlobalConfigurationPropertyData(propertyName);
-        return property.getValue();
+        return Long.valueOf(property.getValue());
     }
 
     @Override
     public Long retrieveOpeningBalancesContraAccount() {
         final String propertyName = "office-opening-balances-contra-account";
         final GlobalConfigurationPropertyData property = getGlobalConfigurationPropertyData(propertyName);
-        return property.getValue();
+        return Long.valueOf(property.getValue());
     }
 
     @Override
@@ -169,7 +169,7 @@ public class ConfigurationDomainServiceJpa implements ConfigurationDomainService
     public Integer retrieveFinancialYearBeginningMonth() {
         final String propertyName = "financial-year-beginning-month";
         final GlobalConfigurationPropertyData property = getGlobalConfigurationPropertyData(propertyName);
-        if (property.isEnabled()) return property.getValue().intValue();
+        if (property.isEnabled()) return Long.valueOf(property.getValue()).intValue();
         return 1;
     }
 
@@ -177,7 +177,7 @@ public class ConfigurationDomainServiceJpa implements ConfigurationDomainService
     public Integer retrieveMinAllowedClientsInGroup() {
         final String propertyName = "min-clients-in-group";
         final GlobalConfigurationPropertyData property = getGlobalConfigurationPropertyData(propertyName);
-        if (property.isEnabled()) { return property.getValue().intValue(); }
+        if (property.isEnabled()) { return Long.valueOf(property.getValue()).intValue(); }
         return null;
     }
 
@@ -185,7 +185,7 @@ public class ConfigurationDomainServiceJpa implements ConfigurationDomainService
     public Integer retrieveMaxAllowedClientsInGroup() {
         final String propertyName = "max-clients-in-group";
         final GlobalConfigurationPropertyData property = getGlobalConfigurationPropertyData(propertyName);
-        if (property.isEnabled()) { return property.getValue().intValue(); }
+        if (property.isEnabled()) { return Long.valueOf(property.getValue()).intValue(); }
         return null;
     }
 
@@ -202,7 +202,7 @@ public class ConfigurationDomainServiceJpa implements ConfigurationDomainService
         int defaultValue = 6; // 6 Stands for HALF-EVEN
         final GlobalConfigurationPropertyData property = getGlobalConfigurationPropertyData(propertyName);
         if (property.isEnabled()) {
-            int value = property.getValue().intValue();
+            int value = Long.valueOf(property.getValue()).intValue();
             if (value < 0 || value > 6) {
                 return defaultValue;
             }
@@ -248,7 +248,7 @@ public class ConfigurationDomainServiceJpa implements ConfigurationDomainService
     public Long retreivePeroidInNumberOfDaysForSkipMeetingDate() {
         final String propertyName = "skip-repayment-on-first-day-of-month";
         final GlobalConfigurationPropertyData property = getGlobalConfigurationPropertyData(propertyName);
-        return property.getValue();
+        return Long.valueOf(property.getValue());
 
     }
 
@@ -277,7 +277,7 @@ public class ConfigurationDomainServiceJpa implements ConfigurationDomainService
 	public Long getDailyTPTLimit() {
         final String propertyName = "daily-tpt-limit";
         final GlobalConfigurationPropertyData property = getGlobalConfigurationPropertyData(propertyName);
-        return property.getValue();
+        return Long.valueOf(property.getValue());
 	}
 
     @Override
