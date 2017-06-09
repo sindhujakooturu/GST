@@ -223,6 +223,13 @@ public class CommandWrapperBuilder {
         this.href = "/purchaser/template";
         return this;
     }
+    public CommandWrapperBuilder createGstCaluculater() {
+        this.actionName = "CREATE";
+        this.entityName = "GSTCALUCULATE";
+        this.entityId = null;
+        this.href = "/purchaser/template";
+        return this;
+    }
     public CommandWrapperBuilder updatePurchaser(final Long purchaserId) {
         this.actionName = "UPDATE";
         this.entityName = "PURCHASER";

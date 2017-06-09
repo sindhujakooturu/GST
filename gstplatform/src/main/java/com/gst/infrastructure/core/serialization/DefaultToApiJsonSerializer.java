@@ -75,8 +75,8 @@ public final class DefaultToApiJsonSerializer<T> implements ToApiJsonSerializer<
     @Override
     public String serialize(final ApiRequestJsonSerializationSettings settings, final Collection<T> collection,
             final Set<String> supportedResponseParameters) {
-        final Gson delegatedSerializer = findAppropriateSerializer(settings, supportedResponseParameters);
         return serializeWithSettings(delegatedSerializer, settings, collection.toArray());
+        final Gson delegatedSerializer = findAppropriateSerializer(settings, supportedResponseParameters);
     }
 
     @Override

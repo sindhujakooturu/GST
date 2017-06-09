@@ -28,9 +28,9 @@ public class SupplierWritePlatformServiceJpaRepositoryImpl implements SupplierWr
     @Autowired
     public SupplierWritePlatformServiceJpaRepositoryImpl(final SupplierCommandFromApiJsonDeserializer fromApiJsonDeserializer,
     		final SupplierRepository supplierRepository,final PlatformSecurityContext context) {
-    	this.context = context;
-        this.fromApiJsonDeserializer = fromApiJsonDeserializer;
-        this.supplierRepository=supplierRepository;
+			    	this.context = context;
+			        this.fromApiJsonDeserializer = fromApiJsonDeserializer;
+			        this.supplierRepository=supplierRepository;
     }
     @Transactional
     @Override
@@ -42,8 +42,8 @@ public class SupplierWritePlatformServiceJpaRepositoryImpl implements SupplierWr
 			Supplier supplier = Supplier.fromJson(command);
 			this.supplierRepository.save(supplier);
 			return new CommandProcessingResult(supplier.getId());
-
-		} catch (DataIntegrityViolationException dve) {
+    		} 
+    		catch (DataIntegrityViolationException dve) {
 			handleSupplierDataIntegrityIssues(command, dve);
 			return CommandProcessingResult.empty();
 		}

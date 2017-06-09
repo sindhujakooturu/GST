@@ -139,23 +139,23 @@ public class Supplier extends AbstractPersistableCustom<Long> {
 			final String state,final String country,final String pin) {
 		
 		
-		this.gstin=gstin;
-		this.gstinComp=gstinComp;
-		this.supplierName=supplierName;
-		this.contactName=contactName;
-		this.officePhone=officePhone;
-		this.homePhone=homePhone;
-		this.rmn=rmn;
-		this.fax=fax;
-		this.rmail=rmail;
-		this.panNo=panNo;
-		this.etin=etin;
-		this.addrLine1=addrLine1;
-		this.addrLine2=addrLine2;
-		this.city=city;
-		this.state=state;
-		this.country=country;
-		this.pin=pin;
+				this.gstin=gstin;
+				this.gstinComp=gstinComp;
+				this.supplierName=supplierName;
+				this.contactName=contactName;
+				this.officePhone=officePhone;
+				this.homePhone=homePhone;
+				this.rmn=rmn;
+				this.fax=fax;
+				this.rmail=rmail;
+				this.panNo=panNo;
+				this.etin=etin;
+				this.addrLine1=addrLine1;
+				this.addrLine2=addrLine2;
+				this.city=city;
+				this.state=state;
+				this.country=country;
+				this.pin=pin;
 		
 	}
 	

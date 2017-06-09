@@ -293,7 +293,6 @@ public final class JsonCommand {
     public Long longValueOfParameterNamed(final String parameterName) {
         return this.fromApiJsonHelper.extractLongNamed(parameterName, this.parsedCommand);
     }
-
     public boolean isChangeInDateParameterNamed(final String parameterName, final Date existingValue) {
         LocalDate localDate = null;
         if (existingValue != null) {

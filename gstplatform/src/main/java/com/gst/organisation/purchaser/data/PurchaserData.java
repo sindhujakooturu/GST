@@ -4,6 +4,7 @@ package com.gst.organisation.purchaser.data;
 
 
 public class PurchaserData {
+	
 	private final Long id;
 	private final String gstin;
     private final String gstinComp;
@@ -23,10 +24,6 @@ public class PurchaserData {
     private final String country;
     private final String pin;
 
-    public static PurchaserData lookup(final Long id, final String gstin) {
-        return new PurchaserData(id, null, gstin, null, null, null, null, null, null, null, null, null,null,null,null
-        		,null,null,null);
-    }
     public PurchaserData(final Long id,final String gstin,final String gstinComp,
     		final String supplierName,final String contactName,final String officePhone,
     		final String homePhone,final String rmn,final String fax,final String rmail,
@@ -34,24 +31,24 @@ public class PurchaserData {
     		final String addrLine2, final String city,final String state,final String country,
     		final String pin) {
     	
-    	this.id=id;
-    	this.gstin=gstin;
-    	this.gstinComp=gstinComp;
-    	this.supplierName=supplierName;
-    	this.contactName=contactName;
-    	this.officePhone=officePhone;
-    	this.homePhone=homePhone;
-    	this.rmn=rmn;
-    	this.fax=fax;
-    	this.rmail=rmail;
-    	this.panNo=panNo;
-    	this.etin=etin;
-    	this.addrLine1=addrLine1;
-    	this.addrLine2=addrLine2;
-    	this.city=city;
-    	this.state=state;
-    	this.country=country;
-    	this.pin=pin;
+		    	this.id=id;
+		    	this.gstin=gstin;
+		    	this.gstinComp=gstinComp;
+		    	this.supplierName=supplierName;
+		    	this.contactName=contactName;
+		    	this.officePhone=officePhone;
+		    	this.homePhone=homePhone;
+		    	this.rmn=rmn;
+		    	this.fax=fax;
+		    	this.rmail=rmail;
+		    	this.panNo=panNo;
+		    	this.etin=etin;
+		    	this.addrLine1=addrLine1;
+		    	this.addrLine2=addrLine2;
+		    	this.city=city;
+		    	this.state=state;
+		    	this.country=country;
+		    	this.pin=pin;
 	}
     
 	public Long getId() {

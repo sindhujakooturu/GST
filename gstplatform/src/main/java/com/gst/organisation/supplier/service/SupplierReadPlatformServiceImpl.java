@@ -26,10 +26,10 @@ public class SupplierReadPlatformServiceImpl implements SupplierReadPlatformServ
 	@Override
 	public List<SupplierData> retrieveAllSupplier() {
 		       
-	 final SupplierMapper mapper = new SupplierMapper();
-	 String sql = "SELECT " + mapper.schema();
+		 final SupplierMapper mapper = new SupplierMapper();
+		 String sql = "SELECT " + mapper.schema();
 
-	 return this.jdbcTemplate.query(sql, mapper, new Object[] {});
+		 return this.jdbcTemplate.query(sql, mapper, new Object[] {});
 	 
 	 }
 	

@@ -161,7 +161,6 @@ public class FromJsonHelper {
     public Long extractLongNamed(final String parameterName, final JsonElement element) {
         return this.helperDelegator.extractLongNamed(parameterName, element, new HashSet<String>());
     }
-
     public Long extractLongNamed(final String parameterName, final JsonElement element, final Set<String> parametersPassedInRequest) {
         return this.helperDelegator.extractLongNamed(parameterName, element, parametersPassedInRequest);
     }
