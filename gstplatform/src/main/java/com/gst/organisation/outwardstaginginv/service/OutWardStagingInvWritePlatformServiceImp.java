@@ -1,5 +1,6 @@
 package com.gst.organisation.outwardstaginginv.service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -62,8 +63,6 @@ public class OutWardStagingInvWritePlatformServiceImp implements OutWardStagingI
 	@Override
 	public CommandProcessingResult createOutWardInv(final JsonCommand command) {
 
-		//OutWardStagingInv chargeCode = null;
-		
 		try {
 			this.apiJsonDeserializer.validaForCreate(command.json());
 			final OutWardStagingInv utWardStagingInvData  = OutWardStagingInv.fromJson(command);
@@ -90,15 +89,15 @@ public class OutWardStagingInvWritePlatformServiceImp implements OutWardStagingI
 				final JsonElement element = this.fromApiJsonHelper.parse(outWardStagingItem);
 				final String itemType = this.fromApiJsonHelper.extractStringNamed("itemType",element);
 				final String itemCode = this.fromApiJsonHelper.extractStringNamed("itemCode",element);
-				final Double taxValue = this.fromApiJsonHelper.extractDoubleNamed("taxValue",element);
-				final Double igstRate = this.fromApiJsonHelper.extractDoubleNamed("igstRate",element);
-				final Double igstAmount = this.fromApiJsonHelper.extractDoubleNamed("igstAmount",element);
-				final Double cgstRate = this.fromApiJsonHelper.extractDoubleNamed("cgstRate",element);
-				final Double cgstAmount = this.fromApiJsonHelper.extractDoubleNamed("cgstAmount",element);
-				final Double sgstRate = this.fromApiJsonHelper.extractDoubleNamed("sgstRate",element);
-				final Double sgstAmount = this.fromApiJsonHelper.extractDoubleNamed("sgstAmount",element);
-				final Double cessRate = this.fromApiJsonHelper.extractDoubleNamed("cessRate",element);
-				final Double cessAmount = this.fromApiJsonHelper.extractDoubleNamed("cessAmount",element);
+				final BigDecimal taxValue = this.fromApiJsonHelper.extractBigDecimalWithLocaleNamed("taxValue",element);
+				final BigDecimal igstRate = this.fromApiJsonHelper.extractBigDecimalWithLocaleNamed("igstRate",element);
+				final BigDecimal igstAmount = this.fromApiJsonHelper.extractBigDecimalWithLocaleNamed("igstAmount",element);
+				final BigDecimal cgstRate = this.fromApiJsonHelper.extractBigDecimalWithLocaleNamed("cgstRate",element);
+				final BigDecimal cgstAmount = this.fromApiJsonHelper.extractBigDecimalWithLocaleNamed("cgstAmount",element);
+				final BigDecimal sgstRate = this.fromApiJsonHelper.extractBigDecimalWithLocaleNamed("sgstRate",element);
+				final BigDecimal sgstAmount = this.fromApiJsonHelper.extractBigDecimalWithLocaleNamed("sgstAmount",element);
+				final BigDecimal cessRate = this.fromApiJsonHelper.extractBigDecimalWithLocaleNamed("cessRate",element);
+				final BigDecimal cessAmount = this.fromApiJsonHelper.extractBigDecimalWithLocaleNamed("cessAmount",element);
 			
 				outWardStagingItemsList.add(new OutWardStagingItem(invoiceId, itemType, itemCode, taxValue, igstRate, igstAmount, cgstRate, cgstAmount,
 					sgstRate, sgstAmount, cessRate, cessAmount));

@@ -9,22 +9,23 @@ import com.gst.commands.handler.NewCommandSourceHandler;
 import com.gst.infrastructure.core.api.JsonCommand;
 import com.gst.infrastructure.core.data.CommandProcessingResult;
 import com.gst.organisation.gstr1fileinvoice.service.Gstr1FileB2BInvoiceWritePlatformService;
+import com.gst.organisation.gstr1fileinvoice.service.Gstr1FileB2BItemWritePlatformService;
 
 @Service
-@CommandType(entity = "GSTR1FILEB2BINVOICE", action = "UPDATE")
-public class UpdateGstr1FileB2BInvoiceCommandHandler  implements NewCommandSourceHandler{
+@CommandType(entity = "GSTR1FILEB2BITEM", action = "CREATE")
+public class CreateGstr1FileB2BItemCommandHandler  implements NewCommandSourceHandler{
 	
-	private final Gstr1FileB2BInvoiceWritePlatformService gstr1FileB2BInvoiceWritePlatformService;
+	private final Gstr1FileB2BItemWritePlatformService gstr1FileB2BItemWritePlatformService;
 
 	@Autowired
-	public UpdateGstr1FileB2BInvoiceCommandHandler(Gstr1FileB2BInvoiceWritePlatformService gstr1FileB2BInvoiceWritePlatformService) {
-		this.gstr1FileB2BInvoiceWritePlatformService = gstr1FileB2BInvoiceWritePlatformService;
+	public CreateGstr1FileB2BItemCommandHandler(Gstr1FileB2BItemWritePlatformService gstr1FileB2BItemWritePlatformService) {
+		this.gstr1FileB2BItemWritePlatformService = gstr1FileB2BItemWritePlatformService;
 	}
 
 	@Transactional
 	@Override
 	public CommandProcessingResult processCommand(JsonCommand command) {
-		return this.gstr1FileB2BInvoiceWritePlatformService.updateGstr1Fileb2bInvoice(command, command.entityId());
+		return this.gstr1FileB2BItemWritePlatformService.createGstr1Fileb2b2Item(command);
 	}
 	
 	

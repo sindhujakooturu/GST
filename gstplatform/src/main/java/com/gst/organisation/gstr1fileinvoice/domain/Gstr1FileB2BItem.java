@@ -1,4 +1,4 @@
-package com.gst.organisation.outwardstaginginv.domain;
+package com.gst.organisation.gstr1fileinvoice.domain;
 
 import java.math.BigDecimal;
 import java.util.LinkedHashMap;
@@ -13,73 +13,75 @@ import org.apache.commons.lang.StringUtils;
 import com.gst.infrastructure.core.api.JsonCommand;
 import com.gst.infrastructure.core.domain.AbstractPersistableCustom;
 
+/**
+ * @author Trigital
+ * 
+ */
 @Entity
-@Table(name = "g_ow_stg_items")
-public class OutWardStagingItem extends AbstractPersistableCustom<Long>{
+@Table(name = "g_gstr1_file_b2b_item")
+public class Gstr1FileB2BItem extends AbstractPersistableCustom<Long> {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="invoice_id")
+	@Column(name = "invoice_id")
 	private Long invoiceId;
-	
+
+	@Column(name = "file_no")
+	private String fileNo;
+
 	@Column(name = "item_type")
 	private String itemType;
-	
+
 	@Column(name = "item_code")
 	private String itemCode;
-	
+
 	@Column(name = "tax_value")
 	private BigDecimal taxValue;
-	
+
 	@Column(name = "igst_rate")
 	private BigDecimal igstRate;
-	
+
 	@Column(name = "igst_amount")
 	private BigDecimal igstAmount;
 	
 	@Column(name = "cgst_rate")
 	private BigDecimal cgstRate;
-	
+
 	@Column(name = "cgst_amount")
 	private BigDecimal cgstAmount;
-	
+
 	@Column(name = "sgst_rate")
 	private BigDecimal sgstRate;
-	
+
 	@Column(name = "sgst_amount")
 	private BigDecimal sgstAmount;
-	
+
 	@Column(name = "cess_rate")
 	private BigDecimal cessRate;
-	
+
 	@Column(name = "cess_amount")
 	private BigDecimal cessAmount;
-	
+
 	@Column(name = "status")
-	private int status;
+	private Integer status;
 	
 	@Column(name = "error_code")
 	private String errorCode;
-	
+
 	@Column(name = "error_descriptor")
 	private String errorDescriptor;
-
 	
-	public OutWardStagingItem() {
+	public Gstr1FileB2BItem() {
 		
 	}
 
-
-
-
-	public OutWardStagingItem(final Long invoiceId, final String itemType, final String itemCode, final BigDecimal taxValue, final BigDecimal igstRate,
-			final BigDecimal igstAmount, final BigDecimal cgstRate, final BigDecimal cgstAmount, final BigDecimal sgstRate, final BigDecimal sgstAmount, final BigDecimal cessRate,
-			final BigDecimal cessAmount/*,final int status,final String errorCode,final String errorDescriptor*/) {
+	public Gstr1FileB2BItem(final Long invoiceId, final String fileNo,final String itemType, final String itemCode,
+			final BigDecimal taxValue, final BigDecimal igstRate,final BigDecimal igstAmount,final BigDecimal cgstRate,final BigDecimal cgstAmount,
+			final BigDecimal sgstRate,final BigDecimal sgstAmount,final BigDecimal cessRate,final BigDecimal cessAmount,
+			final Integer status,final String errorCode,final String errorDescriptor) {
 
 		this.invoiceId = invoiceId;
+		this.fileNo = fileNo;
 		this.itemType = itemType;
 		this.itemCode = itemCode;
 		this.taxValue = taxValue;
@@ -91,13 +93,20 @@ public class OutWardStagingItem extends AbstractPersistableCustom<Long>{
 		this.sgstAmount = sgstAmount;
 		this.cessRate = cessRate;
 		this.cessAmount = cessAmount;
-		/*this.status = status;
+		this.status = status;
 		this.errorCode = errorCode;
-		this.errorDescriptor = errorDescriptor;*/
+		this.errorDescriptor = errorDescriptor;
 	}
 	
-	public static OutWardStagingItem fromJson(final JsonCommand command, final Long invoiceId) {
 
+	/**
+	 * @param command
+	 * @return OutWardInv constructor
+	 */
+	public static Gstr1FileB2BItem fromJson(final JsonCommand command) {
+
+		final Long invoiceId = command.longValueOfParameterNamed("invoiceId");
+		final String fileNo = command.stringValueOfParameterNamed("fileNo");
 		final String itemType = command.stringValueOfParameterNamed("itemType");
 		final String itemCode = command.stringValueOfParameterNamed("itemCode");
 		final BigDecimal taxValue = command.bigDecimalValueOfParameterNamed("taxValue");
@@ -109,14 +118,14 @@ public class OutWardStagingItem extends AbstractPersistableCustom<Long>{
 		final BigDecimal sgstAmount = command.bigDecimalValueOfParameterNamed("sgstAmount");
 		final BigDecimal cessRate = command.bigDecimalValueOfParameterNamed("cessRate");
 		final BigDecimal cessAmount = command.bigDecimalValueOfParameterNamed("cessAmount");
-		/*final int status = command.integerValueOfParameterNamed("status");
+		final int status = command.integerValueOfParameterNamed("status");
 		final String errorCode = command.stringValueOfParameterNamed("errorCode");
-		final String errorDescriptor = command.stringValueOfParameterNamed("errorDescriptor");*/
-		
-		return new OutWardStagingItem(invoiceId, itemType, itemCode, taxValue, igstRate, igstAmount, cgstRate, cgstAmount,
-				sgstRate, sgstAmount, cessRate, cessAmount/*,status,errorCode,errorDescriptor*/);
+		final String errorDescriptor = command.stringValueOfParameterNamed("errorDescriptor");
+
+		return new Gstr1FileB2BItem(invoiceId, fileNo, itemType, itemCode, taxValue, 
+				igstRate,igstAmount,cgstRate,cgstAmount,sgstRate,sgstAmount,cessRate,cessAmount,status,errorCode,errorDescriptor);
 	}
-	
+
 	/**
 	 * @param command
 	 * @return changes of OutWardStagingInv object
@@ -129,6 +138,11 @@ public class OutWardStagingItem extends AbstractPersistableCustom<Long>{
 			final Long newValue = command.longValueOfParameterNamed("invoiceId");
 			actualChanges.put("invoiceId", newValue);
 			this.invoiceId = newValue;
+		}
+		if (command.isChangeInStringParameterNamed("fileNo",this.fileNo)) {
+			final String newValue = command.stringValueOfParameterNamed("fileNo");
+			actualChanges.put("fileNo", newValue);
+			this.fileNo = StringUtils.defaultIfEmpty(newValue, null);
 		}
 		if (command.isChangeInStringParameterNamed("itemType",this.itemType)) {
 			final String newValue = command.stringValueOfParameterNamed("itemType");

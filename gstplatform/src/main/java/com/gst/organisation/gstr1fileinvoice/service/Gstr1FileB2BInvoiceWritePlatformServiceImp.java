@@ -56,9 +56,9 @@ public class Gstr1FileB2BInvoiceWritePlatformServiceImp implements Gstr1FileB2BI
 
 		try {
 			this.apiJsonDeserializer.validaForCreate(command.json());
-			final Gstr1FileB2BInvoice utWardStagingInvData  = Gstr1FileB2BInvoice.fromJson(command);
-			this.gstr1FileB2BInvoiceRepository.save(utWardStagingInvData);
-			return new CommandProcessingResultBuilder().withCommandId(command.commandId()).withEntityId(utWardStagingInvData.getId()).build();
+			final Gstr1FileB2BInvoice gstr1FileB2BInvoiceData  = Gstr1FileB2BInvoice.fromJson(command);
+			this.gstr1FileB2BInvoiceRepository.save(gstr1FileB2BInvoiceData);
+			return new CommandProcessingResultBuilder().withCommandId(command.commandId()).withEntityId(gstr1FileB2BInvoiceData.getId()).build();
 		} catch (final DataIntegrityViolationException dve) {
 			handleDataIntegrityIssues(command, dve);
 			return new CommandProcessingResult(Long.valueOf(-1L));

@@ -47,17 +47,17 @@ public class Gstr1FileInvoice extends AbstractPersistableCustom<Long> {
 	@Column(name = "error_code")
 	private String errorCode;
 
-	@Column(name = "error_descr")
+	@Column(name = "error_descriptor")
 	private String errorDescr;
 
 	@Column(name = "review_comments")
 	private String reviewComments;
 
-	@Column(name = "ref_no")
+	/*@Column(name = "ref_no")
 	private String refNo;
 
 	@Column(name = "trans_id")
-	private String transId;
+	private String transId;*/
 
 	public Gstr1FileInvoice() {
 		
@@ -66,8 +66,8 @@ public class Gstr1FileInvoice extends AbstractPersistableCustom<Long> {
 	public Gstr1FileInvoice(final String gstin, final Date fp,
 			final String grossTurnover, final String fileNo,
 			final Integer version, final Integer status,final String assignedTo,
-			final String errorCode,final String errorDescr,final String reviewComments,
-			final String refNo,final String transId) {
+			final String errorCode,final String errorDescr,final String reviewComments
+			/*final String refNo,final String transId*/) {
 
 		this.gstin = gstin;
 		this.fp = fp;
@@ -79,8 +79,8 @@ public class Gstr1FileInvoice extends AbstractPersistableCustom<Long> {
 		this.errorCode = errorCode;
 		this.errorDescr = errorDescr;
 		this.reviewComments = reviewComments;
-		this.refNo = refNo;
-		this.transId = transId;
+		/*this.refNo = refNo;
+		this.transId = transId;*/
 	}
 	
 	/**
@@ -99,11 +99,11 @@ public class Gstr1FileInvoice extends AbstractPersistableCustom<Long> {
 		final String errorCode = command.stringValueOfParameterNamed("errorCode");
 		final String errorDescr = command.stringValueOfParameterNamed("errorDescr");
 		final String reviewComments = command.stringValueOfParameterNamed("reviewComments");
-		final String refNo = command.stringValueOfParameterNamed("refNo");
-		final String transId = command.stringValueOfParameterNamed("transId");
+		/*final String refNo = command.stringValueOfParameterNamed("refNo");
+		final String transId = command.stringValueOfParameterNamed("transId");*/
 
 		return new Gstr1FileInvoice(gstin, fp, grossTurnover,
-				fileNo, version, status,assignedTo, errorCode,errorDescr,reviewComments,refNo,transId);
+				fileNo, version, status,assignedTo, errorCode,errorDescr,reviewComments/*,refNo,transId*/);
 	}
 
 	/**
@@ -166,7 +166,7 @@ public class Gstr1FileInvoice extends AbstractPersistableCustom<Long> {
 			actualChanges.put("reviewComments", newValue);
 			this.reviewComments = newValue;
 		}
-		if (command.isChangeInStringParameterNamed("refNo",this.refNo)) {
+		/*if (command.isChangeInStringParameterNamed("refNo",this.refNo)) {
 			final String newValue = command.stringValueOfParameterNamed("refNo");
 			actualChanges.put("refNo", newValue);
 			this.refNo = newValue;
@@ -175,7 +175,7 @@ public class Gstr1FileInvoice extends AbstractPersistableCustom<Long> {
 			final String newValue = command.stringValueOfParameterNamed("transId");
 			actualChanges.put("transId", newValue);
 			this.transId = newValue;
-		}
+		}*/
 
 		return actualChanges;
 	}

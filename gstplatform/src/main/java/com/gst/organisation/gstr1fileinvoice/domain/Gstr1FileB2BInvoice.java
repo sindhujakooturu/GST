@@ -84,6 +84,7 @@ public class Gstr1FileB2BInvoice extends AbstractPersistableCustom<Long> {
 	public Gstr1FileB2BInvoice() {
 		
 	}
+	
 
 	public Gstr1FileB2BInvoice(final String gstin, final Date fp,
 			final String fileNo, final String supplierInvNo,
@@ -113,7 +114,7 @@ public class Gstr1FileB2BInvoice extends AbstractPersistableCustom<Long> {
 		this.errorCode = errorCode;
 		this.errorDescriptor = errorDescriptor;
 	}
-	
+
 	/**
 	 * @param command
 	 * @return OutWardInv constructor

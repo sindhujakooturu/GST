@@ -2958,7 +2958,7 @@ public class CommandWrapperBuilder {
 		this.href = "/address/" + entityType + "/" + entityId;
 		return this;
 	}
-    public CommandWrapperBuilder createOutWardInv() {
+    public CommandWrapperBuilder createOutWardStagingInv() {
         this.actionName = "CREATE";
         this.entityName = "OUTWARDINV";
         this.entityId = null;
@@ -3027,6 +3027,22 @@ public class CommandWrapperBuilder {
         this.entityName = "GSTR1FILEB2BINVOICE";
         this.entityId = gstr1Fileb2bInvId;
         this.href = "/gstr1fileb2binvoice/"+gstr1Fileb2bInvId;
+        return this;
+    }
+    
+    public CommandWrapperBuilder createGstr1Fileb2b2Item() {
+        this.actionName = "CREATE";
+        this.entityName = "GSTR1FILEB2BITEM";
+        this.entityId = null;
+        this.href = "/gstr1fileb2bitem/";
+        return this;
+    }
+    
+    public CommandWrapperBuilder updateGstr1Fileb2bItem(final Long gstr1Fileb2bItmId) {
+        this.actionName = "UPDATE";
+        this.entityName = "GSTR1FILEB2BITEM";
+        this.entityId = gstr1Fileb2bItmId;
+        this.href = "/gstr1fileb2bitem/"+gstr1Fileb2bItmId;
         return this;
     }
 }

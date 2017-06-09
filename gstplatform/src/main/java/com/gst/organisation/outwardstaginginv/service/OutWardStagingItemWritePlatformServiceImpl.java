@@ -37,7 +37,7 @@ public class OutWardStagingItemWritePlatformServiceImpl implements OutWardStagin
 	public CommandProcessingResult createOutWardItem(JsonCommand command, Long  entityId) {
 		try{
 			this.apiJsonDeserializer.validaForCreate(command.json(), entityId);
-			final OutWardStagingItem outWardStagingItem  = OutWardStagingItem.fromJson(command,entityId);
+			final OutWardStagingItem outWardStagingItem  =  OutWardStagingItem.fromJson(command,entityId);
 			this.outWardStagingItemRepository.saveAndFlush(outWardStagingItem);
 			
 			return new CommandProcessingResultBuilder().withCommandId(command.commandId()).withEntityId(outWardStagingItem.getId()).build();
