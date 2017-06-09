@@ -276,5 +276,9 @@ public class FromJsonHelper {
     public Gson getGsonConverter() {
         return this.gsonConverter;
     }
+    
+    public Double extractDoubleNamed(final String parameterName, final JsonElement element) {
+        return this.helperDelegator.extractDoubleNamed(parameterName, element, new HashSet<String>());
+    }
 
 }
