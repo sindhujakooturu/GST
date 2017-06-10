@@ -27,7 +27,7 @@ public class Gstr1FileInvoice extends AbstractPersistableCustom<Long> {
 	private String gstin;
 
 	@Column(name = "fp")
-	private Date fp;
+	private String fp;
 
 	@Column(name = "gross_turnover")
 	private String grossTurnover;
@@ -63,7 +63,7 @@ public class Gstr1FileInvoice extends AbstractPersistableCustom<Long> {
 		
 	}
 
-	public Gstr1FileInvoice(final String gstin, final Date fp,
+	public Gstr1FileInvoice(final String gstin, final String fp,
 			final String grossTurnover, final String fileNo,
 			final Integer version, final Integer status,final String assignedTo,
 			final String errorCode,final String errorDescr,final String reviewComments
@@ -90,7 +90,7 @@ public class Gstr1FileInvoice extends AbstractPersistableCustom<Long> {
 	public static Gstr1FileInvoice fromJson(final JsonCommand command) {
 
 		final String gstin = command.stringValueOfParameterNamed("gstin");
-		final Date fp = command.DateValueOfParameterNamed("fp");
+		final String fp = command.stringValueOfParameterNamed("fp");
 		final String grossTurnover = command.stringValueOfParameterNamed("grossTurnover");
 		final String fileNo = command.stringValueOfParameterNamed("fileNo");
 		final Integer version = command.integerValueOfParameterNamed("version");
@@ -119,10 +119,10 @@ public class Gstr1FileInvoice extends AbstractPersistableCustom<Long> {
 			actualChanges.put("gstin", newValue);
 			this.gstin = StringUtils.defaultIfEmpty(newValue, null);
 		}
-		if (command.isChangeInDateParameterNamed("fp",this.fp)) {
-			final Date newValue = command.DateValueOfParameterNamed("fp");
+		if (command.isChangeInStringParameterNamed("fp",this.fp)) {
+			final String newValue = command.stringValueOfParameterNamed("fp");
 			actualChanges.put("fp", newValue);
-			this.fp = newValue;
+			this.fp = StringUtils.defaultIfEmpty(newValue, null);
 		}
 		if (command.isChangeInStringParameterNamed("grossTurnover",this.grossTurnover)) {
 			final String newValue = command.stringValueOfParameterNamed("grossTurnover");

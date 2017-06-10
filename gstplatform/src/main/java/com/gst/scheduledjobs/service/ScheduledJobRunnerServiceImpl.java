@@ -447,16 +447,16 @@ public class ScheduledJobRunnerServiceImpl implements ScheduledJobRunnerService 
     	List<Gstr1FileB2BItem> gstr1FileB2BItems = new ArrayList<Gstr1FileB2BItem>();
     	List<OutWardStagingInvData> outWardStagingInvDatas = this.outWardStagingInvReadPlatformService.retrieveAllOutWardInvData();
     	
-    	Gstr1FileInvoice fileInv = new Gstr1FileInvoice("12343", new Date(),"12", "1234",1, 1,"asdf","errorCode",
+    	Gstr1FileInvoice fileInv = new Gstr1FileInvoice("12343", "062017","12", "1234",1, 1,"asdf","errorCode",
     			"errorDescriptor","reviewComments");
     	
     	for(OutWardStagingInvData outWardStagingInvData:outWardStagingInvDatas){
     		
     		
-    		gstr1FileB2BInvoices.add(new Gstr1FileB2BInvoice(outWardStagingInvData.getGstin(), new Date(), "1234".toString(), outWardStagingInvData.getSupplierInvNo(), 
-    				outWardStagingInvData.getSupplierInvDate(), outWardStagingInvData.getSupplierInvValue(), "fsdfsd", 
-    				outWardStagingInvData.getOrderNo(), outWardStagingInvData.getOrderDate(), outWardStagingInvData.getEtin(), outWardStagingInvData.getInvoiceId(), "1234",
-    				outWardStagingInvData.getcName(),1,1,1, "1234", outWardStagingInvData.getErrorCode(), 
+    		gstr1FileB2BInvoices.add(new Gstr1FileB2BInvoice(outWardStagingInvData.getGstin(), "092017", "1234".toString(), outWardStagingInvData.getSupplierInvNo(), 
+    				outWardStagingInvData.getSupplierInvDate(), outWardStagingInvData.getSupplierInvValue(), "SP", 
+    				outWardStagingInvData.getOrderNo(), "082017", outWardStagingInvData.getEtin(), outWardStagingInvData.getInvoiceId(), "3",
+    				"chkSum",1,1,1, "0", outWardStagingInvData.getErrorCode(), 
     				outWardStagingInvData.getErrorDescripter()));
     		
     		List<OutWardStagingItemData> outWardStagingItemDatas = this.outWardStagingItemReadPlatformService.retriveOutwardStagingInvItems(outWardStagingInvData.getInvoiceId());
@@ -469,7 +469,7 @@ public class ScheduledJobRunnerServiceImpl implements ScheduledJobRunnerService 
     		}
     		
     	}
-    	this.gstr1FileInvoiceRepository.save(fileInv);
+    	this.gstr1FileInvoiceRepository.saveAndFlush(fileInv);
     	this.gstr1FileB2BInvoiceRepository.save(gstr1FileB2BInvoices);
     	this.gstr1FileB2BItemsRepository.save(gstr1FileB2BItems);
     	

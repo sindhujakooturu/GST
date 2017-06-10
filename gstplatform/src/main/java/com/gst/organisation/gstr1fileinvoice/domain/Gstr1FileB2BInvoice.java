@@ -27,7 +27,7 @@ public class Gstr1FileB2BInvoice extends AbstractPersistableCustom<Long> {
 	private String gstin;
 
 	@Column(name = "fp")
-	private Date fp;
+	private String fp;
 
 	@Column(name = "file_no")
 	private String fileNo;
@@ -48,7 +48,7 @@ public class Gstr1FileB2BInvoice extends AbstractPersistableCustom<Long> {
 	private String orderNo;
 
 	@Column(name = "order_date")
-	private Date orderDate;
+	private String orderDate;
 
 	@Column(name = "etin")
 	private String etin;
@@ -59,7 +59,7 @@ public class Gstr1FileB2BInvoice extends AbstractPersistableCustom<Long> {
 	@Column(name = "flag")
 	private String flag;
 
-	@Column(name = "check_sum")
+	@Column(name = "chk_sum")
 	private String checkSum;
 
 	@Column(name = "is_reverse")
@@ -86,10 +86,10 @@ public class Gstr1FileB2BInvoice extends AbstractPersistableCustom<Long> {
 	}
 	
 
-	public Gstr1FileB2BInvoice(final String gstin, final Date fp,
+	public Gstr1FileB2BInvoice(final String gstin, final String fp,
 			final String fileNo, final String supplierInvNo,
 			final Date supplierInvDate, final Long supplierInvValue,
-			final String supplyPlace,final String orderNo,final Date orderDate,
+			final String supplyPlace,final String orderNo,final String orderDate,
 			final String etin,final Long invoiceId,final String flag,final String checkSum,
 			final Integer isReverse,final Integer isProvisional,final Integer recordType,
 			final String status,final String errorCode,final String errorDescriptor) {
@@ -122,14 +122,14 @@ public class Gstr1FileB2BInvoice extends AbstractPersistableCustom<Long> {
 	public static Gstr1FileB2BInvoice fromJson(final JsonCommand command) {
 
 		final String gstin = command.stringValueOfParameterNamed("gstin");
-		final Date fp = command.DateValueOfParameterNamed("fp");
+		final String fp = command.stringValueOfParameterNamed("fp");
 		final String fileNo = command.stringValueOfParameterNamed("fileNo");
 		final String supplierInvNo = command.stringValueOfParameterNamed("supplierInvNo");
 		final Date supplierInvDate = command.DateValueOfParameterNamed("supplierInvDate");
 		final Long supplierInvValue = command.longValueOfParameterNamed("supplierInvValue");
 		final String supplyPlace = command.stringValueOfParameterNamed("supplyPlace");
 		final String orderNo = command.stringValueOfParameterNamed("orderNo");
-		final Date orderDate = command.DateValueOfParameterNamed("orderDate");
+		final String orderDate = command.stringValueOfParameterNamed("orderDate");
 		final String etin = command.stringValueOfParameterNamed("etin");
 		final Long invoiceId = command.longValueOfParameterNamed("invoiceId");
 		final String flag = command.stringValueOfParameterNamed("flag");
@@ -159,8 +159,8 @@ public class Gstr1FileB2BInvoice extends AbstractPersistableCustom<Long> {
 			actualChanges.put("gstin", newValue);
 			this.gstin = StringUtils.defaultIfEmpty(newValue, null);
 		}
-		if (command.isChangeInDateParameterNamed("fp",this.fp)) {
-			final Date newValue = command.DateValueOfParameterNamed("fp");
+		if (command.isChangeInStringParameterNamed("fp",this.fp)) {
+			final String newValue = command.stringValueOfParameterNamed("fp");
 			actualChanges.put("fp", newValue);
 			this.fp = newValue;
 		}
@@ -196,10 +196,10 @@ public class Gstr1FileB2BInvoice extends AbstractPersistableCustom<Long> {
 			actualChanges.put("orderNo", newValue);
 			this.orderNo = StringUtils.defaultIfEmpty(newValue, null);
 		}
-		if (command.isChangeInDateParameterNamed("orderDate",this.orderDate)) {
-			final Date newValue = command.DateValueOfParameterNamed("orderDate");
+		if (command.isChangeInStringParameterNamed("orderDate",this.orderDate)) {
+			final String newValue = command.stringValueOfParameterNamed("orderDate");
 			actualChanges.put("orderDate", newValue);
-			this.orderDate = newValue;
+			this.orderDate = StringUtils.defaultIfEmpty(newValue, null);
 		}
 		if (command.isChangeInStringParameterNamed("etin",this.etin)) {
 			final String newValue = command.stringValueOfParameterNamed("etin");
