@@ -3045,4 +3045,12 @@ public class CommandWrapperBuilder {
         this.href = "/gstr1fileb2bitem/"+gstr1Fileb2bItmId;
         return this;
     }
+    
+    public CommandWrapperBuilder updateOutWardItem(final Long outWardInvoiceId) {
+        this.actionName = "UPDATE";
+        this.entityName = "OUTWARDITEM";
+        this.entityId = outWardInvoiceId;
+        this.href = "/outwarditem/"+outWardInvoiceId;
+        return this;
+    }
 }

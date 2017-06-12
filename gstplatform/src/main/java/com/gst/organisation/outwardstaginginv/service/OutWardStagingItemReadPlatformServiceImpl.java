@@ -90,7 +90,7 @@ public class OutWardStagingItemReadPlatformServiceImpl implements OutWardStaging
 
 			final OutWardInvDataMapper mapper = new OutWardInvDataMapper();
 
-			final String sql = "select " + mapper.schema() + " join g_ow_stg_invoice osi on ost.invoice_id = osi.id where ost.invoice_id = ? ";
+			final String sql = "select " + mapper.schema() + " join g_ow_stg_invoice osi on ost.invoice_id = osi.invoice_id where ost.invoice_id = ? ";
 
 			return jdbcTemplate.query(sql, mapper, new Object[] { invoiceId });
 		} catch (EmptyResultDataAccessException accessException) {

@@ -18,7 +18,7 @@ import com.gst.infrastructure.core.domain.AbstractPersistableCustom;
  * 
  */
 @Entity
-@Table(name = "g_gstr1_file_b2b_item")
+@Table(name = "g_gstr1_file_b2b_items")
 public class Gstr1FileB2BItem extends AbstractPersistableCustom<Long> {
 
 	private static final long serialVersionUID = 1L;

@@ -121,7 +121,7 @@ public class OutWardStagingInvWritePlatformServiceImp implements OutWardStagingI
 	@Override
 	public CommandProcessingResult updateOutWardInv(final JsonCommand command,final Long outWardInvId) {
 		
-		//OutWardStagingInv chargeCode = null;
+		
 		try {
 			context.authenticatedUser();
 			this.apiJsonDeserializer.validaForCreate(command.json());
@@ -134,9 +134,6 @@ public class OutWardStagingInvWritePlatformServiceImp implements OutWardStagingI
 
 			return new CommandProcessingResultBuilder().withCommandId(command.commandId()).withEntityId(outWardStagingInv.getId()).with(changes).build();
 		} catch (DataIntegrityViolationException dve) {
-			/*if (dve.getCause() instanceof ConstraintViolationException) {
-				handleDataIntegrityIssues(command, dve);
-			}*/
 			return new CommandProcessingResult(Long.valueOf(-1L));
 		}
 	}

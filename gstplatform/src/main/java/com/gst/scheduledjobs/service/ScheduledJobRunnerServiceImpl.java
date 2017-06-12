@@ -469,7 +469,7 @@ public class ScheduledJobRunnerServiceImpl implements ScheduledJobRunnerService 
     		}
     		
     	}
-    	this.gstr1FileInvoiceRepository.saveAndFlush(fileInv);
+    	this.gstr1FileInvoiceRepository.save(fileInv);
     	this.gstr1FileB2BInvoiceRepository.save(gstr1FileB2BInvoices);
     	this.gstr1FileB2BItemsRepository.save(gstr1FileB2BItems);
     	
