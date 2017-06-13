@@ -1,9 +1,9 @@
 package com.gst.organisation.gstr1fileinvoice.service;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Collection;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -113,15 +113,15 @@ public class Gstr1FileB2BInvoiceReadPlatformServiceImpl implements Gstr1FileB2BI
         	final String fileNo =  rs.getString("fileNo");
         	final String itemType =  rs.getString("itemType");
         	final String itemCode =  rs.getString("itemCode");
-        	final Double taxValue = rs.getDouble("taxValue");
-        	final Double igstRate = rs.getDouble("igstRate");
-        	final Double igstAmount = rs.getDouble("igstAmount");
-        	final Double cgstRate = rs.getDouble("cgstRate");
-        	final Double cgstAmount = rs.getDouble("cgstAmount");
-        	final Double sgstRate = rs.getDouble("sgstRate");
-        	final Double sgstAmount = rs.getDouble("sgstAmount");
-        	final Double cessRate = rs.getDouble("cessRate");
-        	final Double cessAmount = rs.getDouble("cessAmount");
+        	final BigDecimal taxValue = rs.getBigDecimal("taxValue");
+        	final BigDecimal igstRate = rs.getBigDecimal("igstRate");
+        	final BigDecimal igstAmount = rs.getBigDecimal("igstAmount");
+        	final BigDecimal cgstRate = rs.getBigDecimal("cgstRate");
+        	final BigDecimal cgstAmount = rs.getBigDecimal("cgstAmount");
+        	final BigDecimal sgstRate = rs.getBigDecimal("sgstRate");
+        	final BigDecimal sgstAmount = rs.getBigDecimal("sgstAmount");
+        	final BigDecimal cessRate = rs.getBigDecimal("cessRate");
+        	final BigDecimal cessAmount = rs.getBigDecimal("cessAmount");
 			final int status = rs.getInt("status");
         	final String errorCode = rs.getString("errorCode");
         	final String errorDescriptor = rs.getString("errorDescriptor");

@@ -1,7 +1,6 @@
 package com.gst.organisation.gstr1fileinvoice.data;
 
 import java.util.Collection;
-import java.util.Date;
 
 public class Gstr1FileB2BInvoiceData {
 	
@@ -26,17 +25,19 @@ public class Gstr1FileB2BInvoiceData {
 	private String errorCode;
 	private String errorDescriptor;
 	
-	
+	  
 	private Collection<Gstr1FileB2BItemData> gstr1FileB2BItemData;
 	
 	public Gstr1FileB2BInvoiceData() {
+		
 	}
 
 
-	public Gstr1FileB2BInvoiceData(Long id, String gstin, String fp, String fileNo,
-			String supplierInvNo, String supplierInvDate, Double supplierInvValue, String supplyPlace, String orderNo,
-			String orderDate, String etin, Long invoiceId, String flag, String checkSum, int isReverse, int isProvisional,
-			int recordType, String status, String errorCode, String errorDescriptor) {
+	public Gstr1FileB2BInvoiceData(final Long id, final String gstin, final String fp, final String fileNo,
+			final String supplierInvNo, final String supplierInvDate, final Double supplierInvValue, final String supplyPlace, final String orderNo,
+			final String orderDate, final String etin, final Long invoiceId, final String flag, final String checkSum, final int isReverse, final int isProvisional,
+			final int recordType, final String status, final String errorCode, final String errorDescriptor) {
+
 
 		this.id = id;
 		this.gstin = gstin;
