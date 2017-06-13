@@ -1,6 +1,7 @@
 package com.gst.organisation.outwardstaginginv.data;
 
 import java.util.Date;
+import java.util.List;
 
 
 public class OutWardStagingInvData {
@@ -21,6 +22,8 @@ public class OutWardStagingInvData {
 	private Long status;
 	private String errorCode;
 	private String errorDescripter;
+	
+	private List<OutWardStagingItemData> outWardStagingItemData;
 
 	public OutWardStagingInvData() {
 		
@@ -178,5 +181,15 @@ public class OutWardStagingInvData {
 	public void setErrorDescripter(String errorDescripter) {
 		this.errorDescripter = errorDescripter;
 	}
+
+	public List<OutWardStagingItemData> getOutWardStagingItemData() {
+		return outWardStagingItemData;
+	}
+
+	public void setOutWardStagingItemData(List<OutWardStagingItemData> outWardStagingItemData) {
+		this.outWardStagingItemData = outWardStagingItemData;
+	}
+	
+	
 
 }
