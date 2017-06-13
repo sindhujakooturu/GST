@@ -3055,8 +3055,8 @@ public class CommandWrapperBuilder {
     }
     
     public CommandWrapperBuilder createMasterTest() {
-        this.actionName = null;
-        this.entityName = null;
+        this.actionName = "CREATE";
+        this.entityName = "TEST";
         this.entityId = null;
         this.href = "/mastertest/";
         return this;
