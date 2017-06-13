@@ -1,15 +1,11 @@
 package com.gst.organisation.gstr1fileinvoice.domain;
 
-import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-
 import org.apache.commons.lang.StringUtils;
-
 import com.gst.infrastructure.core.api.JsonCommand;
 import com.gst.infrastructure.core.domain.AbstractPersistableCustom;
 

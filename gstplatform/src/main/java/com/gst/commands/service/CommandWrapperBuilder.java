@@ -3053,4 +3053,12 @@ public class CommandWrapperBuilder {
         this.href = "/outwarditem/"+outWardInvoiceId;
         return this;
     }
+    
+    public CommandWrapperBuilder createMasterTest() {
+        this.actionName = null;
+        this.entityName = null;
+        this.entityId = null;
+        this.href = "/mastertest/";
+        return this;
+    }
 }
