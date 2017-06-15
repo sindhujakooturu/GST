@@ -8,7 +8,7 @@ public class PurchaserData {
 	private final Long id;
 	private final String gstin;
     private final String gstinComp;
-    private final String supplierName;
+    private final String purchaserName;
     private final String contactName;
     private final String officePhone;
     private final String homePhone;
@@ -25,7 +25,7 @@ public class PurchaserData {
     private final String pin;
 
     public PurchaserData(final Long id,final String gstin,final String gstinComp,
-    		final String supplierName,final String contactName,final String officePhone,
+    		final String purchaserName,final String contactName,final String officePhone,
     		final String homePhone,final String rmn,final String fax,final String rmail,
     		final String panNo, final String etin, String addrLine1,
     		final String addrLine2, final String city,final String state,final String country,
@@ -34,7 +34,7 @@ public class PurchaserData {
 		    	this.id=id;
 		    	this.gstin=gstin;
 		    	this.gstinComp=gstinComp;
-		    	this.supplierName=supplierName;
+		    	this.purchaserName=purchaserName;
 		    	this.contactName=contactName;
 		    	this.officePhone=officePhone;
 		    	this.homePhone=homePhone;
@@ -60,8 +60,8 @@ public class PurchaserData {
 	public String getGstinComp() {
 		return gstinComp;
 	}
-	public String getSupplierName() {
-		return supplierName;
+	public String getPurchaserName() {
+		return purchaserName;
 	}
 	public String getContactName() {
 		return contactName;

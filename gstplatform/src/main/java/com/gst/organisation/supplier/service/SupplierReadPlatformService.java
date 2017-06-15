@@ -9,6 +9,6 @@ public interface SupplierReadPlatformService {
 	
 	
     	Collection<SupplierData> retrieveAllSupplier();
-
+    	SupplierData retrieveSupplierdata(final Long supplierId);
 	
 }

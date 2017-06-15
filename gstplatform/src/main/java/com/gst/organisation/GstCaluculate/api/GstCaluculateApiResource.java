@@ -18,7 +18,6 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.gst.infrastructure.core.exception.PlatformApiDataValidationException;
 import com.gst.infrastructure.core.serialization.DefaultToApiJsonSerializer;
 import com.gst.infrastructure.core.serialization.FromJsonHelper;
 import com.gst.infrastructure.security.service.PlatformSecurityContext;

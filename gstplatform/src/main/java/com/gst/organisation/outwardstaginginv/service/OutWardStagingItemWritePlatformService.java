@@ -6,5 +6,7 @@ import com.gst.infrastructure.core.data.CommandProcessingResult;
 public interface OutWardStagingItemWritePlatformService {
 
 	CommandProcessingResult createOutWardItem(JsonCommand command, Long entityId);
+	
+	CommandProcessingResult updateOutWardItem(JsonCommand command, Long entityId);
 
 }

@@ -37,7 +37,7 @@ import com.gst.organisation.purchaser.service.PurchaserReadPlatformService;
 @Scope("singleton")
 public class PurchaserApiResource {
 	
-	private final Set<String> RESPONSE_DATA_PARAMETERS = new HashSet<>(Arrays.asList("id","gstin", "gstinComp", "supplierName", "contactName",
+	private final Set<String> RESPONSE_DATA_PARAMETERS = new HashSet<>(Arrays.asList("id","gstin", "gstinComp", "purchaserName", "contactName",
             "officePhone", "homePhone", "rmn", "fax", "rmail", "panNo", "etin", "addrLine1","addrLine2","city","state","country","pin"));
 				
     private final String resourceNameForPermissions = "PURCHASER";
@@ -72,10 +72,21 @@ public class PurchaserApiResource {
          return this.toApiJsonSerializer.serialize(settings,purchaser, this.RESPONSE_DATA_PARAMETERS);
     }
     
+    @GET
+    @Path("{purchaserId}")
+    @Consumes({ MediaType.APPLICATION_JSON })
+    @Produces({ MediaType.APPLICATION_JSON })
+    public String retreiveHsndata(@PathParam("purchaserId") final Long purchaserId, @Context final UriInfo uriInfo) {
+    	
+        final ApiRequestJsonSerializationSettings settings = this.apiRequestParameterHelper.process(uriInfo.getQueryParameters());
+        PurchaserData purchaserdata = this.readPlatformService.retrievePurchaserdata(purchaserId);
+        return this.toApiJsonSerializer.serialize(settings, purchaserdata, this.RESPONSE_DATA_PARAMETERS);
+    }
+    
     @POST
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    public String createSupplier(final String apiRequestBodyAsJson) {
+    public String createPurchaser(final String apiRequestBodyAsJson) {
 
         final CommandWrapper commandRequest = new CommandWrapperBuilder().createPurchaser().withJson(apiRequestBodyAsJson).build();
 

@@ -28,6 +28,7 @@ import com.gst.infrastructure.core.data.CommandProcessingResult;
 import com.gst.infrastructure.core.serialization.ApiRequestJsonSerializationSettings;
 import com.gst.infrastructure.core.serialization.DefaultToApiJsonSerializer;
 import com.gst.infrastructure.security.service.PlatformSecurityContext;
+import com.gst.organisation.purchaser.data.PurchaserData;
 import com.gst.organisation.supplier.data.SupplierData;
 import com.gst.organisation.supplier.service.SupplierReadPlatformService;
 
@@ -70,6 +71,16 @@ public class SupplierApiResource {
          final Collection<SupplierData> supplier = this.readPlatformService.retrieveAllSupplier();
          final ApiRequestJsonSerializationSettings settings = this.apiRequestParameterHelper.process(uriInfo.getQueryParameters());
          return this.toApiJsonSerializer.serialize(settings,supplier, this.RESPONSE_DATA_PARAMETERS);
+    }
+    @GET
+    @Path("{supplierId}")
+    @Consumes({ MediaType.APPLICATION_JSON })
+    @Produces({ MediaType.APPLICATION_JSON })
+    public String retreiveHsndata(@PathParam("supplierId") final Long supplierId, @Context final UriInfo uriInfo) {
+    	
+        final ApiRequestJsonSerializationSettings settings = this.apiRequestParameterHelper.process(uriInfo.getQueryParameters());
+        SupplierData supplierdata = this.readPlatformService.retrieveSupplierdata(supplierId);
+        return this.toApiJsonSerializer.serialize(settings, supplierdata, this.RESPONSE_DATA_PARAMETERS);
     }
     
     @POST

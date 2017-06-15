@@ -11,7 +11,7 @@ import com.gst.infrastructure.core.api.JsonCommand;
 import com.gst.infrastructure.core.domain.AbstractPersistableCustom;
 
 @Entity
-@Table(name="supplier_t")
+@Table(name="g_supplier")
 public class Supplier extends AbstractPersistableCustom<Long> {
 	
 	/**

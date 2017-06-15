@@ -30,7 +30,7 @@ public class PurchaserWritePlatformServiceJpaRepositoryImpl implements Purchaser
     		final PurchaserRepository purchaserRepository,final PlatformSecurityContext context) {
 		    	this.context = context;
 		        this.fromApiJsonDeserializer = fromApiJsonDeserializer;
-		        this.purchaserRepository=purchaserRepository;
+		        this.purchaserRepository = purchaserRepository;
     }
     @Transactional
     @Override
@@ -53,10 +53,10 @@ public class PurchaserWritePlatformServiceJpaRepositoryImpl implements Purchaser
     	final Throwable realCause = dve.getMostSpecificCause();
 		if (realCause.getMessage().contains("gstin")) {
 			final String name = command.stringValueOfParameterNamed("gstin");
-			throw new PlatformDataIntegrityException("error.msg.supplier.code.duplicate.name","A code with name '" + name + "' already exists", name);
+			throw new PlatformDataIntegrityException("error.msg.purchaser.code.duplicate.name","A code with name '" + name + "' already exists", name);
 		} else if (realCause.getMessage().contains("gstinComp")) {
 
-			throw new PlatformDataIntegrityException("error.msg.supplier.type.with.given.units.already exists","A supplier with given id already exists", "gstinComp");
+			throw new PlatformDataIntegrityException("error.msg.purchaser.type.with.given.units.already exists","A supplier with given id already exists", "gstinComp");
 		}
 
 		throw new PlatformDataIntegrityException("error.msg.cund.unknown.data.integrity.issue","Unknown data integrity issue with resource: "+ realCause.getMessage());

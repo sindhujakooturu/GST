@@ -23,7 +23,7 @@ import com.gst.infrastructure.core.serialization.FromJsonHelper;
 @Component
 public class PurchaserCommandFromApiJsonDeserializer {
 	
-	private final Set<String> supportedParameters = new HashSet<>(Arrays.asList("id","gstin", "gstinComp", "supplierName", "contactName",
+	private final Set<String> supportedParameters = new HashSet<>(Arrays.asList("id","gstin", "gstinComp", "purchaserName", "contactName",
             "officePhone", "homePhone", "rmn", "fax", "rmail", "panNo", "etin","addrLine1","addrLine2","city","state","country","pin"));
 
     private final FromJsonHelper fromApiJsonHelper;
@@ -50,8 +50,8 @@ public class PurchaserCommandFromApiJsonDeserializer {
         final String gstinComp = this.fromApiJsonHelper.extractStringNamed("gstinComp", element);
         baseDataValidator.reset().parameter("gstinComp").value(gstinComp).notBlank().notExceedingLengthOf(15);
 
-        final String supplierName = this.fromApiJsonHelper.extractStringNamed("supplierName", element);
-        baseDataValidator.reset().parameter("supplierName").value(supplierName).notBlank().notExceedingLengthOf(256);
+        final String purchaserName = this.fromApiJsonHelper.extractStringNamed("purchaserName", element);
+        baseDataValidator.reset().parameter("purchaserName").value(purchaserName).notBlank().notExceedingLengthOf(256);
         
         final String contactName = this.fromApiJsonHelper.extractStringNamed("contactName", element);
         baseDataValidator.reset().parameter("contactName").value(contactName).notBlank().notExceedingLengthOf(60);
@@ -104,7 +104,7 @@ public class PurchaserCommandFromApiJsonDeserializer {
         fromApiJsonHelper.checkForUnsupportedParameters(typeOfMap, json, supportedParameters);
 
         final List<ApiParameterError> dataValidationErrors = new ArrayList<ApiParameterError>();
-        final DataValidatorBuilder baseDataValidator = new DataValidatorBuilder(dataValidationErrors).resource("supplier");
+        final DataValidatorBuilder baseDataValidator = new DataValidatorBuilder(dataValidationErrors).resource("purchaser");
 
         final JsonElement element = fromApiJsonHelper.parse(json);
         if (fromApiJsonHelper.parameterExists("name", element)) {

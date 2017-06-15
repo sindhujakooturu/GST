@@ -1,5 +1,7 @@
 package com.gst.organisation.gstr1fileinvoice.data;
 
+import java.math.BigDecimal;
+
 public class Gstr1FileB2BItemData {
 
 	private Long id;
@@ -7,15 +9,15 @@ public class Gstr1FileB2BItemData {
 	private String fileNo;
 	private String itemType;
 	private String itemCode;
-	private Double taxValue;
-	private Double igstRate;
-	private Double igstAmount;
-	private Double cgstRate;
-	private Double cgstAmount;
-	private Double sgstRate;
-	private Double sgstAmount;
-	private Double cessRate;
-	private Double cessAmount;
+	private BigDecimal taxValue;
+	private BigDecimal igstRate;
+	private BigDecimal igstAmount;
+	private BigDecimal cgstRate;
+	private BigDecimal cgstAmount;
+	private BigDecimal sgstRate;
+	private BigDecimal sgstAmount;
+	private BigDecimal cessRate;
+	private BigDecimal cessAmount;
 	private int status;
 	private String errorCode;
 	private String errorDescriptor;
@@ -23,10 +25,10 @@ public class Gstr1FileB2BItemData {
 	public Gstr1FileB2BItemData() {
 	}
 
-	public Gstr1FileB2BItemData(Long id, Long invoiceId, String fileNo, String itemType, String itemCode,
-			Double taxValue, Double igstRate, Double igstAmount, Double cgstRate, Double cgstAmount, Double sgstRate,
-			Double sgstAmount, Double cessRate, Double cessAmount, int status, String errorCode,
-			String errorDescriptor) {
+	public Gstr1FileB2BItemData(final Long id, final Long invoiceId, final String fileNo, final String itemType, final String itemCode,
+			final BigDecimal taxValue, final BigDecimal igstRate, final BigDecimal igstAmount, final BigDecimal cgstRate, final BigDecimal cgstAmount, final BigDecimal sgstRate,
+			final BigDecimal sgstAmount, final BigDecimal cessRate, final BigDecimal cessAmount, final int status, final String errorCode,
+			final String errorDescriptor) {
 
 		this.id = id;
 		this.invoiceId = invoiceId;
@@ -87,75 +89,75 @@ public class Gstr1FileB2BItemData {
 		this.itemCode = itemCode;
 	}
 
-	public Double getTaxValue() {
+	public BigDecimal getTaxValue() {
 		return taxValue;
 	}
 
-	public void setTaxValue(Double taxValue) {
+	public void setTaxValue(BigDecimal taxValue) {
 		this.taxValue = taxValue;
 	}
 
-	public Double getIgstRate() {
+	public BigDecimal getIgstRate() {
 		return igstRate;
 	}
 
-	public void setIgstRate(Double igstRate) {
+	public void setIgstRate(BigDecimal igstRate) {
 		this.igstRate = igstRate;
 	}
 
-	public Double getIgstAmount() {
+	public BigDecimal getIgstAmount() {
 		return igstAmount;
 	}
 
-	public void setIgstAmount(Double igstAmount) {
+	public void setIgstAmount(BigDecimal igstAmount) {
 		this.igstAmount = igstAmount;
 	}
 
-	public Double getCgstRate() {
+	public BigDecimal getCgstRate() {
 		return cgstRate;
 	}
 
-	public void setCgstRate(Double cgstRate) {
+	public void setCgstRate(BigDecimal cgstRate) {
 		this.cgstRate = cgstRate;
 	}
 
-	public Double getCgstAmount() {
+	public BigDecimal getCgstAmount() {
 		return cgstAmount;
 	}
 
-	public void setCgstAmount(Double cgstAmount) {
+	public void setCgstAmount(BigDecimal cgstAmount) {
 		this.cgstAmount = cgstAmount;
 	}
 
-	public Double getSgstRate() {
+	public BigDecimal getSgstRate() {
 		return sgstRate;
 	}
 
-	public void setSgstRate(Double sgstRate) {
+	public void setSgstRate(BigDecimal sgstRate) {
 		this.sgstRate = sgstRate;
 	}
 
-	public Double getSgstAmount() {
+	public BigDecimal getSgstAmount() {
 		return sgstAmount;
 	}
 
-	public void setSgstAmount(Double sgstAmount) {
+	public void setSgstAmount(BigDecimal sgstAmount) {
 		this.sgstAmount = sgstAmount;
 	}
 
-	public Double getCessRate() {
+	public BigDecimal getCessRate() {
 		return cessRate;
 	}
 
-	public void setCessRate(Double cessRate) {
+	public void setCessRate(BigDecimal cessRate) {
 		this.cessRate = cessRate;
 	}
 
-	public Double getCessAmount() {
+	public BigDecimal getCessAmount() {
 		return cessAmount;
 	}
 
-	public void setCessAmount(Double cessAmount) {
+	public void setCessAmount(BigDecimal cessAmount) {
 		this.cessAmount = cessAmount;
 	}
 

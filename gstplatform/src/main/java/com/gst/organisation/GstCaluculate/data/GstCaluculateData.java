@@ -51,16 +51,6 @@ public class GstCaluculateData{
     public GstCaluculateData(){
     	
     }
-   /* static {
-    	GstCaluculateData my;
-        try {
-            my = new GstCaluculateData();
-            my.init();
-        } catch (Exception e) {
-            my = null;
-            // log
-        }
-    }*/
 	public Long getId() {
 		return id;
 	}
