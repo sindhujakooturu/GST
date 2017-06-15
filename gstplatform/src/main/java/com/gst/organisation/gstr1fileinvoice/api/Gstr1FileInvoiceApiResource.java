@@ -95,7 +95,6 @@ public class Gstr1FileInvoiceApiResource {
 
 	public String createGstr1FileInvoice(final String apiRequestBodyAsJson,@Context final UriInfo uriInfo) {
 		
-		this.context.authenticatedUser().validateHasReadPermission(GSTR1FILEINVOICEDATA_RESOURCE_NAME);
 		final CommandWrapper commandRequest = new CommandWrapperBuilder().createGstr1FileInvoice().withJson(apiRequestBodyAsJson).build();
 		final CommandProcessingResult result = this.commandSourceWritePlatformService.logCommandSource(commandRequest);
 		return this.toApiJsonSerializer.serialize(result);
@@ -114,8 +113,19 @@ public class Gstr1FileInvoiceApiResource {
 
 	public String updateGstr1FileInvoice(@PathParam("gstr1FileInvId") final Long gstr1FileInvId,final String apiRequestBodyAsJson) {
 	   
-		context.authenticatedUser().validateHasReadPermission(GSTR1FILEINVOICEDATA_RESOURCE_NAME);
 		final CommandWrapper commandRequest = new CommandWrapperBuilder().updateGstr1FileInvoice(gstr1FileInvId).withJson(apiRequestBodyAsJson).build();
+		final CommandProcessingResult result = this.commandSourceWritePlatformService.logCommandSource(commandRequest);
+		return this.toApiJsonSerializer.serialize(result);
+	}
+	
+	@PUT
+	@Path("updatestatus/{id}")
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Produces({ MediaType.APPLICATION_JSON })
+
+	public String updateGstr1FileInvoiceStatus(@PathParam("id") final Long id,final String apiRequestBodyAsJson) {
+	   
+		final CommandWrapper commandRequest = new CommandWrapperBuilder().updateGstr1FileInvoiceStatus(id).withJson(apiRequestBodyAsJson).build();
 		final CommandProcessingResult result = this.commandSourceWritePlatformService.logCommandSource(commandRequest);
 		return this.toApiJsonSerializer.serialize(result);
 	}
