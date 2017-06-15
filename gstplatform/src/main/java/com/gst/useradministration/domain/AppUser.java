@@ -120,6 +120,11 @@ public class AppUser extends AbstractPersistableCustom<Long> implements Platform
     @Column(name = "is_self_service_user", nullable = false)
 	private boolean isSelfServiceUser;
     
+    @Column(name = "company_Id", nullable = false)
+	private Long companyId;
+    
+    
+    
     @OneToMany(cascade = CascadeType.ALL,  orphanRemoval = true, fetch=FetchType.EAGER)
     @JoinColumn(name = "appuser_id", referencedColumnName= "id", nullable = false)
     private Set<AppUserClientMapping> appUserClientMappings = new HashSet<>();
@@ -325,7 +330,13 @@ public class AppUser extends AbstractPersistableCustom<Long> implements Platform
         		this.appUserClientMappings.clear();
         	}
         }
-
+        
+        if (command.isChangeInLongParameterNamed("companyId",this.companyId)) {
+			final Long newValue = command.longValueOfParameterNamed("companyId");
+			actualChanges.put("companyId", newValue);
+			this.companyId = newValue;
+		}
+        
         return actualChanges;
     }
 
@@ -647,5 +658,15 @@ public class AppUser extends AbstractPersistableCustom<Long> implements Platform
 		}
 		return newAppUserClientMappings;
 	}
+
+	public Long getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(Long companyId) {
+		this.companyId = companyId;
+	}
+
+	
 
 }

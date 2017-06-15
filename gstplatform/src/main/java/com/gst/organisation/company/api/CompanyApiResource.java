@@ -43,7 +43,7 @@ public class CompanyApiResource {
 
 	private final Set<String> RESPONSE_PARAMETERS = new HashSet<String>(Arrays.asList("id", "gstin","companyName", "contactName","officePhone",
 			                     "homePhone", "mobile","fax", "email","gstnRegNo","panNo","addressLine1","addressLine2","city",
-			                     "state","country","pin"));
+			                     "state","country","pin","officeId"));
 	
 
 	private final String resourceNameForPermissions = "COMPANY";
@@ -108,9 +108,9 @@ public class CompanyApiResource {
 	public String retrieveSingleCompanyDetails(@PathParam("companyId") final Long companyId,@Context final UriInfo uriInfo) {
 	   
 		context.authenticatedUser().validateHasReadPermission(resourceNameForPermissions);
-		CompanyData outWardStagingInvData = this.companyReadPlatformService.retrieveSingleCompanyDetails(companyId);
+		CompanyData singleCompanyData = this.companyReadPlatformService.retrieveSingleCompanyDetails(companyId);
 		final ApiRequestJsonSerializationSettings settings = apiRequestParameterHelper.process(uriInfo.getQueryParameters());
-		return this.toApiJsonSerializer.serialize(settings,outWardStagingInvData,RESPONSE_PARAMETERS);
+		return this.toApiJsonSerializer.serialize(settings,singleCompanyData,RESPONSE_PARAMETERS);
 	}
 
 	/**
@@ -129,6 +129,19 @@ public class CompanyApiResource {
 		final CommandWrapper commandRequest = new CommandWrapperBuilder().updateCompany(companyId).withJson(apiRequestBodyAsJson).build();
 		final CommandProcessingResult result = this.commandSourceWritePlatformService.logCommandSource(commandRequest);
 		return this.toApiJsonSerializer.serialize(result);
+	}
+	
+	@GET
+	@Path("companyuser/{officeId}")
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Produces({ MediaType.APPLICATION_JSON })
+
+	public String retrieveAllCompanysByUser(@PathParam("officeId") final Long officeId,@Context final UriInfo uriInfo) {
+	   
+		context.authenticatedUser().validateHasReadPermission(resourceNameForPermissions);
+		List<CompanyData> outWardStagingInvData = this.companyReadPlatformService.retrieveAllCompanyDetailsByUser(officeId);
+		final ApiRequestJsonSerializationSettings settings = apiRequestParameterHelper.process(uriInfo.getQueryParameters());
+		return this.toApiJsonSerializer.serialize(settings,outWardStagingInvData,RESPONSE_PARAMETERS);
 	}
 	
 

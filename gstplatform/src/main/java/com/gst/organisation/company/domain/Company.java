@@ -70,16 +70,18 @@ public class Company extends AbstractPersistableCustom<Long> {
 	@Column(name = "pin")
 	private String pin;
 	
+	@Column(name = "office_id")
+	private Long officeId;
+	
 	public Company() {
 		
 	}
 	
 	public Company(final String gstin, final String companyName, final String contactName,
-			final String officePhone, final String homePhone,
-			final String mobile, final String fax,
-			final String email,final String gstnRegNo,final String panNo,
-			final String addressLine1,final String addressLine2,final String city,final String state,
-			final String country,final String pin) {
+			final String officePhone, final String homePhone,final String mobile, final String fax,
+			final String email,final String gstnRegNo,final String panNo,final String addressLine1,
+			final String addressLine2,final String city,final String state,final String country,
+			final String pin,final Long officeId) {
 
 		this.gstin = gstin;
 		this.companyName = companyName;
@@ -97,6 +99,7 @@ public class Company extends AbstractPersistableCustom<Long> {
 		this.state = state;
 		this.country = country;
 		this.pin = pin;
+		this.officeId = officeId;
 	}
 	
 	/**
@@ -121,9 +124,10 @@ public class Company extends AbstractPersistableCustom<Long> {
 		final String state = command.stringValueOfParameterNamed("state");
 		final String country = command.stringValueOfParameterNamed("country");
 		final String pin = command.stringValueOfParameterNamed("pin");
+		final Long officeId = command.longValueOfParameterNamed("pin");
 
 		return new Company(gstin,companyName, contactName, officePhone, homePhone, mobile, fax,
-				email, gstnRegNo, panNo, addressLine1, addressLine2, city, state, country, pin);
+				email, gstnRegNo, panNo, addressLine1, addressLine2, city, state, country, pin, officeId);
 	}
 
 	/**
@@ -217,6 +221,12 @@ public class Company extends AbstractPersistableCustom<Long> {
 			final String newValue = command.stringValueOfParameterNamed("pin");
 			actualChanges.put("pin", newValue);
 			this.pin = StringUtils.defaultIfEmpty(newValue, null);
+		}
+		
+		if (command.isChangeInLongParameterNamed("officeId",this.officeId)) {
+			final Long newValue = command.longValueOfParameterNamed("officeId");
+			actualChanges.put("officeId", newValue);
+			this.officeId = newValue;
 		}
 
 		return actualChanges;
