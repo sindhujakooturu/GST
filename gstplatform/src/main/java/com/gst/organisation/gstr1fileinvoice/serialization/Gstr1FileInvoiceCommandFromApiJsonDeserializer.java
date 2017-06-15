@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import com.google.common.reflect.TypeToken;
 import com.google.gson.JsonElement;
+import com.gst.infrastructure.core.api.JsonCommand;
 import com.gst.infrastructure.core.data.ApiParameterError;
 import com.gst.infrastructure.core.data.DataValidatorBuilder;
 import com.gst.infrastructure.core.exception.InvalidJsonException;
@@ -31,7 +32,7 @@ public class Gstr1FileInvoiceCommandFromApiJsonDeserializer {
 	 * The parameters supported for this command.
 	 */
 	final private Set<String> supportedParameters = new HashSet<String>(Arrays.asList("gstin","fp","grossTurnover","fileNo","version",
-			           "status", "assignedTo","errorCode" , "errorDescr","reviewComments","refNo","transId","dateFormat", "locale"));
+			           "status", "assignedTo","errorCode" , "errorDescr","reviewComments","refNo","transId","dateFormat", "locale","action"));
 			          
 	
 	
@@ -110,5 +111,21 @@ public class Gstr1FileInvoiceCommandFromApiJsonDeserializer {
 					"validation.msg.validation.errors.exist",
 					"Validation errors exist.", dataValidationErrors);
 		}
+	}
+
+	public void validaForUpdateStatus(JsonCommand command) {
+
+		final Type typeOfMap = new TypeToken<Map<String, Object>>() {
+			private static final long serialVersionUID = 1L;
+		}.getType();
+
+		final List<ApiParameterError> dataValidationErrors = new ArrayList<ApiParameterError>();
+		final DataValidatorBuilder baseDataValidator = new DataValidatorBuilder(dataValidationErrors).resource("gstr1fileinvoice");
+
+
+		final String action = command.stringValueOfParameterNamed("action");
+		baseDataValidator.reset().parameter("action").value(action).notNull();
+		
+		throwExceptionIfValidationWarningsExist(dataValidationErrors);
 	}
 }

@@ -24,10 +24,10 @@ package com.gst.infrastructure.core.exception;
  */
 public class PlatformDataIntegrityException extends RuntimeException {
 
-    private final String globalisationMessageCode;
-    private final String defaultUserMessage;
-    private final String parameterName;
-    private final Object[] defaultUserMessageArgs;
+    private String globalisationMessageCode;
+    private String defaultUserMessage;
+    private String parameterName;
+    private Object[] defaultUserMessageArgs;
 
     public PlatformDataIntegrityException(final String globalisationMessageCode, final String defaultUserMessage,
             final Object... defaultUserMessageArgs) {
@@ -45,6 +45,10 @@ public class PlatformDataIntegrityException extends RuntimeException {
         this.defaultUserMessageArgs = defaultUserMessageArgs;
     }
 
+    public PlatformDataIntegrityException(final String defaultUserMessage) {
+        this.defaultUserMessage = defaultUserMessage;
+    }
+    
     public String getGlobalisationMessageCode() {
         return this.globalisationMessageCode;
     }

@@ -48,10 +48,10 @@ import com.gst.organisation.gstr1fileinvoice.domain.Gstr1FileB2BInvoice;
 import com.gst.organisation.gstr1fileinvoice.domain.Gstr1FileB2BInvoiceRepository;
 import com.gst.organisation.gstr1fileinvoice.domain.Gstr1FileB2BItem;
 import com.gst.organisation.gstr1fileinvoice.domain.Gstr1FileB2BItemRepository;
-import com.gst.organisation.gstr1fileinvoice.domain.Gstr1FileInvoice;
 import com.gst.organisation.gstr1fileinvoice.domain.Gstr1FileInvoiceRepository;
-import com.gst.organisation.outwardstaginginv.data.OutWardStagingInvData;
 import com.gst.organisation.outwardstaginginv.data.OutWardStagingItemData;
+import com.gst.organisation.outwardstaginginv.domain.OutWardStagingInv;
+import com.gst.organisation.outwardstaginginv.domain.OutWardStagingInvRepository;
 import com.gst.organisation.outwardstaginginv.service.OutWardStagingInvReadPlatformService;
 import com.gst.organisation.outwardstaginginv.service.OutWardStagingItemReadPlatformService;
 import com.gst.portfolio.savings.DepositAccountType;
@@ -84,6 +84,7 @@ public class ScheduledJobRunnerServiceImpl implements ScheduledJobRunnerService 
     private final Gstr1FileB2BInvoiceRepository gstr1FileB2BInvoiceRepository;
     private final Gstr1FileB2BItemRepository gstr1FileB2BItemsRepository;
     private final OutWardStagingItemReadPlatformService outWardStagingItemReadPlatformService;
+    private final OutWardStagingInvRepository outWardStagingInvRepository;
 
     @Autowired
     public ScheduledJobRunnerServiceImpl(final RoutingDataSourceServiceFactory dataSourceServiceFactory,
@@ -97,7 +98,8 @@ public class ScheduledJobRunnerServiceImpl implements ScheduledJobRunnerService 
             final Gstr1FileInvoiceRepository gstr1FileInvoiceRepository,
             final Gstr1FileB2BInvoiceRepository gstr1FileB2BInvoiceRepository,
             final Gstr1FileB2BItemRepository gstr1FileB2BItemsRepository,
-            final OutWardStagingItemReadPlatformService outWardStagingItemReadPlatformService) {
+            final OutWardStagingItemReadPlatformService outWardStagingItemReadPlatformService,
+            final OutWardStagingInvRepository outWardStagingInvRepository) {
        
     	this.dataSourceServiceFactory = dataSourceServiceFactory;
         this.savingsAccountWritePlatformService = savingsAccountWritePlatformService;
@@ -111,6 +113,7 @@ public class ScheduledJobRunnerServiceImpl implements ScheduledJobRunnerService 
         this.gstr1FileB2BInvoiceRepository = gstr1FileB2BInvoiceRepository;
         this.gstr1FileB2BItemsRepository = gstr1FileB2BItemsRepository;
         this.outWardStagingItemReadPlatformService = outWardStagingItemReadPlatformService;
+        this.outWardStagingInvRepository = outWardStagingInvRepository;
     }
 
     @Transactional
@@ -443,21 +446,23 @@ public class ScheduledJobRunnerServiceImpl implements ScheduledJobRunnerService 
     @CronTarget(jobName = JobName.OUTWARD_STAGING_TO_PROCESS)
     public void outwardStagingToProcessData() {
     	
-    	List<Gstr1FileB2BInvoice> gstr1FileB2BInvoices = new ArrayList<Gstr1FileB2BInvoice>();
+    	Gstr1FileB2BInvoice gstr1FileB2BInvoice = null;
     	List<Gstr1FileB2BItem> gstr1FileB2BItems = new ArrayList<Gstr1FileB2BItem>();
-    	List<OutWardStagingInvData> outWardStagingInvDatas = this.outWardStagingInvReadPlatformService.retrieveAllOutWardInvData();
-    	
-    	Gstr1FileInvoice fileInv = new Gstr1FileInvoice("12343", "062017","12", "1234",1, 1,"asdf","errorCode",
+    	List<OutWardStagingInv> outWardStagingInvDatas = this.outWardStagingInvRepository.findAllOutWardStagingInv();
+    	System.out.println("Schedler Job 'Outward staging to process' is triggered now");
+    	/*Gstr1FileInvoice fileInv = new Gstr1FileInvoice("12343", "062017","12", "1234",1, 1,"asdf","errorCode",
     			"errorDescriptor","reviewComments");
+    	this.gstr1FileInvoiceRepository.saveAndFlush(fileInv);*/
     	
-    	for(OutWardStagingInvData outWardStagingInvData:outWardStagingInvDatas){
+    	for(OutWardStagingInv outWardStagingInvData:outWardStagingInvDatas){
     		
     		
-    		gstr1FileB2BInvoices.add(new Gstr1FileB2BInvoice(outWardStagingInvData.getGstin(), "092017", "1234".toString(), outWardStagingInvData.getSupplierInvNo(), 
+    		gstr1FileB2BInvoice = new Gstr1FileB2BInvoice(outWardStagingInvData.getGstin(), "092017", "1234".toString(), outWardStagingInvData.getSupplierInvNo(), 
     				outWardStagingInvData.getSupplierInvDate(), outWardStagingInvData.getSupplierInvValue(), "SP", 
     				outWardStagingInvData.getOrderNo(), "082017", outWardStagingInvData.getEtin(), outWardStagingInvData.getInvoiceId(), "3",
     				"chkSum",1,1,1, "0", outWardStagingInvData.getErrorCode(), 
-    				outWardStagingInvData.getErrorDescripter()));
+    				outWardStagingInvData.getErrorDescripter());
+    		this.gstr1FileB2BInvoiceRepository.saveAndFlush(gstr1FileB2BInvoice);
     		
     		List<OutWardStagingItemData> outWardStagingItemDatas = this.outWardStagingItemReadPlatformService.retriveOutwardStagingInvItems(outWardStagingInvData.getInvoiceId());
     		for( OutWardStagingItemData outWardStagingItemData: outWardStagingItemDatas){
@@ -467,12 +472,10 @@ public class ScheduledJobRunnerServiceImpl implements ScheduledJobRunnerService 
     					outWardStagingItemData.getCessAmount(), outWardStagingItemData.getStatus(), outWardStagingItemData.getErrorCode(), outWardStagingItemData.getErrorDescripter()));
     					
     		}
-    		
+    		this.gstr1FileB2BItemsRepository.save(gstr1FileB2BItems);
+    		outWardStagingInvData.setStatus(1);
     	}
-    	this.gstr1FileInvoiceRepository.save(fileInv);
-    	this.gstr1FileB2BInvoiceRepository.save(gstr1FileB2BInvoices);
-    	this.gstr1FileB2BItemsRepository.save(gstr1FileB2BItems);
-    	
+    	this.outWardStagingInvRepository.save(outWardStagingInvDatas);
     }
     
 }
