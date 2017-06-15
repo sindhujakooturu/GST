@@ -22,3 +22,9 @@ CREATE TABLE IF NOT EXISTS `gst-default`.`g_purchaser` (
 
 INSERT IGNORE INTO `m_permission` (`grouping`, `code`, `entity_name`, `action_name`, `can_maker_checker`) VALUES ('purchaser', 'CREATE_PURCHASER', 'CREATE', 'PURCHASER', 0);
 INSERT IGNORE INTO `m_permission` (`grouping`, `code`, `entity_name`, `action_name`, `can_maker_checker`) VALUES ('purchaser', 'UPDATE_PURCHASER', 'UPDATE', 'PURCHASER', 0);
+
+ALTER TABLE `m_appuser` 
+ADD COLUMN `company_id` INT(11) NULL DEFAULT NULL AFTER `is_self_service_user`;
+
+ALTER TABLE `company_t` 
+ADD COLUMN `office_id` INT(11) NOT NULL AFTER `pin`;

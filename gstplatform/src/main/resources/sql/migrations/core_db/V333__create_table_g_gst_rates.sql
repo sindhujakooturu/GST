@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `gst-default`.`g_gst_rate` (
+CREATE TABLE IF NOT EXISTS `g_gst_rate` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `item_code` BIGINT(16) NULL,
   `item_desc` VARCHAR(255) NULL,

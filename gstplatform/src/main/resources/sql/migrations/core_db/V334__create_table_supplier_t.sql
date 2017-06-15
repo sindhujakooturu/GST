@@ -1,4 +1,4 @@
-CREATE TABLE IF NOT EXISTS `gst-default`.`g_supplier` (
+CREATE TABLE IF NOT EXISTS `g_supplier` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `gstin` VARCHAR(15) NULL,
   `supplier_name` VARCHAR(256) NULL,
