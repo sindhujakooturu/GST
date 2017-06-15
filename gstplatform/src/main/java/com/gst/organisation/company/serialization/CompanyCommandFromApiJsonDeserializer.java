@@ -31,7 +31,7 @@ public class CompanyCommandFromApiJsonDeserializer {
 	 */
 	final private Set<String> supportedParameters = new HashSet<String>(Arrays.asList("gstin","companyName","contactName","officePhone","homePhone",
 			          "mobile", "fax", "email","gstnRegNo" , "panNo","addressLine1","addressLine2",
-			          "city", "state", "country", "pin","dateFormat", "locale"));
+			          "city", "state", "country", "pin","officeId","dateFormat", "locale"));
 	
 	
 	private final FromJsonHelper fromApiJsonHelper;
@@ -106,6 +106,9 @@ public class CompanyCommandFromApiJsonDeserializer {
 		
 		final String pin = fromApiJsonHelper.extractStringNamed("pin", element);
 		baseDataValidator.reset().parameter("pin").value(pin);
+		
+		final Long officeId = fromApiJsonHelper.extractLongNamed("officeId", element);
+		baseDataValidator.reset().parameter("officeId").value(officeId);
 
 		throwExceptionIfValidationWarningsExist(dataValidationErrors);
 
