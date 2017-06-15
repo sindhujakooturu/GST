@@ -81,6 +81,7 @@ public class ClientsApiResource {
             final PortfolioCommandSourceWritePlatformService commandsSourceWritePlatformService,
             final AccountDetailsReadPlatformService accountDetailsReadPlatformService,
             final SavingsAccountReadPlatformService savingsAccountReadPlatformService) {
+    	
         this.context = context;
         this.clientReadPlatformService = readPlatformService;
         this.toApiJsonSerializer = toApiJsonSerializer;

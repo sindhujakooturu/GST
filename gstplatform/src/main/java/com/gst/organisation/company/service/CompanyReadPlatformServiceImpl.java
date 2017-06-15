@@ -35,20 +35,20 @@ public class CompanyReadPlatformServiceImpl implements CompanyReadPlatformServic
 	 */
 	public List<CompanyData> retrieveAllCompanyData() {
 
-		final OutWardInvDataMapper mapper = new OutWardInvDataMapper();
+		final CompanyDataMapper mapper = new CompanyDataMapper();
 
 		final String sql = "Select " + mapper.schema();
 
 		return this.jdbcTemplate.query(sql, mapper, new Object[] {});
 	}
 
-	private static final class OutWardInvDataMapper implements
+	private static final class CompanyDataMapper implements
 			RowMapper<CompanyData> {
 
 		public String schema() {
 			return " c.id as id, c.gstin as gstin, c.company_name as companyName, c.contact_name as contactName, c.office_phone as officePhone, c.home_phone as homePhone, c.mobile as mobile,"
 					+ " c.fax as fax, c.email as email,c.gstn_reg_no as gstnRegNo , c.pan_no as panNo, c.address_line1 as addressLine1, c.address_line2 as addressLine2,"
-					+ " c.city as city,c.state as state, c.country as country, c.pin as pin "
+					+ " c.city as city,c.state as state, c.country as country, c.pin as pin,c.office_id as officeId "
 					+ " from company_t c";
 		}
 
@@ -73,11 +73,12 @@ public class CompanyReadPlatformServiceImpl implements CompanyReadPlatformServic
 			final String state = rs.getString("state");
 			final String country = rs.getString("country");
 			final String pin = rs.getString("pin");
+			final Long officeId = rs.getLong("officeId");
 			
 
 			return new CompanyData(id, gstin, companyName, contactName, officePhone, homePhone, mobile,
 					fax, email,gstnRegNo , panNo, addressLine1, addressLine2, city, 
-					state, country, pin);
+					state, country, pin,officeId);
 		}
 	}
 
@@ -89,11 +90,26 @@ public class CompanyReadPlatformServiceImpl implements CompanyReadPlatformServic
 
 		try {
 
-			final OutWardInvDataMapper mapper = new OutWardInvDataMapper();
+			final CompanyDataMapper mapper = new CompanyDataMapper();
 
 			final String sql = "select " + mapper.schema() + " where c.id = ?";
 
 			return jdbcTemplate.queryForObject(sql, mapper, new Object[] { companyId });
+		} catch (EmptyResultDataAccessException accessException) {
+			return null;
+		}
+	}
+
+	@Override
+	public List<CompanyData> retrieveAllCompanyDetailsByUser(Long companyId) {
+		
+		try {
+
+			final CompanyDataMapper mapper = new CompanyDataMapper();
+
+			final String sql = "select " + mapper.schema() + " join m_office o on o.id = c.office_id where c.office_id = ? ";
+
+			return jdbcTemplate.query(sql, mapper, new Object[] { companyId });
 		} catch (EmptyResultDataAccessException accessException) {
 			return null;
 		}

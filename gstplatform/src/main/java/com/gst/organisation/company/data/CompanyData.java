@@ -21,6 +21,7 @@ public class CompanyData {
 	private String state;
 	private String country;
 	private String pin;
+	private Long officeId;
 
 	
 	public CompanyData() {
@@ -31,7 +32,7 @@ public class CompanyData {
 			final String officePhone, final String homePhone, final String mobile,
 			final String fax, final String email,final String gstnRegNo ,final String panNo,
 			final String addressLine1,final String addressLine2,final String city,final String state,final String country,
-			final String pin) {
+			final String pin,final Long officeId) {
 		
 		this.id = id;
 		this.gstin = gstin;
@@ -50,6 +51,7 @@ public class CompanyData {
 		this.state = state;
 		this.country = country;
 		this.pin = pin;
+		this.officeId = officeId;
 	}
 
 	public Long getId() {
@@ -188,5 +190,13 @@ public class CompanyData {
 		this.pin = pin;
 	}
 
+	public Long getOfficeId() {
+		return officeId;
+	}
+
+	public void setOfficeId(Long officeId) {
+		this.officeId = officeId;
+	}
+	
 
 }

@@ -13,5 +13,7 @@ public interface CompanyReadPlatformService {
 	List<CompanyData> retrieveAllCompanyData();
 
 	CompanyData retrieveSingleCompanyDetails(Long companyId);
+	
+	List<CompanyData> retrieveAllCompanyDetailsByUser(Long officeId);
 
 }
