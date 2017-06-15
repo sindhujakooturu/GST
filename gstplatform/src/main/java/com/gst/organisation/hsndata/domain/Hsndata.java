@@ -14,7 +14,7 @@ import com.gst.infrastructure.core.api.JsonCommand;
 import com.gst.infrastructure.core.domain.AbstractPersistableCustom;
 
 @Entity
-@Table(name = "cfg_hsn_data", uniqueConstraints = {@UniqueConstraint(columnNames = { "hsn_code" }, name = "hsnCode_UNIQUE") })
+@Table(name = "g_hsn_data", uniqueConstraints = {@UniqueConstraint(columnNames = { "hsn_code" }, name = "hsnCode_UNIQUE") })
 public class Hsndata extends AbstractPersistableCustom<Long>{
 	private static final long serialVersionUID = 1L;
 	
@@ -24,36 +24,36 @@ public class Hsndata extends AbstractPersistableCustom<Long>{
     @Column(name = "description", length = 256)
     private String description;
     
+    @Column(name = "is_deleted", length = 6)
+    private String deleted="false";
+  
     
     public static Hsndata fromJson(final JsonCommand command) {
     	
-    	
-    	final String hsnCodeParamName = "hsnCode";
-        final String hsnCode = command.stringValueOfParameterNamed(hsnCodeParamName);
-        
-        final String descriptionParamName = "description";
-        final String description = command.stringValueOfParameterNamed(descriptionParamName);
-
+    final String hsnCodeParamName = "hsnCode";
+    final String hsnCode = command.stringValueOfParameterNamed(hsnCodeParamName);
+    final String descriptionParamName = "description";
+    final String description = command.stringValueOfParameterNamed(descriptionParamName);
+    
     return new Hsndata(hsnCode,description);
     
-    }
+  }
 
-    public  Hsndata() {
-
-    		}
-    private Hsndata(final String hsnCode,  final String description) {
+    public  Hsndata() {}
+    
+    private Hsndata(final String hsnCode, final String description) {
 	this.hsnCode = hsnCode;
     this.description = description;
+    
   }
-  	
 
     public String getHsnCode() {
 	return hsnCode;
-}
+  }
 
     public String getDescription() {
 	return description;
-}
+   }
 
     public Map<String, Object> update(final JsonCommand command) {
     final Map<String, Object> actualChanges = new LinkedHashMap<>();
@@ -75,6 +75,10 @@ public class Hsndata extends AbstractPersistableCustom<Long>{
    
     return actualChanges;
 }
+    public void delete() {
+    	this.hsnCode=this.getId()+"_"+this.hsnCode;
+    	this.deleted="true";   
+      }
 
 }
     

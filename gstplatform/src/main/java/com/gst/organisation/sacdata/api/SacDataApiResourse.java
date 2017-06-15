@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -15,11 +16,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.UriInfo;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-
 import com.gst.commands.domain.CommandWrapper;
 import com.gst.commands.service.CommandWrapperBuilder;
 import com.gst.commands.service.PortfolioCommandSourceWritePlatformService;
@@ -34,7 +33,7 @@ import com.gst.organisation.sacdata.service.SacdataReadPlatformService;
 @Path("/sacdata")
 @Component
 @Scope("singleton")
-public class SacdataApiResourse {
+public class SacDataApiResourse {
 
     /**
      * The set of parameters that are supported in response for
@@ -46,19 +45,20 @@ public class SacdataApiResourse {
     private final String RESOURCENAMEFORPERMISSIONS = "SACDATA";
 
    
-    private final SacdataReadPlatformService readPlatformService;
+    private final SacdataReadPlatformService sacdatareadPlatformService;
     private final PlatformSecurityContext context;	
     private final DefaultToApiJsonSerializer<SacdataData> toApiJsonSerializer;
     private final ApiRequestParameterHelper apiRequestParameterHelper;
     private final PortfolioCommandSourceWritePlatformService commandsSourceWritePlatformService;
 
     @Autowired
-    public SacdataApiResourse( final SacdataReadPlatformService readPlatformService,final PlatformSecurityContext context,
-            final DefaultToApiJsonSerializer<SacdataData> toApiJsonSerializer,
-            final ApiRequestParameterHelper apiRequestParameterHelper,
-            final PortfolioCommandSourceWritePlatformService commandsSourceWritePlatformService) {
+    public SacDataApiResourse( final SacdataReadPlatformService readPlatformService,final PlatformSecurityContext context,
+        final DefaultToApiJsonSerializer<SacdataData> toApiJsonSerializer,
+        final ApiRequestParameterHelper apiRequestParameterHelper,
+        final PortfolioCommandSourceWritePlatformService commandsSourceWritePlatformService) {
+    	
     	this.context = context;
-        this.readPlatformService = readPlatformService;
+        this.sacdatareadPlatformService = readPlatformService;
         this.toApiJsonSerializer = toApiJsonSerializer;
         this.apiRequestParameterHelper = apiRequestParameterHelper;
         this.commandsSourceWritePlatformService = commandsSourceWritePlatformService;
@@ -70,21 +70,29 @@ public class SacdataApiResourse {
     public String retrieveAllSacdata(@Context final UriInfo uriInfo) {
     	
     	context.authenticatedUser().validateHasReadPermission(RESOURCENAMEFORPERMISSIONS);
-        final Collection<SacdataData> sac=this.readPlatformService.retrieveAllSacdata();
+        final Collection<SacdataData> sac=this.sacdatareadPlatformService.retrieveAllSacdata();
         final ApiRequestJsonSerializationSettings settings = this.apiRequestParameterHelper.process(uriInfo.getQueryParameters());
-        
         return this.toApiJsonSerializer.serialize(settings  , sac, this.RESPONSE_DATA_PARAMETERS);
+    }
+    
+    @GET
+    @Path("{id}")
+    @Consumes({ MediaType.APPLICATION_JSON })
+    @Produces({ MediaType.APPLICATION_JSON })
+    public String retreiveSacdata(@PathParam("id") final Long id, @Context final UriInfo uriInfo) {
+    	
+        final ApiRequestJsonSerializationSettings settings = this.apiRequestParameterHelper.process(uriInfo.getQueryParameters());
+        SacdataData sacdata = this.sacdatareadPlatformService.retrieveSacdata(id);
+        return this.toApiJsonSerializer.serialize(settings, sacdata, this.RESPONSE_DATA_PARAMETERS);
     }
 
     @POST
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
     public String createSacdata(final String apiRequestBodyAsJson) {
-
+    	
         final CommandWrapper commandRequest = new CommandWrapperBuilder().createSacdata().withJson(apiRequestBodyAsJson).build();
-
         final CommandProcessingResult result = this.commandsSourceWritePlatformService.logCommandSource(commandRequest);
-
         return this.toApiJsonSerializer.serialize(result);
     }
    
@@ -93,11 +101,20 @@ public class SacdataApiResourse {
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
     public String updateSacdata(@PathParam("id") final Long id, final String apiRequestBodyAsJson) {
-
         final CommandWrapper commandRequest = new CommandWrapperBuilder().updateSacdata(id).withJson(apiRequestBodyAsJson).build();
-
         final CommandProcessingResult result = this.commandsSourceWritePlatformService.logCommandSource(commandRequest);
-
         return this.toApiJsonSerializer.serialize(result);
     }
+    
+
+    @DELETE
+	@Path("{id}")
+	@Consumes({MediaType.APPLICATION_JSON})
+	@Produces({MediaType.APPLICATION_JSON})
+	public String deleteSacdata(@PathParam("id") final Long id) {
+	    final CommandWrapper commandRequest = new CommandWrapperBuilder().deleteSacdata(id).build();
+        final CommandProcessingResult result = this.commandsSourceWritePlatformService.logCommandSource(commandRequest);
+        return this.toApiJsonSerializer.serialize(result);
+
+	}
 }

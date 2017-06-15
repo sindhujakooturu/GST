@@ -56,7 +56,7 @@ public class HsndataCommandFromApiJsonDeserializer {
 }
    
     	
-        public void validateForUpdate(final String json, Long id) {
+        public void validateForUpdate(final String json) {
         	if (StringUtils.isBlank(json)) { throw new InvalidJsonException(); 
         	}
         	

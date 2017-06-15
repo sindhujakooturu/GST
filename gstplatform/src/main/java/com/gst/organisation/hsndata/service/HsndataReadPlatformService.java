@@ -11,7 +11,7 @@ public interface HsndataReadPlatformService {
 	
 			Collection<HsndataData> retrieveAllHsndata();
 
-		//	HsndataData retrieveHsndata(String hscCode);
+			HsndataData retrieveHsndata(Long id);
 			
 
 }

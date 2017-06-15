@@ -10,5 +10,6 @@ public interface SacdataWritePlatformService {
 	CommandProcessingResult createSacdata(final JsonCommand command) throws SacdataException;
 
     CommandProcessingResult updateSacdata(final Long id, final JsonCommand command);
-    //CommandProcessingResult deleteSacdata(JsonCommand command);
+    
+    CommandProcessingResult deleteHsndata(final Long id, final JsonCommand command);
 }

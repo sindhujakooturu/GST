@@ -30,15 +30,15 @@ public class SacdataReadPlatformServiceImpl implements SacdataReadPlatformServic
 		return this.jdbcTemplate.query(sql, rm, new Object[] {});
 	}
 
-    /*
+    
     @Override
-    public SacdataData retrieveSacdata() {
+    public SacdataData retrieveSacdata(Long id) {
             
     	final SacdataMapper rm = new SacdataMapper();
-        final String sql = "select " + rm.schema() + " where s.sacSeqId = ?" ;
-        return this.jdbcTemplate.queryForObject(sql, rm, new Object[] {  });
+        final String sql = "select " + rm.schema() + " where s.id = ?" ;
+        return this.jdbcTemplate.queryForObject(sql, rm, new Object[] { id });
     }
-    */
+    
 	
     private static final class SacdataMapper implements RowMapper<SacdataData> {
 
@@ -46,7 +46,7 @@ public class SacdataReadPlatformServiceImpl implements SacdataReadPlatformServic
             return " s.id as id, s.sac_seq_id as sacSeqId, s.service_name as serviceName, " +
             	   " s.description as description, s.sac_tax_collection as sacTaxCollection, " +
             	   " s.sac_other_reciept as sacOtherReciept, s.sac_deduct_refund as sacDeductRefund, " +
-            	   " s.sac_penalty as sacPenalty from cfg_sac_data s ";
+            	   " s.sac_penalty as sacPenalty from g_sac_data s ";
         }
 	
         @Override
@@ -64,6 +64,9 @@ public class SacdataReadPlatformServiceImpl implements SacdataReadPlatformServic
             return new SacdataData(id,sacSeqId, serviceName, description, sacTaxCollection, sacOtherReciept, sacDeductRefund, sacPenalty);
         }
     }
+
+
+	
 
 }
     

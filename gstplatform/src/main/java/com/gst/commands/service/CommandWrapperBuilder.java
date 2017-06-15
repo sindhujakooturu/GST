@@ -225,11 +225,20 @@ public class CommandWrapperBuilder {
         this.href = "/sacdata/" + id;
         return this;
     }
+    
+    public CommandWrapperBuilder deleteSacdata(final Long id) {
+        this.actionName = "DELETE";
+        this.entityName = "SACDATA";
+        this.entityId = id;
+        this.href = "/sacdata/" + id;
+        return this;
+    }
+    
     public CommandWrapperBuilder createHsndata() {
         this.actionName = "CREATE";
         this.entityName = "HSNDATA";
         this.entityId = null;
-        this.href = "/hsndata/template";
+        this.href = "/hsndata";
         return this;
     }
     public CommandWrapperBuilder updateHsndata(final Long id) {
@@ -238,6 +247,13 @@ public class CommandWrapperBuilder {
         this.entityId = id;
         this.href = "/hsndata/" + id;
         return this;
+    }     
+   public CommandWrapperBuilder deleteHsndata(final Long id) {
+            this.actionName = "DELETE";
+            this.entityName = "HSNDATA";
+            this.entityId = id;
+            this.href = "/hsndata/" + id;
+            return this;
     }
     public CommandWrapperBuilder updateStaff(final Long id) {
         this.actionName = "UPDATE";

@@ -108,7 +108,7 @@ public class SacdataCommandFromApiJsonDeserializer {
             
             if (this.fromApiJsonHelper.parameterExists("sacOtherReciept", element)) {
                 final String sacOtherReciept = this.fromApiJsonHelper.extractStringNamed("sacOtherReciept", element);
-                baseDataValidator.reset().parameter("sacOtherReciept").value(sacOtherReciept).notExceedingLengthOf(50);
+                baseDataValidator.reset().parameter("sacOtherReciept").value(sacOtherReciept).notExceedingLengthOf(10);
             }
             if (this.fromApiJsonHelper.parameterExists("sacDeductRefund", element)) {
                 final String sacDeductRefund = this.fromApiJsonHelper.extractStringNamed("sacDeductRefund", element);
@@ -117,7 +117,7 @@ public class SacdataCommandFromApiJsonDeserializer {
             
             if (this.fromApiJsonHelper.parameterExists("sacPenalty", element)) {
                 final Boolean sacPenalty = this.fromApiJsonHelper.extractBooleanNamed("sacPenalty", element);
-                baseDataValidator.reset().parameter("sacPenalty").value(sacPenalty).notNull();
+                baseDataValidator.reset().parameter("sacPenalty").value(sacPenalty).notBlank().notExceedingLengthOf(10);
             
     }        throwExceptionIfValidationWarningsExist(dataValidationErrors);
     

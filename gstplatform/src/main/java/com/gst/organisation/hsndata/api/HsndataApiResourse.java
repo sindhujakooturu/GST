@@ -7,6 +7,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
@@ -40,25 +41,22 @@ public class HsndataApiResourse {
 
     
     private final Set<String> RESPONSE_DATA_PARAMETERS = new HashSet<>(Arrays.asList("id", "hsnCode","description"));
-
     private final String RESOURCENAMEFORPERMISSIONS = "HSNDATA";
-
-   
-    private final HsndataReadPlatformService readPlatformService;
+    private final HsndataReadPlatformService hsndataReadPlatformService;
     private final PlatformSecurityContext context;	
     private final DefaultToApiJsonSerializer<HsndataData> toApiJsonSerializer;
     private final ApiRequestParameterHelper apiRequestParameterHelper;
     private final PortfolioCommandSourceWritePlatformService commandsSourceWritePlatformService;
 
+   
     @Autowired
-    public HsndataApiResourse( final HsndataReadPlatformService readPlatformService,final PlatformSecurityContext context,
+    public HsndataApiResourse(final HsndataReadPlatformService readPlatformService,final PlatformSecurityContext context,
         final DefaultToApiJsonSerializer<HsndataData> toApiJsonSerializer,
         final ApiRequestParameterHelper apiRequestParameterHelper,
         final PortfolioCommandSourceWritePlatformService commandsSourceWritePlatformService) {
     	
-    	
     	this.context = context;
-        this.readPlatformService = readPlatformService;
+        this.hsndataReadPlatformService = readPlatformService;
         this.toApiJsonSerializer = toApiJsonSerializer;
         this.apiRequestParameterHelper = apiRequestParameterHelper;
         this.commandsSourceWritePlatformService = commandsSourceWritePlatformService;
@@ -69,36 +67,55 @@ public class HsndataApiResourse {
     @Produces({ MediaType.APPLICATION_JSON })
     public String retrieveAllHsndata(@Context final UriInfo uriInfo) {
     	
-    	context.authenticatedUser().validateHasReadPermission(RESOURCENAMEFORPERMISSIONS);
-        final Collection<HsndataData> hsn=this.readPlatformService.retrieveAllHsndata();
+    	this.context.authenticatedUser().validateHasReadPermission(RESOURCENAMEFORPERMISSIONS);
+        final Collection<HsndataData> hsnData = this.hsndataReadPlatformService.retrieveAllHsndata();
         final ApiRequestJsonSerializationSettings settings = this.apiRequestParameterHelper.process(uriInfo.getQueryParameters());
-        
-        return this.toApiJsonSerializer.serialize(settings  , hsn, this.RESPONSE_DATA_PARAMETERS);
+        return this.toApiJsonSerializer.serialize(settings, hsnData, this.RESPONSE_DATA_PARAMETERS);
     }
-
+    
+    @GET
+    @Path("{hsnId}")
+    @Consumes({ MediaType.APPLICATION_JSON })
+    @Produces({ MediaType.APPLICATION_JSON })
+    public String retreiveHsndata(@PathParam("hsnId") final Long hsnId, @Context final UriInfo uriInfo) {
+    	
+        final ApiRequestJsonSerializationSettings settings = this.apiRequestParameterHelper.process(uriInfo.getQueryParameters());
+        HsndataData hsndata = this.hsndataReadPlatformService.retrieveHsndata(hsnId);
+        return this.toApiJsonSerializer.serialize(settings, hsndata, this.RESPONSE_DATA_PARAMETERS);
+    }
+    
+    
     @POST
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
     public String createHsndata(final String apiRequestBodyAsJson) {
-
+    	
         final CommandWrapper commandRequest = new CommandWrapperBuilder().createHsndata().withJson(apiRequestBodyAsJson).build();
-
         final CommandProcessingResult result = this.commandsSourceWritePlatformService.logCommandSource(commandRequest);
-
         return this.toApiJsonSerializer.serialize(result);
     }
 
  
     @PUT
-    @Path("{id}")
+    @Path("{hsnId}")
     @Consumes({ MediaType.APPLICATION_JSON })
     @Produces({ MediaType.APPLICATION_JSON })
-    public String updateHsndata(@PathParam("id") final Long id, final String apiRequestBodyAsJson) {
-
-        final CommandWrapper commandRequest = new CommandWrapperBuilder().updateHsndata(id).withJson(apiRequestBodyAsJson).build();
-
+    public String updateHsndata(@PathParam("hsnId") final Long hsnId, final String apiRequestBodyAsJson) {
+    	
+        final CommandWrapper commandRequest = new CommandWrapperBuilder().updateHsndata(hsnId).withJson(apiRequestBodyAsJson).build();
         final CommandProcessingResult result = this.commandsSourceWritePlatformService.logCommandSource(commandRequest);
-
         return this.toApiJsonSerializer.serialize(result);
     }
+
+    @DELETE
+	@Path("{hsnId}")
+	@Consumes({MediaType.APPLICATION_JSON})
+	@Produces({MediaType.APPLICATION_JSON})
+	public String deleteHsndata(@PathParam("hsnId") final Long hsnId) {
+    	
+	    final CommandWrapper commandRequest = new CommandWrapperBuilder().deleteHsndata(hsnId).build();
+        final CommandProcessingResult result = this.commandsSourceWritePlatformService.logCommandSource(commandRequest);
+        return this.toApiJsonSerializer.serialize(result);
+
+	}
 }
