@@ -1,12 +1,10 @@
 package com.gst.organisation.gstr1fileinvoice.service;
 
 import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.Collection;
-import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
@@ -71,5 +69,22 @@ public class Gstr1FileInvoiceReadPlatformServiceImpl implements Gstr1FileInvoice
         }
 
     }
+
+	@Override
+	public Gstr1FileInvoiceData retrieveSingleGstr1Details(Long gstr1InvId) {
+		
+		try {
+
+			final Gstr1FileInvoiceMapper mapper = new Gstr1FileInvoiceMapper();
+
+			final String sql = "select " + mapper.schema() + " where fid.id = ?";
+
+			return jdbcTemplate.queryForObject(sql, mapper, new Object[] { gstr1InvId });
+		} catch (EmptyResultDataAccessException accessException) {
+			return null;
+		}
+		
+	}
+
 
 }
