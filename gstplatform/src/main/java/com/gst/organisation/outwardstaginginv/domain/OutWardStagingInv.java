@@ -60,7 +60,7 @@ public class OutWardStagingInv extends AbstractPersistableCustom<Long> {
 	private String receiptStateCode;
 
 	@Column(name = "status")
-	private Integer status;
+	private Integer status = 0;
 
 	@Column(name = "error_code")
 	private String errorCode;
@@ -76,7 +76,7 @@ public class OutWardStagingInv extends AbstractPersistableCustom<Long> {
 			final String cName, final String supplierInvNo,
 			final Date supplierInvDate, final Long supplierInvValue,
 			final String supplyStateCode,final String orderNo,final Date orderDate,
-			final String etin,final Long invoiceId,final String receiptStateCode,final Integer status,
+			final String etin,final Long invoiceId,final String receiptStateCode,
 			final String errorCode,final String errorDescripter) {
 
 		this.gstin = gstin;
@@ -91,7 +91,6 @@ public class OutWardStagingInv extends AbstractPersistableCustom<Long> {
 		this.etin = etin;
 		this.invoiceId = invoiceId;
 		this.receiptStateCode = receiptStateCode;
-		this.status = status;
 		this.errorCode = errorCode;
 		this.errorDescripter = errorDescripter;
 	}
@@ -114,13 +113,138 @@ public class OutWardStagingInv extends AbstractPersistableCustom<Long> {
 		final String etin = command.stringValueOfParameterNamed("etin");
 		final Long invoiceId = command.longValueOfParameterNamed("invoiceId");
 		final String receiptStateCode = command.stringValueOfParameterNamed("receiptStateCode");
-		final Integer status = command.integerValueOfParameterNamed("status");
 		final String errorCode = command.stringValueOfParameterNamed("errorCode");
 		final String errorDescripter = command.stringValueOfParameterNamed("errorDescripter");
 
 		return new OutWardStagingInv(gstin, gstinPurchaser, cName,
 				supplierInvNo, supplierInvDate, supplierInvValue, supplyStateCode,orderNo,orderDate,etin,invoiceId,receiptStateCode,
-				status,errorCode,errorDescripter);
+				errorCode,errorDescripter);
+	}
+	
+	
+
+	public String getGstin() {
+		return gstin;
+	}
+
+	public void setGstin(String gstin) {
+		this.gstin = gstin;
+	}
+
+	public String getGstinPurchaser() {
+		return gstinPurchaser;
+	}
+
+	public void setGstinPurchaser(String gstinPurchaser) {
+		this.gstinPurchaser = gstinPurchaser;
+	}
+
+	public String getcName() {
+		return cName;
+	}
+
+	public void setcName(String cName) {
+		this.cName = cName;
+	}
+
+	public String getSupplierInvNo() {
+		return supplierInvNo;
+	}
+
+	public void setSupplierInvNo(String supplierInvNo) {
+		this.supplierInvNo = supplierInvNo;
+	}
+
+	public Date getSupplierInvDate() {
+		return supplierInvDate;
+	}
+
+	public void setSupplierInvDate(Date supplierInvDate) {
+		this.supplierInvDate = supplierInvDate;
+	}
+
+	public Long getSupplierInvValue() {
+		return supplierInvValue;
+	}
+
+	public void setSupplierInvValue(Long supplierInvValue) {
+		this.supplierInvValue = supplierInvValue;
+	}
+
+	public String getSupplyStateCode() {
+		return supplyStateCode;
+	}
+
+	public void setSupplyStateCode(String supplyStateCode) {
+		this.supplyStateCode = supplyStateCode;
+	}
+
+	public String getOrderNo() {
+		return orderNo;
+	}
+
+	public void setOrderNo(String orderNo) {
+		this.orderNo = orderNo;
+	}
+
+	public Date getOrderDate() {
+		return orderDate;
+	}
+
+	public void setOrderDate(Date orderDate) {
+		this.orderDate = orderDate;
+	}
+
+	public String getEtin() {
+		return etin;
+	}
+
+	public void setEtin(String etin) {
+		this.etin = etin;
+	}
+
+	public Long getInvoiceId() {
+		return invoiceId;
+	}
+
+	public void setInvoiceId(Long invoiceId) {
+		this.invoiceId = invoiceId;
+	}
+
+	public String getReceiptStateCode() {
+		return receiptStateCode;
+	}
+
+	public void setReceiptStateCode(String receiptStateCode) {
+		this.receiptStateCode = receiptStateCode;
+	}
+
+	public Integer getStatus() {
+		return status;
+	}
+
+	public void setStatus(Integer status) {
+		this.status = status;
+	}
+
+	public String getErrorCode() {
+		return errorCode;
+	}
+
+	public void setErrorCode(String errorCode) {
+		this.errorCode = errorCode;
+	}
+
+	public String getErrorDescripter() {
+		return errorDescripter;
+	}
+
+	public void setErrorDescripter(String errorDescripter) {
+		this.errorDescripter = errorDescripter;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
 	}
 
 	/**
@@ -212,5 +336,6 @@ public class OutWardStagingInv extends AbstractPersistableCustom<Long> {
 
 		return actualChanges;
 	}
+	
 
 }

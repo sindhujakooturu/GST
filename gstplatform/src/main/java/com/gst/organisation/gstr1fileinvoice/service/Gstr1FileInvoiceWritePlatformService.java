@@ -12,5 +12,7 @@ public interface Gstr1FileInvoiceWritePlatformService {
 	 CommandProcessingResult createGstr1FileInvoice(JsonCommand command);
 	
 	 CommandProcessingResult updateGstr1FileInvoice(JsonCommand command,Long gstr1FileInvId);
+
+	CommandProcessingResult updateGstr1FileInvoiceStatus(JsonCommand command, Long entityId);
 	
 }
