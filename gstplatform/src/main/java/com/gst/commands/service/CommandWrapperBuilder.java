@@ -3061,4 +3061,12 @@ public class CommandWrapperBuilder {
         this.href = "/mastertest/";
         return this;
     }
+    
+    public CommandWrapperBuilder updateGstr1FileInvoiceStatus(final Long gstr1FileInvId) {
+        this.actionName = "UPDATE";
+        this.entityName = "GSTR1FILEINVOICESTATUS";
+        this.entityId = gstr1FileInvId;
+        this.href = "/gstr1fileinvoicedata/updatestatus/"+gstr1FileInvId;
+        return this;
+    }
 }
