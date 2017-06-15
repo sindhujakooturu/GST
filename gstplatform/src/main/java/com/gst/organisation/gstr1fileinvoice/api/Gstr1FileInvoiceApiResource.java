@@ -30,6 +30,7 @@ import com.gst.infrastructure.core.data.CommandProcessingResult;
 import com.gst.infrastructure.core.serialization.ApiRequestJsonSerializationSettings;
 import com.gst.infrastructure.core.serialization.DefaultToApiJsonSerializer;
 import com.gst.infrastructure.security.service.PlatformSecurityContext;
+import com.gst.organisation.company.data.CompanyData;
 import com.gst.organisation.gstr1fileinvoice.data.Gstr1FileB2BInvoiceData;
 import com.gst.organisation.gstr1fileinvoice.data.Gstr1FileInvoiceData;
 import com.gst.organisation.gstr1fileinvoice.service.Gstr1FileB2BInvoiceReadPlatformService;
@@ -101,6 +102,20 @@ public class Gstr1FileInvoiceApiResource {
 		return this.toApiJsonSerializer.serialize(result);
 	
 	}
+	
+	@GET
+	@Path("{gstr1InvId}")
+	@Consumes({ MediaType.APPLICATION_JSON })
+	@Produces({ MediaType.APPLICATION_JSON })
+
+	public String retrieveSingleCompanyDetails(@PathParam("gstr1InvId") final Long gstr1InvId,@Context final UriInfo uriInfo) {
+	   
+		context.authenticatedUser().validateHasReadPermission(GSTR1FILEINVOICEDATA_RESOURCE_NAME);
+		Gstr1FileInvoiceData gstr1FileInvoiceData = this.gstr1FileInvoiceReadPlatformService.retrieveSingleGstr1Details(gstr1InvId);
+		final ApiRequestJsonSerializationSettings settings = apiRequestParameterHelper.process(uriInfo.getQueryParameters());
+		return this.toApiJsonSerializer.serialize(settings,gstr1FileInvoiceData,RESPONSE_DATA_PARAMETERS);
+	}
+	
 	
 	/**
 	 * @param outWardInvId
