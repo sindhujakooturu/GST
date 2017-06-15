@@ -81,9 +81,8 @@ public class Gstr1FileInvoiceWritePlatformServiceImp implements Gstr1FileInvoice
 	public CommandProcessingResult updateGstr1FileInvoice(final JsonCommand command,final Long gstr1FileInvId) {
 		
 		try {
-			context.authenticatedUser();
 			this.apiJsonDeserializer.validaForCreate(command.json());
-			final Gstr1FileInvoice gstr1FileInvoice = retrieveChargeCodeById(gstr1FileInvId);
+			final Gstr1FileInvoice gstr1FileInvoice = retrieveGstr1FileInvoiceById(gstr1FileInvId);
 			
 			final Map<String, Object> changes = gstr1FileInvoice.update(command);
 			if (!changes.isEmpty()) {
@@ -96,12 +95,31 @@ public class Gstr1FileInvoiceWritePlatformServiceImp implements Gstr1FileInvoice
 		}
 	}
 
-	private Gstr1FileInvoice retrieveChargeCodeById(final Long gstr1FileInvId) {
-		final Gstr1FileInvoice gstr1FileInvoice = this.gstr1FileInvoiceRepository.findOne(gstr1FileInvId);
+	private Gstr1FileInvoice retrieveGstr1FileInvoiceById(final Long gstr1FileInvId) {
+		Gstr1FileInvoice gstr1FileInvoice = this.gstr1FileInvoiceRepository.findOne(gstr1FileInvId);
 		if (gstr1FileInvoice == null) {
 			throw new Gstr1FileInvoiceNotFoundException(gstr1FileInvId);
 		}
 		return gstr1FileInvoice;
+	}
+
+	@Override
+	public CommandProcessingResult updateGstr1FileInvoiceStatus(JsonCommand command, Long entityId) {
+		
+		try {
+			this.apiJsonDeserializer.validaForUpdateStatus(command);
+			Gstr1FileInvoice gstr1FileInvoice = this.retrieveGstr1FileInvoiceById(entityId);
+			if("approve".equalsIgnoreCase(command.stringValueOfParameterNamed("action"))){
+				gstr1FileInvoice.setStatus(4);
+			}else if("reject".equalsIgnoreCase(command.stringValueOfParameterNamed("action"))){
+				gstr1FileInvoice.setStatus(3);
+			}
+			this.gstr1FileInvoiceRepository.saveAndFlush(gstr1FileInvoice);
+
+			return new CommandProcessingResultBuilder().withCommandId(command.commandId()).withEntityId(gstr1FileInvoice.getId()).build();
+		} catch (DataIntegrityViolationException dve) {
+			return new CommandProcessingResult(Long.valueOf(-1L));
+		}
 	}
 
 }

@@ -64,3 +64,13 @@ CREATE TABLE `g_gstr1_file_b2b_items` (
   CONSTRAINT `fk_gstr1fileb2binvitm_invoiceid` FOREIGN KEY (`invoice_id`) REFERENCES `g_gstr1_file_b2b_invoice` (`invoice_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
+INSERT IGNORE INTO `m_permission` (`grouping`, `code`, `entity_name`, `action_name`, `can_maker_checker`) VALUES ('organisation', 'CREATE_GSTR1FILEINVOICEDATA', 'GSTR1FILEINVOICEDATA', 'CREATE', 0);
+
+INSERT IGNORE INTO `m_permission` (`grouping`, `code`, `entity_name`, `action_name`, `can_maker_checker`) VALUES ('organisation', 'READ_GSTR1FILEINVOICEDATA', 'GSTR1FILEINVOICEDATA', 'READ', 0);
+
+INSERT IGNORE INTO `m_permission` (`grouping`, `code`, `entity_name`, `action_name`, `can_maker_checker`) VALUES ('organisation', 'UPDATE_GSTR1FILEINVOICEDATA', 'GSTR1FILEINVOICEDATA', 'UPDATE', 0);
+
+INSERT IGNORE INTO `m_permission` (`grouping`, `code`, `entity_name`, `action_name`, `can_maker_checker`) VALUES ('organisation', 'DELETE_GSTR1FILEINVOICEDATA', 'GSTR1FILEINVOICEDATA', 'DELETE', 0);
+
+
+
