@@ -210,51 +210,6 @@ public class CommandWrapperBuilder {
         return this;
     }
     
-    public CommandWrapperBuilder createSacdata() {
-        this.actionName = "CREATE";
-        this.entityName = "SACDATA";
-        this.entityId = null;
-        this.href = "/sacdata/template";
-        return this;
-    
-    }
-    public CommandWrapperBuilder updateSacdata(final Long id) {
-        this.actionName = "UPDATE";
-        this.entityName = "SACDATA";
-        this.entityId = id;
-        this.href = "/sacdata/" + id;
-        return this;
-    }
-    
-    public CommandWrapperBuilder deleteSacdata(final Long id) {
-        this.actionName = "DELETE";
-        this.entityName = "SACDATA";
-        this.entityId = id;
-        this.href = "/sacdata/" + id;
-        return this;
-    }
-    
-    public CommandWrapperBuilder createHsndata() {
-        this.actionName = "CREATE";
-        this.entityName = "HSNDATA";
-        this.entityId = null;
-        this.href = "/hsndata";
-        return this;
-    }
-    public CommandWrapperBuilder updateHsndata(final Long id) {
-        this.actionName = "UPDATE";
-        this.entityName = "HSNDATA";
-        this.entityId = id;
-        this.href = "/hsndata/" + id;
-        return this;
-    }     
-   public CommandWrapperBuilder deleteHsndata(final Long id) {
-            this.actionName = "DELETE";
-            this.entityName = "HSNDATA";
-            this.entityId = id;
-            this.href = "/hsndata/" + id;
-            return this;
-    }
     public CommandWrapperBuilder updateStaff(final Long id) {
         this.actionName = "UPDATE";
         this.entityName = "STAFF";
@@ -3044,7 +2999,43 @@ public class CommandWrapperBuilder {
         return this;
     }
     
-    public CommandWrapperBuilder createGstr1FileInvoice() {
+    public CommandWrapperBuilder createSupplier() {
+        this.actionName = "CREATE";
+        this.entityName = "SUPPLIER";
+        this.entityId = null;
+        this.href = "/supplier/template";
+        return this;
+    }
+    public CommandWrapperBuilder createPurchaser() {
+        this.actionName = "CREATE";
+        this.entityName = "PURCHASER";
+        this.entityId = null;
+        this.href = "/purchaser/template";
+        return this;
+    }
+    public CommandWrapperBuilder createGstCaluculater() {
+        this.actionName = "CREATE";
+        this.entityName = "GSTCALUCULATE";
+        this.entityId = null;
+        this.href = "/gstcaluculate/template";
+        return this;
+    }
+    public CommandWrapperBuilder updatePurchaser(final Long purchaserId) {
+        this.actionName = "UPDATE";
+        this.entityName = "PURCHASER";
+        this.entityId = purchaserId;
+        this.href = "/purchaser/" + purchaserId;
+        return this;
+    }
+    public CommandWrapperBuilder updateSupplier(final Long supplierId) {
+        this.actionName = "UPDATE";
+        this.entityName = "SUPPLIER";
+        this.entityId = supplierId;
+        this.href = "/supplier/" + supplierId;
+        return this;
+    }
+
+        public CommandWrapperBuilder createGstr1FileInvoice() {
         this.actionName = "CREATE";
         this.entityName = "GSTR1FILEINVOICE";
         this.entityId = null;
@@ -3114,5 +3105,51 @@ public class CommandWrapperBuilder {
         this.entityId = gstr1FileInvId;
         this.href = "/gstr1fileinvoicedata/updatestatus/"+gstr1FileInvId;
         return this;
+    }
+    
+    public CommandWrapperBuilder createSacdata() {
+        this.actionName = "CREATE";
+        this.entityName = "SACDATA";
+        this.entityId = null;
+        this.href = "/sacdata/template";
+        return this;
+    
+    }
+    public CommandWrapperBuilder updateSacdata(final Long id) {
+        this.actionName = "UPDATE";
+        this.entityName = "SACDATA";
+        this.entityId = id;
+        this.href = "/sacdata/" + id;
+        return this;
+    }
+    
+    public CommandWrapperBuilder deleteSacdata(final Long id) {
+        this.actionName = "DELETE";
+        this.entityName = "SACDATA";
+        this.entityId = id;
+        this.href = "/sacdata/" + id;
+        return this;
+    }
+    
+    public CommandWrapperBuilder createHsndata() {
+        this.actionName = "CREATE";
+        this.entityName = "HSNDATA";
+        this.entityId = null;
+        this.href = "/hsndata";
+        return this;
+    }
+    public CommandWrapperBuilder updateHsndata(final Long id) {
+        this.actionName = "UPDATE";
+        this.entityName = "HSNDATA";
+        this.entityId = id;
+        this.href = "/hsndata/" + id;
+        return this;
+    }     
+   public CommandWrapperBuilder deleteHsndata(final Long id) {
+            this.actionName = "DELETE";
+            this.entityName = "HSNDATA";
+            this.entityId = id;
+            this.href = "/hsndata/" + id;
+            return this;
     }
 }
