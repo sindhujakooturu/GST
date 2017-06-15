@@ -1,15 +1,12 @@
 package com.gst.organisation.GstCaluculate.domain;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
+import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Table;
-import org.apache.commons.lang.StringUtils;
 import com.gst.infrastructure.core.api.JsonCommand;
 import com.gst.infrastructure.core.domain.AbstractPersistableCustom;
-import com.gst.organisation.GstCaluculate.data.GstCaluculateData;
 
 @Entity
 @Table(name="g_gst_rate")
@@ -21,22 +18,22 @@ public class GstCaluculate extends AbstractPersistableCustom<Long> {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name="item_code", length = 16)
-	private String itemcode;
+	private Long itemCode;
 	
 	@Column(name="item_desc", length = 255)
-	private String itemdesc;
+	private String itemDesc;
 	
 	@Column(name="sgst_rate", length = 6)
-    private Double sgstrate;
+    private BigDecimal sgstRate;
 	
 	@Column(name="cgst_rate", length = 6)
-    private  Double cgstrate;
+    private  BigDecimal cgstRate;
 	
 	@Column(name="igst_rate", length = 6)
-    private  Double igstrate;
+    private  BigDecimal igstRate;
 	
 	@Column(name="cess_rate", length = 6)
-    private  Double cessrate;
+    private  BigDecimal cessRate;
 	
 	
 	public GstCaluculate(){
@@ -45,67 +42,96 @@ public class GstCaluculate extends AbstractPersistableCustom<Long> {
 	
 	 public static GstCaluculate fromJson(final JsonCommand command) {
 
-	        final String itemcodeParamName = "itemcode";
-	        final String itemcode = command.stringValueOfParameterNamed(itemcodeParamName);
+	        final String itemcodeParamName = "itemCode";
+	        final Long itemcode = command.longValueOfParameterNamed(itemcodeParamName);
 
-	        final String itemdescParamName = "itemdesc";
+	        final String itemdescParamName = "itemDesc";
 	        final String itemdesc = command.stringValueOfParameterNamed(itemdescParamName);
 
-	        final String sgstrateParamName = "sgstrate";
-	        final Long sgstrate = command.longValueOfParameterNamed(sgstrateParamName);
+	        final String sgstrateParamName = "sgstRate";
+	        final BigDecimal sgstrate = command.bigDecimalValueOfParameterNamed(sgstrateParamName);
 
-	        final String cgstrateParamName = "cgstrate";
-	        final Long cgstrate = command.longValueOfParameterNamed(cgstrateParamName);
+	        final String cgstrateParamName = "cgstRate";
+	        final BigDecimal cgstrate = command.bigDecimalValueOfParameterNamed(cgstrateParamName);
 
-	        final String igstrateParamName = "igstrate";
-	        final Long igstrate = command.longValueOfParameterNamed(igstrateParamName);
+	        final String igstrateParamName = "igstRate";
+	        final BigDecimal igstrate = command.bigDecimalValueOfParameterNamed(igstrateParamName);
 	        
-	        final String cessrateParamName = "cessrate";
-	        final Long cessrate = command.longValueOfParameterNamed(cessrateParamName);
+	        final String cessrateParamName = "cessRate";
+	        final BigDecimal cessrate = command.bigDecimalValueOfParameterNamed(cessrateParamName);
 	        
 
 	        return new GstCaluculate(itemcode, itemdesc, sgstrate, cgstrate, igstrate, cessrate);
 	    }
 	
-	public GstCaluculate(final String itemcode,final String itemdesc,final Double sgstrate,
-			final Double cgstrate, final Double igstrate, final Double cessrate) {
+	public GstCaluculate(final Long itemCode,final String itemDesc,final BigDecimal sgstRate,
+			final BigDecimal cgstRate, final BigDecimal igstRate, final BigDecimal cessRate) {
 		
-		this.itemcode=itemcode;
-		this.itemdesc=itemdesc;
-		this.sgstrate=sgstrate;
-		this.cgstrate=cgstrate;
-		this.igstrate=igstrate;
-		this.cessrate=cessrate;
+		this.itemCode=itemCode;
+		this.itemDesc=itemDesc;
+		this.sgstRate=sgstRate;
+		this.cgstRate=cgstRate;
+		this.igstRate=igstRate;
+		this.cessRate=cessRate;
 		
 	}
+
+	public Long getItemCode() {
+		return itemCode;
+	}
+
+	public void setItemCode(Long itemCode) {
+		this.itemCode = itemCode;
+	}
+
+	public String getItemDesc() {
+		return itemDesc;
+	}
+
+	public void setItemDesc(String itemDesc) {
+		this.itemDesc = itemDesc;
+	}
+
+	public BigDecimal getSgstRate() {
+		return sgstRate;
+	}
+
+	public void setSgstRate(BigDecimal sgstRate) {
+		this.sgstRate = sgstRate;
+	}
+
+	public BigDecimal getCgstRate() {
+		return cgstRate;
+	}
+
+	public void setCgstRate(BigDecimal cgstRate) {
+		this.cgstRate = cgstRate;
+	}
+
+	public BigDecimal getIgstRate() {
+		return igstRate;
+	}
+
+	public void setIgstRate(BigDecimal igstRate) {
+		this.igstRate = igstRate;
+	}
+
+	public BigDecimal getCessRate() {
+		return cessRate;
+	}
+
+	public void setCessRate(BigDecimal cessRate) {
+		this.cessRate = cessRate;
+	}
+
+	public static long getSerialversionuid() {
+		return serialVersionUID;
+	}
 	
 	
 	
-	public String getItemcode() {
-		return itemcode;
-	}
 
-	public String getItemdesc() {
-		return itemdesc;
-	}
-
-	public Double getSgstrate() {
-		return sgstrate;
-	}
-
-	public Double getCgstrate() {
-		return cgstrate;
-	}
-
-	public Double getIgstrate() {
-		return igstrate;
-	}
-
-	public Double getCessrate() {
-		return cessrate;
-	}
-
-	public Map<String, Object> update(final JsonCommand command) {
+	/*public Map<String, Object> update(final JsonCommand command) {
 		
 		        final Map<String, Object> actualChanges = new LinkedHashMap<>(7);
 		        
@@ -122,8 +148,8 @@ public class GstCaluculate extends AbstractPersistableCustom<Long> {
 		            this.itemdesc= StringUtils.defaultIfEmpty(newValue, null);
 		        }
 		        final String sgstrateParamName = "sgstrate";
-		        if (command.isChangeInDoubleParameterNamed(sgstrateParamName, this.sgstrate)) {
-		            final String newValue = command.stringValueOfParameterNamed(sgstrateParamName);
+		        if (command.isChangeInBigDecimalParameterNamed(sgstrateParamName, this.sgstrate));
+		            final Double newValue = command.doubleValueOfParameterNamed(sgstrateParamName);
 		            actualChanges.put(sgstrateParamName, newValue);
 		            this.sgstrate= StringUtils.defaultIfEmpty(newValue, null);
 		        }
@@ -146,7 +172,7 @@ public class GstCaluculate extends AbstractPersistableCustom<Long> {
 		            this.homePhone= StringUtils.defaultIfEmpty(newValue, null);
 		        }
 		        return actualChanges; 
-	}
+	}*/
 
 	
 }

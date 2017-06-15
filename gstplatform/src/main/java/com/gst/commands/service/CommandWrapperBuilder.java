@@ -209,41 +209,7 @@ public class CommandWrapperBuilder {
         this.href = "/staff/template";
         return this;
     }
-    public CommandWrapperBuilder createSupplier() {
-        this.actionName = "CREATE";
-        this.entityName = "SUPPLIER";
-        this.entityId = null;
-        this.href = "/supplier/template";
-        return this;
-    }
-    public CommandWrapperBuilder createPurchaser() {
-        this.actionName = "CREATE";
-        this.entityName = "PURCHASER";
-        this.entityId = null;
-        this.href = "/purchaser/template";
-        return this;
-    }
-    public CommandWrapperBuilder createGstCaluculater() {
-        this.actionName = "CREATE";
-        this.entityName = "GSTCALUCULATE";
-        this.entityId = null;
-        this.href = "/purchaser/template";
-        return this;
-    }
-    public CommandWrapperBuilder updatePurchaser(final Long purchaserId) {
-        this.actionName = "UPDATE";
-        this.entityName = "PURCHASER";
-        this.entityId = purchaserId;
-        this.href = "/purchaser/" + purchaserId;
-        return this;
-    }
-    public CommandWrapperBuilder updateSupplier(final Long supplierId) {
-        this.actionName = "UPDATE";
-        this.entityName = "SUPPLIER";
-        this.entityId = supplierId;
-        this.href = "/supplier/" + supplierId;
-        return this;
-    }
+    
     public CommandWrapperBuilder updateStaff(final Long staffId) {
         this.actionName = "UPDATE";
         this.entityName = "STAFF";
@@ -3031,6 +2997,42 @@ public class CommandWrapperBuilder {
         this.entityName = "OUTWARDITEM";
         this.entityId = outWardInvoiceId;
         this.href = "/outwarditem/"+outWardInvoiceId;
+        return this;
+    }
+    
+    public CommandWrapperBuilder createSupplier() {
+        this.actionName = "CREATE";
+        this.entityName = "SUPPLIER";
+        this.entityId = null;
+        this.href = "/supplier/template";
+        return this;
+    }
+    public CommandWrapperBuilder createPurchaser() {
+        this.actionName = "CREATE";
+        this.entityName = "PURCHASER";
+        this.entityId = null;
+        this.href = "/purchaser/template";
+        return this;
+    }
+    public CommandWrapperBuilder createGstCaluculater() {
+        this.actionName = "CREATE";
+        this.entityName = "GSTCALUCULATE";
+        this.entityId = null;
+        this.href = "/gstcaluculate/template";
+        return this;
+    }
+    public CommandWrapperBuilder updatePurchaser(final Long purchaserId) {
+        this.actionName = "UPDATE";
+        this.entityName = "PURCHASER";
+        this.entityId = purchaserId;
+        this.href = "/purchaser/" + purchaserId;
+        return this;
+    }
+    public CommandWrapperBuilder updateSupplier(final Long supplierId) {
+        this.actionName = "UPDATE";
+        this.entityName = "SUPPLIER";
+        this.entityId = supplierId;
+        this.href = "/supplier/" + supplierId;
         return this;
     }
 }

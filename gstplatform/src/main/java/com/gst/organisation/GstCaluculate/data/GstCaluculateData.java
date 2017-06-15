@@ -1,140 +1,135 @@
 package com.gst.organisation.GstCaluculate.data;
 
-import java.util.Collection;
-
-import com.google.gson.JsonArray;
+import java.math.BigDecimal;
 
 
 
-public class GstCaluculateData {
+
+
+public class GstCaluculateData{
 	
 
-			private final Long id;
-			private final String itemcode;
-		    private final String itemdesc;
-		    private final Double sgstrate;
-		    private final Double cgstrate;
-		    private final Double igstrate;
-		    private final Double cessrate;
-		    private Double ssc;
-		    private Double csc;
-		    private final Double itemamount;
-		    private final String itemname;
-		    private final Double sgstamount;
-		    private final Double cgstamount;
-		    private final Double igstamount;
-		    private final Double cessamount;
+			private  Long id;
+			private  String itemCode;
+			private  String itemDesc;
+			private  BigDecimal sgstRate;
+			private  BigDecimal cgstRate;
+			private BigDecimal igstRate;
+			private BigDecimal cessRate;
+			private BigDecimal itemAmount;
+			private String itemName;
+			private BigDecimal sgstAmount;
+			private BigDecimal cgstAmount;
+			private BigDecimal igstAmount;
+			private BigDecimal cessAmount;
+			private String ssc;
+			private String csc;
 
-    public GstCaluculateData(final Long id,final String itemcode,final String itemdesc,
-    		final Double sgstrate,final Double cgstrate,final Double igstrate,
-    		final Double cessrate,final Double ssc,final Double csc,final Double itemamount,final String itemname
-    		,final Double sgstamount,final Double cgstamount,final Double igstamount,final Double cessamount) {
+    public GstCaluculateData(final Long id,final String itemCode,final String itemDesc,
+    		final BigDecimal sgstRate,final BigDecimal cgstRate,final BigDecimal igstRate,
+    		final BigDecimal cessRate,final BigDecimal itemAmount,final String itemName
+    		,final BigDecimal sgstAmount,final BigDecimal cgstAmount,final BigDecimal igstAmount,final BigDecimal cessAmount,final String ssc,final String csc) {
     	
 		    	this.id=id;
-		    	this.itemcode=itemcode;
-		    	this.itemdesc=itemdesc;
-		    	this.sgstrate=sgstrate;
-		    	this.cgstrate=cgstrate;
-		    	this.igstrate=igstrate;
-		    	this.cessrate=cessrate;
+		    	this.itemCode=itemCode;
+		    	this.itemDesc=itemDesc;
+		    	this.sgstRate=sgstRate;
+		    	this.cgstRate=cgstRate;
+		    	this.igstRate=igstRate;
+		    	this.cessRate=cessRate;
+		    	this.itemAmount=itemAmount;
+		    	this.itemName=itemName;
+		    	this.sgstAmount=sgstAmount;
+		    	this.cessAmount=cessAmount;
+		    	this.igstAmount=igstAmount;
+		    	this.cgstAmount=cgstAmount;
 		    	this.ssc=ssc;
 		    	this.csc=csc;
-		    	this.itemamount=itemamount;
-		    	this.itemname=itemname;
-		    	this.sgstamount=sgstamount;
-		    	this.cessamount=cessamount;
-		    	this.igstamount=igstamount;
-		    	this.cgstamount=cgstamount;
 		    	
 	}
-
-	public Double responce(final Long id,final boolean ssc,final boolean csc,final String itemcode,final String itemname,final Double itemamount,
-			final Double sgstamount, final Double sgstrate, final Double cgstamount
-			,final Double cgstrate,final Double igstamount,final Double igstrate,final Double cessamount,
-			final Double cessrate) {
-		return new GstCaluculateData(id, itemcode,itemname, itemamount,sgstamount,sgstrate,cgstamount,csc, csc, cgstrate,itemname, igstamount
-				,igstrate,cessamount,cessrate);
-	}
+    
+    public GstCaluculateData(){
+    	
+    }
+   /* static {
+    	GstCaluculateData my;
+        try {
+            my = new GstCaluculateData();
+            my.init();
+        } catch (Exception e) {
+            my = null;
+            // log
+        }
+    }*/
 	public Long getId() {
 		return id;
 	}
 
-	public String getItemcode() {
-		return itemcode;
+	public String getItemCode() {
+		return itemCode;
 	}
 
-	public String getItemdesc() {
-		return itemdesc;
+	public String getItemDesc() {
+		return itemDesc;
 	}
 
-	public Double getSgstrate() {
-		return sgstrate;
+	public BigDecimal getSgstRate() {
+		return sgstRate;
 	}
 
-	public Double getCgstrate() {
-		return cgstrate;
+	public BigDecimal getCgstRate() {
+		return cgstRate;
 	}
 
-	public Double getIgstrate() {
-		return igstrate;
+	public BigDecimal getIgstRate() {
+		return igstRate;
 	}
 
-	public Double getCessrate() {
-		return cessrate;
+	public BigDecimal getCessRate() {
+		return cessRate;
 	}
 
-	public Double getSsc() {
+	public BigDecimal getItemAmount() {
+		return itemAmount;
+	}
+
+	public String getItemName() {
+		return itemName;
+	}
+
+	public BigDecimal getSgstAmount() {
+		return sgstAmount;
+	}
+
+	public BigDecimal getCgstAmount() {
+		return cgstAmount;
+	}
+
+	public BigDecimal getIgstAmount() {
+		return igstAmount;
+	}
+
+	public BigDecimal getCessAmount() {
+		return cessAmount;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getSsc() {
 		return ssc;
 	}
 
-	public Double getCsc() {
-		return csc;
-	}
-
-	public Double getItemamount() {
-		return itemamount;
-	}
-
-	public String getItemname() {
-		return itemname;
-	}
-
-	public Double getSgstamount() {
-		return sgstamount;
-	}
-
-	public Double getCgstamount() {
-		return cgstamount;
-	}
-
-	public Double getIgstamount() {
-		return igstamount;
-	}
-
-	public Double getCessamount() {
-		return cessamount;
-	}
-
-	public void setSsc(Double ssc) {
+	public void setSsc(String ssc) {
 		this.ssc = ssc;
 	}
 
-	public void setCsc(Double csc) {
-		this.csc = csc;
+	public String getCsc() {
+		return csc;
 	}
 
-	public static Collection<GstCaluculateData> response(final String itemcode,final String itemname,final Double itemamount,final Double sgstrate
-			,final Double cgstrate,final Double sgstamount,final Double cgstamount,final Double igstrate,final Double igstamount,final Double cessamount,final Double cessrate) {
-		 return response( itemcode,itemname,itemamount,sgstrate,sgstamount,cgstrate,cgstamount,igstrate,igstamount,cessrate,cessamount);
-		
+	public void setCsc(String csc) {
+		this.csc = csc;
 	}
-	
-	
-	public static Collection<GstCaluculateData> sameCodeResponse(final String itemcode,final String itemname,final Double itemamount,final Double sgstrate
-			,final Double cgstrate,final Double sgstamount,final Double cgstamount,final Double igstrate,final Double igstamount,final Double cessamount,final Double cessrate) {
-		
-		return sameCodeResponse(itemcode,itemname,itemamount,sgstrate,sgstamount,cgstrate,cgstamount,igstrate,igstamount,cessrate,cessamount);
-	}
-	
-	
 }

@@ -23,8 +23,8 @@ import com.gst.infrastructure.core.serialization.FromJsonHelper;
 @Component
 public class GstCaluculateCommandFromApiJsonDeserializer {
 	
-	private final Set<String> supportedParameters = new HashSet<>(Arrays.asList("id","itemcode", "itemdesc", "sgstrate", "cgstrate",
-            "igstrate", "cessrate","itemamount","itemname"));
+	private final Set<String> supportedParameters = new HashSet<>(Arrays.asList("id","itemCode", "itemDesc", "sgstRate", "cgstRate",
+            "igstRate", "cessRate","itemAmount","itemName"));
 
     private final FromJsonHelper fromApiJsonHelper;
     
@@ -44,29 +44,26 @@ public class GstCaluculateCommandFromApiJsonDeserializer {
 
         final JsonElement element = this.fromApiJsonHelper.parse(json);
 
-        final String itemcode = this.fromApiJsonHelper.extractStringNamed("itemcode", element);
-        baseDataValidator.reset().parameter("itemcode").value(itemcode).notBlank().notExceedingLengthOf(15);
+        final String itemCode = this.fromApiJsonHelper.extractStringNamed("itemCode", element);
+        baseDataValidator.reset().parameter("itemCode").value(itemCode).notBlank().notExceedingLengthOf(15);
 
-        final String sgstrate = this.fromApiJsonHelper.extractStringNamed("sgstrate", element);
-        baseDataValidator.reset().parameter("sgstrate").value(sgstrate).notBlank().notExceedingLengthOf(15);
+        final String sgstRate = this.fromApiJsonHelper.extractStringNamed("sgstRate", element);
+        baseDataValidator.reset().parameter("sgstRate").value(sgstRate).notBlank().notExceedingLengthOf(15);
 
-        final String cgstrate = this.fromApiJsonHelper.extractStringNamed("cgstrate", element);
-        baseDataValidator.reset().parameter("cgstrate").value(cgstrate).notBlank().notExceedingLengthOf(15);
+        final String cgstRate = this.fromApiJsonHelper.extractStringNamed("cgstRate", element);
+        baseDataValidator.reset().parameter("cgstRate").value(cgstRate).notBlank().notExceedingLengthOf(15);
         
-        final String igstrate = this.fromApiJsonHelper.extractStringNamed("igstrate", element);
-        baseDataValidator.reset().parameter("igstrate").value(igstrate).notBlank().notExceedingLengthOf(60);
+        final String igstRate = this.fromApiJsonHelper.extractStringNamed("igstRate", element);
+        baseDataValidator.reset().parameter("igstRate").value(igstRate).notBlank().notExceedingLengthOf(60);
         
-        final String cessrate = this.fromApiJsonHelper.extractStringNamed("cessrate", element);
-        baseDataValidator.reset().parameter("cessrate").value(cessrate).notBlank().notExceedingLengthOf(60);
+        final String cessRate = this.fromApiJsonHelper.extractStringNamed("cessRate", element);
+        baseDataValidator.reset().parameter("cessRate").value(cessRate).notBlank().notExceedingLengthOf(60);
         
-        final String homePhone = this.fromApiJsonHelper.extractStringNamed("homePhone", element);
-        baseDataValidator.reset().parameter("homePhone").value(homePhone).notBlank().notExceedingLengthOf(60);
+        final String itemAmount = this.fromApiJsonHelper.extractStringNamed("itemAmount", element);
+        baseDataValidator.reset().parameter("itemAmount").value(itemAmount).notBlank().notExceedingLengthOf(60);
         
-        final String itemamount = this.fromApiJsonHelper.extractStringNamed("itemamount", element);
-        baseDataValidator.reset().parameter("itemamount").value(itemamount).notBlank().notExceedingLengthOf(60);
-        
-        final String itemname = this.fromApiJsonHelper.extractStringNamed("itemname", element);
-        baseDataValidator.reset().parameter("itemname").value(itemname).notBlank().notExceedingLengthOf(60);
+        final String itemName = this.fromApiJsonHelper.extractStringNamed("itemName", element);
+        baseDataValidator.reset().parameter("itemName").value(itemName).notBlank().notExceedingLengthOf(60);
         
         
 

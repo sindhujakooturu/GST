@@ -1,4 +1,4 @@
-package com.gst.organisation.GstCaluculate.handler;
+/*package com.gst.organisation.GstCaluculate.handler;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,20 +12,21 @@ import com.gst.organisation.GstCaluculate.service.GstCaluculateWritePlatformServ
 
 
 @Service
-@CommandType(entity = "GstCaluculate", action = "CREATE")
-public class CreateGstCaluculateCommandHandler implements NewCommandSourceHandler{
+@CommandType(entity = "GSTCALUCULATE", action = "CREATE")
+public class CreateGstCaluculaterCommandHandler implements NewCommandSourceHandler{
 	
 	private final GstCaluculateWritePlatformService writePlatformService;
 	
 	@Autowired
-    public CreateGstCaluculateCommandHandler(final GstCaluculateWritePlatformService writePlatformService) {
+    public CreateGstCaluculaterCommandHandler(final GstCaluculateWritePlatformService writePlatformService) {
         this.writePlatformService = writePlatformService;
     }
 	@Transactional
     @Override
-    public CommandProcessingResult processCommand(final JsonCommand command) {
+    public String processCommand(final JsonCommand command) {
 
         return this.writePlatformService.createGstCaluculate(command);
     }
 
 }
+*/

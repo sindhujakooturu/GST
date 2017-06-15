@@ -90,7 +90,6 @@ public class CompanyApiResource {
 	@POST
 	@Consumes({ MediaType.APPLICATION_JSON })
 	@Produces({ MediaType.APPLICATION_JSON })
-
 	public String createCompanyData(final String apiRequestBodyAsJson,@Context final UriInfo uriInfo) {
 		
 		context.authenticatedUser().validateHasReadPermission(resourceNameForPermissions);
