@@ -2987,8 +2987,7 @@ public class CommandWrapperBuilder {
 		return this;
 	}
 	
-	public CommandWrapperBuilder updateLocation(final String entityType,
-			Long entityId) {
+	public CommandWrapperBuilder updateLocation(final String entityType,Long entityId) {
 		this.actionName = "UPDATE";
 		this.entityName = "LOCATION";
 		this.entityId = entityId;
@@ -2997,8 +2996,7 @@ public class CommandWrapperBuilder {
 		return this;
 	}
 	
-	public CommandWrapperBuilder deleteLocation(final String entityType,
-			Long entityId) {
+	public CommandWrapperBuilder deleteLocation(final String entityType,Long entityId) {
 		this.actionName = "DELETE";
 		this.entityName = "LOCATION";
 		this.entityId = entityId;
@@ -3006,7 +3004,7 @@ public class CommandWrapperBuilder {
 		this.href = "/address/" + entityType + "/" + entityId;
 		return this;
 	}
-    public CommandWrapperBuilder createOutWardInv() {
+    public CommandWrapperBuilder createOutWardStagingInv() {
         this.actionName = "CREATE";
         this.entityName = "OUTWARDINV";
         this.entityId = null;
@@ -3043,6 +3041,70 @@ public class CommandWrapperBuilder {
         this.entityName = "OUTWARDITEM";
         this.entityId = outWardInvoiceId;
         this.href = "/outwarditem/"+outWardInvoiceId;
+        return this;
+    }
+    
+    public CommandWrapperBuilder createGstr1FileInvoice() {
+        this.actionName = "CREATE";
+        this.entityName = "GSTR1FILEINVOICE";
+        this.entityId = null;
+        this.href = "/gstr1fileinvoicedata/";
+        return this;
+    }
+    
+    public CommandWrapperBuilder updateGstr1FileInvoice(final Long gstr1FileInvId) {
+        this.actionName = "UPDATE";
+        this.entityName = "GSTR1FILEINVOICE";
+        this.entityId = gstr1FileInvId;
+        this.href = "/gstr1fileinvoicedata/"+gstr1FileInvId;
+        return this;
+    }
+    
+    public CommandWrapperBuilder createGstr1Fileb2b2Invoice() {
+        this.actionName = "CREATE";
+        this.entityName = "GSTR1FILEB2BINVOICE";
+        this.entityId = null;
+        this.href = "/gstr1fileb2binvoice/";
+        return this;
+    }
+    
+    public CommandWrapperBuilder updateGstr1Fileb2bInvoice(final Long gstr1Fileb2bInvId) {
+        this.actionName = "UPDATE";
+        this.entityName = "GSTR1FILEB2BINVOICE";
+        this.entityId = gstr1Fileb2bInvId;
+        this.href = "/gstr1fileb2binvoice/"+gstr1Fileb2bInvId;
+        return this;
+    }
+    
+    public CommandWrapperBuilder createGstr1Fileb2b2Item() {
+        this.actionName = "CREATE";
+        this.entityName = "GSTR1FILEB2BITEM";
+        this.entityId = null;
+        this.href = "/gstr1fileb2bitem/";
+        return this;
+    }
+    
+    public CommandWrapperBuilder updateGstr1Fileb2bItem(final Long gstr1Fileb2bItmId) {
+        this.actionName = "UPDATE";
+        this.entityName = "GSTR1FILEB2BITEM";
+        this.entityId = gstr1Fileb2bItmId;
+        this.href = "/gstr1fileb2bitem/"+gstr1Fileb2bItmId;
+        return this;
+    }
+    
+    public CommandWrapperBuilder updateOutWardItem(final Long outWardInvoiceId) {
+        this.actionName = "UPDATE";
+        this.entityName = "OUTWARDITEM";
+        this.entityId = outWardInvoiceId;
+        this.href = "/outwarditem/"+outWardInvoiceId;
+        return this;
+    }
+    
+    public CommandWrapperBuilder createMasterTest() {
+        this.actionName = "CREATE";
+        this.entityName = "TEST";
+        this.entityId = null;
+        this.href = "/mastertest/";
         return this;
     }
 }
