@@ -23,8 +23,6 @@ public class MasterTestData {
 	private String column13;
 	private String column14;
 	
-	//private List<OutWardStagingItemData> outWardStagingItemData;
-
 	public MasterTestData() {
 		
 	}
