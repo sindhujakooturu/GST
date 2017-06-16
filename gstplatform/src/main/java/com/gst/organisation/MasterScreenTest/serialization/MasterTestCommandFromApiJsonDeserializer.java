@@ -1,6 +1,7 @@
 package com.gst.organisation.MasterScreenTest.serialization;
 
 import java.lang.reflect.Type;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -9,6 +10,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.apache.commons.lang.StringUtils;
+import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -58,108 +60,120 @@ public class MasterTestCommandFromApiJsonDeserializer {
 		this.fromApiJsonHelper.checkForUnsupportedParameters(typeOfMap, json,this.supportedParameters);
 
 		final List<ApiParameterError> dataValidationErrors = new ArrayList<ApiParameterError>();
-		final DataValidatorBuilder baseDataValidator = new DataValidatorBuilder(dataValidationErrors).resource("outwardinv");
+		final DataValidatorBuilder baseDataValidator = new DataValidatorBuilder(dataValidationErrors).resource("mastertest");
 
 		final JsonElement element = this.fromApiJsonHelper.parse(json);
 
-		final String gstin = this.fromApiJsonHelper.extractStringNamed("gstin", element);
-		baseDataValidator.reset().parameter("gstin").value(gstin);
+		final String column1 = this.fromApiJsonHelper.extractStringNamed("column1", element);
+		baseDataValidator.reset().parameter("column1").value(column1);
 
-		final String gstinPurchaser = this.fromApiJsonHelper.extractStringNamed("gstinPurchaser", element);
-		baseDataValidator.reset().parameter("gstinPurchaser").value(gstinPurchaser);
+		final String column2 = this.fromApiJsonHelper.extractStringNamed("column2", element);
+		baseDataValidator.reset().parameter("column2").value(column2);
 
-		final String cName = this.fromApiJsonHelper.extractStringNamed("cName", element);
-		baseDataValidator.reset().parameter("cName").value(cName);
+		final String column3 = this.fromApiJsonHelper.extractStringNamed("column3", element);
+		baseDataValidator.reset().parameter("column3").value(column3);
 		
-		final String supplierInvNo = this.fromApiJsonHelper.extractStringNamed("supplierInvNo", element);
-		baseDataValidator.reset().parameter("supplierInvNo").value(supplierInvNo);
+		final String column4 = this.fromApiJsonHelper.extractStringNamed("column4", element);
+		baseDataValidator.reset().parameter("column4").value(column4);
 	
-		final String supplierInvDate = this.fromApiJsonHelper.extractStringNamed("supplierInvDate", element);
-		baseDataValidator.reset().parameter("supplierInvDate").value(supplierInvDate);
+		final LocalDate column5 = this.fromApiJsonHelper.extractLocalDateNamed("column5",element);
+		baseDataValidator.reset().parameter("column5").value(column5);
 
-		final Long supplierInvValue = fromApiJsonHelper.extractLongNamed("supplierInvValue", element);
-		baseDataValidator.reset().parameter("supplierInvValue").value(supplierInvValue);
+		final BigDecimal column6 = fromApiJsonHelper.extractBigDecimalWithLocaleNamed("column6", element);
+		baseDataValidator.reset().parameter("column6").value(column6);
 		
-		final String supplyStateCode = this.fromApiJsonHelper.extractStringNamed("supplyStateCode", element);
-		baseDataValidator.reset().parameter("supplyStateCode").value(supplyStateCode);
+		final String column7 = this.fromApiJsonHelper.extractStringNamed("column7", element);
+		baseDataValidator.reset().parameter("column7").value(column7);
 		
-		final String orderNo = this.fromApiJsonHelper.extractStringNamed("orderNo", element);
-		baseDataValidator.reset().parameter("orderNo").value(orderNo);
+		final String column8 = this.fromApiJsonHelper.extractStringNamed("column8", element);
+		baseDataValidator.reset().parameter("column8").value(column8);
 
-		final String orderDate = this.fromApiJsonHelper.extractStringNamed("orderDate", element);
-		baseDataValidator.reset().parameter("orderDate").value(orderDate);
+		final LocalDate column9 = this.fromApiJsonHelper.extractLocalDateNamed("column9", element);
+		baseDataValidator.reset().parameter("column9").value(column9);
 
-		final String etin = this.fromApiJsonHelper.extractStringNamed("etin", element);
-		baseDataValidator.reset().parameter("etin").value(etin);
+		final String column10 = this.fromApiJsonHelper.extractStringNamed("column10", element);
+		baseDataValidator.reset().parameter("column10").value(column10);
 		
-		final Long invoiceId = this.fromApiJsonHelper.extractLongNamed("invoiceId", element);
-		baseDataValidator.reset().parameter("invoiceId").value(invoiceId);
+		final Long column11 = this.fromApiJsonHelper.extractLongNamed("column11", element);
+		baseDataValidator.reset().parameter("column11").value(column11);
 	
-		final String receiptStateCode = this.fromApiJsonHelper.extractStringNamed("receiptStateCode", element);
-		baseDataValidator.reset().parameter("receiptStateCode").value(receiptStateCode);
+		final String column12 = this.fromApiJsonHelper.extractStringNamed("column12", element);
+		baseDataValidator.reset().parameter("column12").value(column12);
 
-		final Long status = this.fromApiJsonHelper.extractLongNamed("status", element);
+		final Integer status = this.fromApiJsonHelper.extractIntegerWithLocaleNamed("status", element);
 		baseDataValidator.reset().parameter("status").value(status);
 		
-		final String errorCode = this.fromApiJsonHelper.extractStringNamed("errorCode", element);
-		baseDataValidator.reset().parameter("errorCode").value(errorCode);
+		final String column13 = this.fromApiJsonHelper.extractStringNamed("column13", element);
+		baseDataValidator.reset().parameter("column13").value(column13);
 		
-		final String errorDescripter = this.fromApiJsonHelper.extractStringNamed("errorDescripter", element);
-		baseDataValidator.reset().parameter("errorDescripter").value(errorDescripter);
+		final String column14 = this.fromApiJsonHelper.extractStringNamed("column14", element);
+		baseDataValidator.reset().parameter("column14").value(column14);
 		
-		if(true == this.fromApiJsonHelper.extractBooleanNamed("isDetails", element)){
-			final JsonArray outwardStagingItemsArray = this.fromApiJsonHelper.extractJsonArrayNamed("itemDetails",element);
-			String[] outwardStagingItems = new String[outwardStagingItemsArray.size()];
-	        final int outwardStagingItemsArraySize = outwardStagingItemsArray.size();
-			baseDataValidator.reset().parameter("itemDetails").value(outwardStagingItemsArraySize).integerGreaterThanZero();
-	        if(outwardStagingItemsArraySize > 0){
-		    for(int i = 0; i < outwardStagingItemsArraySize; i++){
-		    	outwardStagingItems[i] = outwardStagingItemsArray.get(i).toString();
+		/*if(true == this.fromApiJsonHelper.extractBooleanNamed("isDetails", element)){*/
+			final JsonArray testMasterDetailsArray = this.fromApiJsonHelper.extractJsonArrayNamed("childDetails",element);
+			String[] testChildDetails = new String[testMasterDetailsArray.size()];
+	        final int testChildDetailsArraySize = testMasterDetailsArray.size();
+			baseDataValidator.reset().parameter("childDetails").value(testChildDetailsArraySize).integerGreaterThanZero();
+	        if(testChildDetailsArraySize > 0){
+		    for(int i = 0; i < testChildDetailsArraySize; i++){
+		    	testChildDetails[i] = testMasterDetailsArray.get(i).toString();
 		    	
 		    }
 
-			 for (final String outwardStagingItem : outwardStagingItems) {
+			 for (final String testChildDetail : testChildDetails) {
 				 
-				     final JsonElement detailElement = fromApiJsonHelper.parse(outwardStagingItem);
+				     final JsonElement detailElement = fromApiJsonHelper.parse(testChildDetail);
 				     
-				    final String itemType = this.fromApiJsonHelper.extractStringNamed("itemType", detailElement);
-					baseDataValidator.reset().parameter("itemType").value(itemType);
+				    final Long invoiceId = this.fromApiJsonHelper.extractLongNamed("invoiceId", detailElement);
+					baseDataValidator.reset().parameter("invoiceId").value(invoiceId);
 
-					final String itemCode = this.fromApiJsonHelper.extractStringNamed("itemCode", detailElement);
-					baseDataValidator.reset().parameter("itemCode").value(itemCode);
+					final String column15 = this.fromApiJsonHelper.extractStringNamed("column15", detailElement);
+					baseDataValidator.reset().parameter("column15").value(column15);
 
-					final Double taxValue = this.fromApiJsonHelper.extractDoubleNamed("taxValue", detailElement);
-					baseDataValidator.reset().parameter("taxValue").value(taxValue);
+					final String column16 = this.fromApiJsonHelper.extractStringNamed("column16", detailElement);
+					baseDataValidator.reset().parameter("column16").value(column16);
 						
-					final Double  igstRate = this.fromApiJsonHelper.extractDoubleNamed("igstRate", detailElement);
-					baseDataValidator.reset().parameter("igstRate").value(igstRate);
+					final BigDecimal  column17 = this.fromApiJsonHelper.extractBigDecimalWithLocaleNamed("column17", detailElement);
+					baseDataValidator.reset().parameter("column17").value(column17);
 						
-					final Double igstAmount = this.fromApiJsonHelper.extractDoubleNamed("igstAmount", detailElement);
-					baseDataValidator.reset().parameter("igstAmount").value(igstAmount);
+					final BigDecimal column18 = this.fromApiJsonHelper.extractBigDecimalWithLocaleNamed("column18", detailElement);
+					baseDataValidator.reset().parameter("column18").value(column18);
 						
-					final Double cgstRate = this.fromApiJsonHelper.extractDoubleNamed("cgstRate", detailElement);
-					baseDataValidator.reset().parameter("cgstRate").value(cgstRate);
+					final BigDecimal column19 = this.fromApiJsonHelper.extractBigDecimalWithLocaleNamed("column19", detailElement);
+					baseDataValidator.reset().parameter("column19").value(column19);
 						
-					final Double cgstAmount = this.fromApiJsonHelper.extractDoubleNamed("cgstAmount", detailElement);
-					baseDataValidator.reset().parameter("cgstAmount").value(cgstAmount);
+					final BigDecimal column20 = this.fromApiJsonHelper.extractBigDecimalWithLocaleNamed("column20", detailElement);
+					baseDataValidator.reset().parameter("column20").value(column20);
 						
-					final Double sgstRate = this.fromApiJsonHelper.extractDoubleNamed("sgstRate", detailElement);
-					baseDataValidator.reset().parameter("sgstRate").value(sgstRate);
+					final BigDecimal column21 = this.fromApiJsonHelper.extractBigDecimalWithLocaleNamed("column21", detailElement);
+					baseDataValidator.reset().parameter("column21").value(column21);
 						
-					final Double sgstAmount = this.fromApiJsonHelper.extractDoubleNamed("sgstAmount", detailElement);
-					baseDataValidator.reset().parameter("sgstAmount").value(sgstAmount);
+					final BigDecimal column22 = this.fromApiJsonHelper.extractBigDecimalWithLocaleNamed("column22", detailElement);
+					baseDataValidator.reset().parameter("column22").value(column22);
 						
 						
-					final Double cessRate = this.fromApiJsonHelper.extractDoubleNamed("cessRate", detailElement);
-					baseDataValidator.reset().parameter("cessRate").value(cessRate);
+					final BigDecimal column23 = this.fromApiJsonHelper.extractBigDecimalWithLocaleNamed("column23", detailElement);
+					baseDataValidator.reset().parameter("column23").value(column23);
+					
+					final BigDecimal column24 = this.fromApiJsonHelper.extractBigDecimalWithLocaleNamed("column24", detailElement);
+					baseDataValidator.reset().parameter("column24").value(column24);
+					
+					final BigDecimal column25 = this.fromApiJsonHelper.extractBigDecimalWithLocaleNamed("column25", detailElement);
+					baseDataValidator.reset().parameter("column25").value(column25);
+					
+					/*final Integer status = this.fromApiJsonHelper.extractIntegerWithLocaleNamed("status",detailElement);
+					baseDataValidator.reset().parameter("status").value(status);*/
+					
+					final String column26 = this.fromApiJsonHelper.extractStringNamed("column26", detailElement);
+					baseDataValidator.reset().parameter("column26").value(column26);
 						
-					final Double cessAmount = this.fromApiJsonHelper.extractDoubleNamed("cessAmount", detailElement);
-					baseDataValidator.reset().parameter("cessAmount").value(cessAmount);
+					final String column27 = this.fromApiJsonHelper.extractStringNamed("column27", detailElement);
+					baseDataValidator.reset().parameter("column27").value(column27);
 			  }
 	        }
 			
 			
-		}
+		/*}*/
 		throwExceptionIfValidationWarningsExist(dataValidationErrors);
 
 	}
