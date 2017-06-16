@@ -1,5 +1,6 @@
 package com.gst.organisation.MasterScreenTest.service;
 
+import java.math.BigDecimal;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
@@ -12,7 +13,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
 import com.gst.infrastructure.core.service.RoutingDataSource;
-import com.gst.organisation.outwardstaginginv.data.OutWardStagingInvData;
+import com.gst.organisation.MasterScreenTest.data.MasterTestData;
 
 /**
  * @author Trigital
@@ -34,50 +35,50 @@ public class MasterTestReadPlatformServiceImpl implements MasterTestReadPlatform
 	 * 
 	 * @see #retrieveAllOutWardInvData()
 	 */
-	public List<OutWardStagingInvData> retrieveAllOutWardInvData() {
+	public List<MasterTestData> retrieveAllTestData() {
 
-		final OutWardInvDataMapper mapper = new OutWardInvDataMapper();
+		final MasterTestMapper mapper = new MasterTestMapper();
 
 		final String sql = "Select Distinct " + mapper.schema();
 
 		return this.jdbcTemplate.query(sql, mapper, new Object[] {});
 	}
 
-	private static final class OutWardInvDataMapper implements
-			RowMapper<OutWardStagingInvData> {
+	private static final class MasterTestMapper implements
+			RowMapper<MasterTestData> {
 
 		public String schema() {
-			return " osi.id as id, osi.gstin as gstin, osi.gstin_purchaser as gstinPurchaser, osi.c_name as cName, osi.supplier_inv_no as supplierInvNo, osi.supplier_inv_date as supplierInvDate,"
-					+ " osi.supplier_inv_value as supplierInvValue, osi.supply_state_code as supplyStateCode,osi.order_no as orderNo , osi.order_date as orderDate, osi.etin as etin, osi.invoice_id as invoiceId,"
-					+ " osi.receipt_state_code as receiptStateCode,osi.status as status, osi.error_code as errorCode, osi.error_descr as errorDescripter "
-					+ " from g_ow_stg_invoice osi";
+			return " tn.id as id, tn.column1 as column1, tn.column2 as column2, tn.column3 as column3, tn.column4 as column4, tn.column5 as column5,"
+					+ " tn.column6 as column6, tn.column7 as column7,tn.column8 as column8 , tn.column9 as column9, tn.column10 as column10, tn.column11 as column11,"
+					+ " tn.column12 as column12,tn.status as status, tn.column13 as column13, tn.column14 as column14 "
+					+ " from tablename tn";
 		}
+		
 
 		@Override
-		public OutWardStagingInvData mapRow(final ResultSet rs, final int rowNum)
+		public MasterTestData mapRow(final ResultSet rs, final int rowNum)
 				throws SQLException {
 
 			final Long id = rs.getLong("id");
-			final String gstin = rs.getString("gstin");
-			final String gstinPurchaser = rs.getString("gstinPurchaser");
-			final String cName = rs.getString("cName");
-			final String supplierInvNo = rs.getString("supplierInvNo");
-			final Date supplierInvDate = rs.getDate("supplierInvDate");
-			final Long supplierInvValue = rs.getLong("supplierInvValue");
-			final String supplyStateCode = rs.getString("supplyStateCode");
-			final String orderNo = rs.getString("orderNo");
-			final Date orderDate = rs.getDate("orderDate");
-			final String etin = rs.getString("etin");
-			final Long invoiceId = rs.getLong("invoiceId");
-			final String receiptStateCode = rs.getString("receiptStateCode");
+			final String column1 = rs.getString("column1");
+			final String column2 = rs.getString("column2");
+			final String column3 = rs.getString("column3");
+			final String column4 = rs.getString("column4");
+			final Date column5 = rs.getDate("column5");
+			final BigDecimal column6 = rs.getBigDecimal("column6");
+			final String column7 = rs.getString("column7");
+			final String column8 = rs.getString("column8");
+			final Date column9 = rs.getDate("column9");
+			final String column10 = rs.getString("column10");
+			final Long column11 = rs.getLong("column11");
+			final String column12 = rs.getString("column12");
 			final Long status = rs.getLong("status");
-			final String errorCode = rs.getString("errorCode");
-			final String errorDescripter = rs.getString("errorDescripter");
+			final String column13 = rs.getString("column13");
+			final String column14 = rs.getString("column14");
 			
-
-			return new OutWardStagingInvData(id, gstin, gstinPurchaser, cName, supplierInvNo, supplierInvDate,
-					               supplierInvValue, supplyStateCode,orderNo , orderDate, etin, invoiceId, receiptStateCode, 
-					               status, errorCode, errorDescripter);
+			return new MasterTestData(id, column1, column2, column3, column4, column5,
+					column6, column7,column8 , column9, column10, column11, column12, 
+					status, column13, column14);
 		}
 	}
 
@@ -85,15 +86,15 @@ public class MasterTestReadPlatformServiceImpl implements MasterTestReadPlatform
 	 * (non-Javadoc)
 	 * 
 	 */
-	public OutWardStagingInvData retrieveSingleOutWardStagingInvDetails(final Long outWardInvId) {
+	public MasterTestData retrieveSingleTestDetails(final Long id) {
 
 		try {
 
-			final OutWardInvDataMapper mapper = new OutWardInvDataMapper();
+			final MasterTestMapper mapper = new MasterTestMapper();
 
-			final String sql = "select " + mapper.schema() + " where osi.id = ?";
+			final String sql = "select " + mapper.schema() + " where tn.id = ?";
 
-			return jdbcTemplate.queryForObject(sql, mapper, new Object[] { outWardInvId });
+			return jdbcTemplate.queryForObject(sql, mapper, new Object[] { id });
 		} catch (EmptyResultDataAccessException accessException) {
 			return null;
 		}

@@ -2,7 +2,7 @@ package com.gst.organisation.MasterScreenTest.service;
 
 import java.util.List;
 
-import com.gst.organisation.outwardstaginginv.data.OutWardStagingInvData;
+import com.gst.organisation.MasterScreenTest.data.MasterTestData;
 
 /**
  * @author Trigital
@@ -10,8 +10,8 @@ import com.gst.organisation.outwardstaginginv.data.OutWardStagingInvData;
  */
 public interface MasterTestReadPlatformService {
 
-	List<OutWardStagingInvData> retrieveAllOutWardInvData();
+	List<MasterTestData> retrieveAllTestData();
 
-	OutWardStagingInvData retrieveSingleOutWardStagingInvDetails(Long outWardInvId);
+	MasterTestData retrieveSingleTestDetails(Long id);
 
 }
